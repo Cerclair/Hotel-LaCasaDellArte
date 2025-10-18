@@ -33,11 +33,11 @@ export default function SpaPage() {
     <div className="min-h-screen bg-[var(--color-beige)]">
       {/* Hero Section */}
       <section className="relative h-96 bg-gradient-to-br from-[var(--color-beige-dark)] to-[var(--color-beige)] flex items-center justify-center">
-        <div className="container mx-auto px-4 text-center z-10">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4" style={{ fontFamily: 'var(--font-display)' }}>
+        <div className="w-full max-w-7xl mx-auto px-4 flex flex-col items-center justify-center text-center z-10">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight" style={{ fontFamily: 'var(--font-display)' }}>
             ZEN Spa
           </h1>
-          <p className="text-xl md:text-2xl text-[var(--color-gray)] max-w-2xl mx-auto">
+          <p className="text-xl md:text-2xl text-[var(--color-gray)] max-w-2xl leading-relaxed">
             A sanctuary of serenity where wellness meets artistry
           </p>
         </div>

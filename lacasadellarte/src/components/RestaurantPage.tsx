@@ -10,11 +10,11 @@ export default function RestaurantPage({ restaurant }: RestaurantPageProps) {
     <div className="min-h-screen bg-[var(--color-beige)]">
       {/* Hero Section */}
       <section className="relative h-96 bg-gradient-to-br from-[var(--color-beige-dark)] to-[var(--color-beige)] flex items-center justify-center">
-        <div className="container mx-auto px-4 text-center z-10">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4" style={{ fontFamily: 'var(--font-display)' }}>
+        <div className="w-full max-w-7xl mx-auto px-4 flex flex-col items-center justify-center text-center z-10">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight" style={{ fontFamily: 'var(--font-display)' }}>
             {restaurant.name}
           </h1>
-          <p className="text-xl md:text-2xl text-[var(--color-accent)] font-semibold">
+          <p className="text-xl md:text-2xl text-[var(--color-accent)] font-semibold leading-relaxed">
             {restaurant.cuisine}
           </p>
         </div>

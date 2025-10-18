@@ -12,11 +12,11 @@ export default function AtelierPage() {
     <div className="min-h-screen bg-[var(--color-beige)]">
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-[var(--color-beige-dark)] to-[var(--color-beige)] py-16">
-        <div className="container mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-bold text-center mb-4" style={{ fontFamily: 'var(--font-display)' }}>
+        <div className="w-full max-w-7xl mx-auto px-4 flex flex-col items-center justify-center text-center">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight" style={{ fontFamily: 'var(--font-display)' }}>
             Atelier - Art Gallery
           </h1>
-          <p className="text-xl text-center text-[var(--color-gray)] max-w-3xl mx-auto">
+          <p className="text-xl text-[var(--color-gray)] max-w-3xl leading-relaxed">
             Where contemporary and classic art converge in a celebration of human creativity
           </p>
         </div>

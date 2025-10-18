@@ -21,14 +21,16 @@ export default function RoomsPage() {
   return (
     <div className="min-h-screen bg-[var(--color-beige)]">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-[var(--color-beige-dark)] to-[var(--color-beige)] py-16">
-        <div className="container mx-auto px-4">
-          <h1 className="text-4xl md:text-5xl font-bold text-center mb-4" style={{ fontFamily: 'var(--font-display)' }}>
-            Our Rooms
-          </h1>
-          <p className="text-xl text-center text-[var(--color-gray)] max-w-2xl mx-auto">
-            Discover your perfect sanctuary where art and comfort intertwine
-          </p>
+      <section className="bg-gradient-to-br from-[var(--color-beige-dark)] to-[var(--color-beige)] py-12">
+        <div className="w-full max-w-7xl mx-auto px-4">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight" style={{ fontFamily: 'var(--font-display)' }}>
+              Our Rooms
+            </h1>
+            <p className="text-lg md:text-xl text-[var(--color-gray)] max-w-xl leading-relaxed">
+              Discover your perfect sanctuary where art and comfort intertwine
+            </p>
+          </div>
         </div>
       </section>
 

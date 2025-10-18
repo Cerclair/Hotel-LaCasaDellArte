@@ -4,11 +4,11 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative h-[70vh] md:h-[80vh] flex items-center justify-center bg-gradient-to-br from-[var(--color-beige)] to-[var(--color-beige-dark)]">
         <div className="absolute inset-0 bg-[url('/hero-pattern.svg')] opacity-10"></div>
-        <div className="container mx-auto px-4 text-center z-10">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6" style={{ fontFamily: 'var(--font-display)' }}>
+        <div className="w-full max-w-7xl mx-auto px-4 flex flex-col items-center justify-center text-center z-10">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-tight" style={{ fontFamily: 'var(--font-display)' }}>
             Welcome to La Casa Dell&apos;Arte
           </h1>
-          <p className="text-xl md:text-2xl text-[var(--color-gray)] max-w-3xl mx-auto mb-8">
+          <p className="text-lg md:text-xl lg:text-2xl text-[var(--color-gray)] max-w-3xl mb-8 leading-relaxed">
             Where hospitality and artistry unite in perfect harmony
           </p>
           <a
@@ -21,9 +21,9 @@ export default function Home() {
       </section>
 
       {/* Main Description Section */}
-      <section className="section bg-[var(--color-beige-light)]">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
+      <section className="section bg-[var(--color-beige-light)] flex items-center justify-center">
+        <div className="w-full max-w-7xl mx-auto px-4 flex flex-col items-center justify-center">
+          <div className="max-w-4xl text-center">
             <h2 className="section-title" style={{ fontFamily: 'var(--font-display)' }}>
               A Living Gallery
             </h2>
@@ -40,13 +40,13 @@ export default function Home() {
       </section>
 
       {/* Inspiration Section */}
-      <section className="section bg-[var(--color-beige)]">
-        <div className="container mx-auto px-4">
+      <section className="section bg-[var(--color-beige)] flex items-center justify-center">
+        <div className="w-full max-w-7xl mx-auto px-4 flex flex-col items-center justify-center">
           <h2 className="section-title" style={{ fontFamily: 'var(--font-display)' }}>
             Our Inspiration
           </h2>
-          <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-            <div className="space-y-6">
+          <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl w-full">
+            <div className="space-y-6 text-center md:text-left">
               <h3 className="text-2xl font-semibold text-[var(--color-text)]" style={{ fontFamily: 'var(--font-display)' }}>
                 Chihuly Garden and Glass
               </h3>
@@ -70,9 +70,9 @@ export default function Home() {
       </section>
 
       {/* Vision and Mission Section */}
-      <section className="section bg-[var(--color-beige-light)]">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+      <section className="section bg-[var(--color-beige-light)] flex items-center justify-center">
+        <div className="w-full max-w-7xl mx-auto px-4 flex flex-col items-center justify-center">
+          <div className="grid md:grid-cols-2 gap-12 max-w-6xl w-full">
             {/* Vision */}
             <div className="bg-white p-8 rounded-lg shadow-lg">
               <div className="w-16 h-16 bg-[var(--color-accent)] rounded-full flex items-center justify-center mb-6">
@@ -111,45 +111,45 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section className="section bg-[var(--color-beige)]">
-        <div className="container mx-auto px-4">
+      <section className="section bg-[var(--color-beige)] flex items-center justify-center">
+        <div className="w-full max-w-7xl mx-auto px-4 flex flex-col items-center justify-center">
           <h2 className="section-title" style={{ fontFamily: 'var(--font-display)' }}>
             Find Us
           </h2>
-          <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 max-w-6xl w-full">
             {/* Contact Information */}
-            <div className="space-y-8">
+            <div className="space-y-8 text-center md:text-left">
               <div>
                 <h3 className="text-xl font-semibold mb-4 text-[var(--color-text)]">
                   Get in Touch
                 </h3>
                 <div className="space-y-4">
-                  <div className="flex items-start space-x-3">
-                    <svg className="w-6 h-6 text-[var(--color-accent)] mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="flex items-start space-x-3 justify-center md:justify-start">
+                    <svg className="w-6 h-6 text-[var(--color-accent)] mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
-                    <div>
+                    <div className="text-left">
                       <p className="font-medium text-[var(--color-text)]">Address</p>
                       <p className="text-[var(--color-gray)]">Galle Road, Colombo 03, Sri Lanka</p>
                     </div>
                   </div>
 
-                  <div className="flex items-start space-x-3">
-                    <svg className="w-6 h-6 text-[var(--color-accent)] mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="flex items-start space-x-3 justify-center md:justify-start">
+                    <svg className="w-6 h-6 text-[var(--color-accent)] mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                     </svg>
-                    <div>
+                    <div className="text-left">
                       <p className="font-medium text-[var(--color-text)]">Phone</p>
                       <p className="text-[var(--color-gray)]">+94 718 530 994</p>
                     </div>
                   </div>
 
-                  <div className="flex items-start space-x-3">
-                    <svg className="w-6 h-6 text-[var(--color-accent)] mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="flex items-start space-x-3 justify-center md:justify-start">
+                    <svg className="w-6 h-6 text-[var(--color-accent)] mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
-                    <div>
+                    <div className="text-left">
                       <p className="font-medium text-[var(--color-text)]">Email</p>
                       <a href="mailto:ladellaarte@gmail.com" className="text-[var(--color-gray)] hover:text-[var(--color-accent)] transition-colors">
                         ladellaarte@gmail.com
