@@ -21,13 +21,13 @@ export default function RoomsPage() {
   return (
     <div className="min-h-screen bg-[var(--color-beige)]">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-[var(--color-beige-dark)] to-[var(--color-beige)] py-12">
-        <div className="w-full max-w-7xl mx-auto px-4">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight" style={{ fontFamily: 'var(--font-display)' }}>
+      <section className="bg-gradient-to-br from-[var(--color-beige-dark)] to-[var(--color-beige)] py-16 flex items-center justify-center">
+        <div className="w-full max-w-7xl mx-auto px-4 flex flex-col items-center justify-center">
+          <div className="max-w-4xl text-center">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight" style={{ fontFamily: 'var(--font-display)' }}>
               Our Rooms
             </h1>
-            <p className="text-lg md:text-xl text-[var(--color-gray)] max-w-xl leading-relaxed">
+            <p className="text-xl text-[var(--color-gray)] leading-relaxed">
               Discover your perfect sanctuary where art and comfort intertwine
             </p>
           </div>
@@ -35,29 +35,29 @@ export default function RoomsPage() {
       </section>
 
       {/* Filter Section */}
-      <section className="bg-white shadow-md sticky top-20 z-40">
-        <div className="container mx-auto px-4 py-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+      <section className="bg-white shadow-sm border-b border-[var(--color-beige-dark)] sticky top-20 z-40">
+        <div className="w-full max-w-7xl mx-auto px-4 py-4">
+          <div className="flex flex-wrap items-end gap-3">
             {/* Room Type Filter */}
-            <div>
-              <label className="block text-sm font-medium text-[var(--color-text)] mb-2">
+            <div className="flex-1 min-w-[140px]">
+              <label className="block text-xs font-medium text-[var(--color-gray)] mb-1">
                 Room Type
               </label>
               <select
                 value={selectedType}
                 onChange={(e) => setSelectedType(e.target.value)}
-                className="w-full px-4 py-2 border border-[var(--color-beige-dark)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] bg-white text-[var(--color-text)]"
+                className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-[var(--color-accent)] bg-white text-[var(--color-text)]"
               >
                 <option value="all">All Rooms</option>
-                <option value="standard">Standard Rooms</option>
-                <option value="deluxe">Deluxe Rooms</option>
-                <option value="suite">King Deluxe Suites</option>
+                <option value="standard">Standard</option>
+                <option value="deluxe">Deluxe</option>
+                <option value="suite">Suite</option>
               </select>
             </div>
 
             {/* Check-in Date */}
-            <div>
-              <label className="block text-sm font-medium text-[var(--color-text)] mb-2">
+            <div className="flex-1 min-w-[140px]">
+              <label className="block text-xs font-medium text-[var(--color-gray)] mb-1">
                 Check-in
               </label>
               <input
@@ -65,13 +65,13 @@ export default function RoomsPage() {
                 value={checkIn}
                 onChange={(e) => setCheckIn(e.target.value)}
                 min={new Date().toISOString().split('T')[0]}
-                className="w-full px-4 py-2 border border-[var(--color-beige-dark)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] bg-white text-[var(--color-text)]"
+                className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-[var(--color-accent)] bg-white text-[var(--color-text)]"
               />
             </div>
 
             {/* Check-out Date */}
-            <div>
-              <label className="block text-sm font-medium text-[var(--color-text)] mb-2">
+            <div className="flex-1 min-w-[140px]">
+              <label className="block text-xs font-medium text-[var(--color-gray)] mb-1">
                 Check-out
               </label>
               <input
@@ -79,41 +79,41 @@ export default function RoomsPage() {
                 value={checkOut}
                 onChange={(e) => setCheckOut(e.target.value)}
                 min={checkIn || new Date().toISOString().split('T')[0]}
-                className="w-full px-4 py-2 border border-[var(--color-beige-dark)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] bg-white text-[var(--color-text)]"
+                className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-[var(--color-accent)] bg-white text-[var(--color-text)]"
               />
             </div>
 
             {/* Adults */}
-            <div>
-              <label className="block text-sm font-medium text-[var(--color-text)] mb-2">
+            <div className="flex-1 min-w-[100px]">
+              <label className="block text-xs font-medium text-[var(--color-gray)] mb-1">
                 Adults
               </label>
               <select
                 value={adults}
                 onChange={(e) => setAdults(Number(e.target.value))}
-                className="w-full px-4 py-2 border border-[var(--color-beige-dark)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] bg-white text-[var(--color-text)]"
+                className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-[var(--color-accent)] bg-white text-[var(--color-text)]"
               >
                 {[1, 2, 3, 4].map((num) => (
                   <option key={num} value={num}>
-                    {num} {num === 1 ? 'Adult' : 'Adults'}
+                    {num}
                   </option>
                 ))}
               </select>
             </div>
 
             {/* Children */}
-            <div>
-              <label className="block text-sm font-medium text-[var(--color-text)] mb-2">
+            <div className="flex-1 min-w-[100px]">
+              <label className="block text-xs font-medium text-[var(--color-gray)] mb-1">
                 Children
               </label>
               <select
                 value={children}
                 onChange={(e) => setChildren(Number(e.target.value))}
-                className="w-full px-4 py-2 border border-[var(--color-beige-dark)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] bg-white text-[var(--color-text)]"
+                className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-[var(--color-accent)] bg-white text-[var(--color-text)]"
               >
                 {[0, 1, 2].map((num) => (
                   <option key={num} value={num}>
-                    {num} {num === 1 ? 'Child' : 'Children'}
+                    {num}
                   </option>
                 ))}
               </select>
