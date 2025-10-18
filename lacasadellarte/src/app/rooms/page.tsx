@@ -35,88 +35,90 @@ export default function RoomsPage() {
       </section>
 
       {/* Filter Section */}
-      <section className="bg-white shadow-sm border-b border-[var(--color-beige-dark)] sticky top-20 z-40">
-        <div className="w-full max-w-7xl mx-auto px-4 py-4">
-          <div className="flex flex-wrap items-end gap-3">
-            {/* Room Type Filter */}
-            <div className="flex-1 min-w-[140px]">
-              <label className="block text-xs font-medium text-[var(--color-gray)] mb-1">
-                Room Type
-              </label>
-              <select
-                value={selectedType}
-                onChange={(e) => setSelectedType(e.target.value)}
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-[var(--color-accent)] bg-white text-[var(--color-text)]"
-              >
-                <option value="all">All Rooms</option>
-                <option value="standard">Standard</option>
-                <option value="deluxe">Deluxe</option>
-                <option value="suite">Suite</option>
-              </select>
-            </div>
+      <section className="bg-white shadow-lg border-y border-[var(--color-beige-dark)] sticky top-20 z-40">
+        <div className="w-full max-w-7xl mx-auto px-4 py-5">
+          <div className="bg-gradient-to-r from-[var(--color-beige-light)] to-white rounded-xl p-5 shadow-md">
+            <div className="flex flex-wrap items-end gap-4">
+              {/* Room Type Filter */}
+              <div className="flex-1 min-w-[160px]">
+                <label className="block text-xs font-semibold text-[var(--color-accent)] mb-2 uppercase tracking-wide">
+                  Room Type
+                </label>
+                <select
+                  value={selectedType}
+                  onChange={(e) => setSelectedType(e.target.value)}
+                  className="w-full px-4 py-2.5 text-sm border-2 border-[var(--color-beige-dark)] rounded-lg focus:outline-none focus:border-[var(--color-accent)] focus:ring-2 focus:ring-[var(--color-accent)]/20 bg-white text-[var(--color-text)] font-medium transition-all duration-200 hover:border-[var(--color-accent)]"
+                >
+                  <option value="all">All Rooms</option>
+                  <option value="standard">Standard</option>
+                  <option value="deluxe">Deluxe</option>
+                  <option value="suite">Suite</option>
+                </select>
+              </div>
 
-            {/* Check-in Date */}
-            <div className="flex-1 min-w-[140px]">
-              <label className="block text-xs font-medium text-[var(--color-gray)] mb-1">
-                Check-in
-              </label>
-              <input
-                type="date"
-                value={checkIn}
-                onChange={(e) => setCheckIn(e.target.value)}
-                min={new Date().toISOString().split('T')[0]}
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-[var(--color-accent)] bg-white text-[var(--color-text)]"
-              />
-            </div>
+              {/* Check-in Date */}
+              <div className="flex-1 min-w-[160px]">
+                <label className="block text-xs font-semibold text-[var(--color-accent)] mb-2 uppercase tracking-wide">
+                  Check-in
+                </label>
+                <input
+                  type="date"
+                  value={checkIn}
+                  onChange={(e) => setCheckIn(e.target.value)}
+                  min={new Date().toISOString().split('T')[0]}
+                  className="w-full px-4 py-2.5 text-sm border-2 border-[var(--color-beige-dark)] rounded-lg focus:outline-none focus:border-[var(--color-accent)] focus:ring-2 focus:ring-[var(--color-accent)]/20 bg-white text-[var(--color-text)] font-medium transition-all duration-200 hover:border-[var(--color-accent)]"
+                />
+              </div>
 
-            {/* Check-out Date */}
-            <div className="flex-1 min-w-[140px]">
-              <label className="block text-xs font-medium text-[var(--color-gray)] mb-1">
-                Check-out
-              </label>
-              <input
-                type="date"
-                value={checkOut}
-                onChange={(e) => setCheckOut(e.target.value)}
-                min={checkIn || new Date().toISOString().split('T')[0]}
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-[var(--color-accent)] bg-white text-[var(--color-text)]"
-              />
-            </div>
+              {/* Check-out Date */}
+              <div className="flex-1 min-w-[160px]">
+                <label className="block text-xs font-semibold text-[var(--color-accent)] mb-2 uppercase tracking-wide">
+                  Check-out
+                </label>
+                <input
+                  type="date"
+                  value={checkOut}
+                  onChange={(e) => setCheckOut(e.target.value)}
+                  min={checkIn || new Date().toISOString().split('T')[0]}
+                  className="w-full px-4 py-2.5 text-sm border-2 border-[var(--color-beige-dark)] rounded-lg focus:outline-none focus:border-[var(--color-accent)] focus:ring-2 focus:ring-[var(--color-accent)]/20 bg-white text-[var(--color-text)] font-medium transition-all duration-200 hover:border-[var(--color-accent)]"
+                />
+              </div>
 
-            {/* Adults */}
-            <div className="flex-1 min-w-[100px]">
-              <label className="block text-xs font-medium text-[var(--color-gray)] mb-1">
-                Adults
-              </label>
-              <select
-                value={adults}
-                onChange={(e) => setAdults(Number(e.target.value))}
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-[var(--color-accent)] bg-white text-[var(--color-text)]"
-              >
-                {[1, 2, 3, 4].map((num) => (
-                  <option key={num} value={num}>
-                    {num}
-                  </option>
-                ))}
-              </select>
-            </div>
+              {/* Adults */}
+              <div className="flex-1 min-w-[120px]">
+                <label className="block text-xs font-semibold text-[var(--color-accent)] mb-2 uppercase tracking-wide">
+                  Adults
+                </label>
+                <select
+                  value={adults}
+                  onChange={(e) => setAdults(Number(e.target.value))}
+                  className="w-full px-4 py-2.5 text-sm border-2 border-[var(--color-beige-dark)] rounded-lg focus:outline-none focus:border-[var(--color-accent)] focus:ring-2 focus:ring-[var(--color-accent)]/20 bg-white text-[var(--color-text)] font-medium transition-all duration-200 hover:border-[var(--color-accent)]"
+                >
+                  {[1, 2, 3, 4].map((num) => (
+                    <option key={num} value={num}>
+                      {num} {num === 1 ? 'Adult' : 'Adults'}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
-            {/* Children */}
-            <div className="flex-1 min-w-[100px]">
-              <label className="block text-xs font-medium text-[var(--color-gray)] mb-1">
-                Children
-              </label>
-              <select
-                value={children}
-                onChange={(e) => setChildren(Number(e.target.value))}
-                className="w-full px-3 py-2 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-[var(--color-accent)] bg-white text-[var(--color-text)]"
-              >
-                {[0, 1, 2].map((num) => (
-                  <option key={num} value={num}>
-                    {num}
-                  </option>
-                ))}
-              </select>
+              {/* Children */}
+              <div className="flex-1 min-w-[120px]">
+                <label className="block text-xs font-semibold text-[var(--color-accent)] mb-2 uppercase tracking-wide">
+                  Children
+                </label>
+                <select
+                  value={children}
+                  onChange={(e) => setChildren(Number(e.target.value))}
+                  className="w-full px-4 py-2.5 text-sm border-2 border-[var(--color-beige-dark)] rounded-lg focus:outline-none focus:border-[var(--color-accent)] focus:ring-2 focus:ring-[var(--color-accent)]/20 bg-white text-[var(--color-text)] font-medium transition-all duration-200 hover:border-[var(--color-accent)]"
+                >
+                  {[0, 1, 2].map((num) => (
+                    <option key={num} value={num}>
+                      {num} {num === 1 ? 'Child' : 'Children'}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
           </div>
         </div>
