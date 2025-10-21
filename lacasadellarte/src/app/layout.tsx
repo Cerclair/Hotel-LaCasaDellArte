@@ -23,6 +23,16 @@ export const metadata: Metadata = {
   title: "La Casa Dell'Arte - Luxury Art-Inspired Hotel",
   description: "Experience the perfect blend of hospitality and artistry at La Casa Dell'Arte, a luxury hotel in Colombo, Sri Lanka. Where every stay is a masterpiece.",
   keywords: "luxury hotel, art hotel, Colombo hotel, La Casa Dell'Arte, Sri Lanka accommodation, boutique hotel",
+  icons: {
+    icon: [
+      { url: '/favicon/favicon.ico' },
+      { url: '/favicon/icon1.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon/icon0.svg', type: 'image/svg+xml' },
+    ],
+    shortcut: '/favicon/favicon.ico',
+    apple: '/favicon/apple-icon.png',
+  },
+  manifest: '/favicon/manifest.json',
 };
 
 export default function RootLayout({
