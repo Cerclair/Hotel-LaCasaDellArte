@@ -99,35 +99,26 @@ export default function Navigation() {
                 </svg>
               </button>
 
-              {/* Premium Dropdown Menu */}
+              {/* Clean Dropdown Menu */}
               <div
-                className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 w-72 bg-[#E8E4D8] shadow-2xl rounded-2xl overflow-hidden transition-all duration-300 border-2 border-[var(--color-accent)]/10 ${
-                  isDiningOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-3 pointer-events-none'
+                className={`absolute top-full left-1/2 -translate-x-1/2 mt-3 w-64 bg-[#E8E4D8] shadow-xl rounded-xl overflow-hidden transition-all duration-300 border border-[var(--color-accent)]/20 ${
+                  isDiningOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2 pointer-events-none'
                 }`}
                 onMouseEnter={() => setIsDiningOpen(true)}
                 onMouseLeave={() => setIsDiningOpen(false)}
               >
-
-
                 {/* Menu Items */}
-                <div className="py-3">
+                <div className="py-3 px-8">
                   {diningOptions.map((option) => (
                     <Link
                       key={option.href}
                       href={option.href}
-                      className="group flex items-center px-12 py-5 text-[var(--color-text)] hover:bg-[var(--color-accent)]/5 transition-all duration-300 border-l-4 border-transparent hover:border-[var(--color-accent)]"
+                      className="text-[var(--color-text)] hover:text-[var(--color-accent)] font-medium transition-colors duration-300 py-2 block text-center"
                     >
-                      <div className="flex items-center gap-4">
-                        <div className="w-2.5 h-2.5 rounded-full bg-[var(--color-accent)]/30 group-hover:bg-[var(--color-accent)] group-hover:scale-125 transition-all duration-300"></div>
-                        <span className="text-base font-semibold group-hover:text-[var(--color-accent)] group-hover:translate-x-1 transition-all duration-300">
-                          {option.name}
-                        </span>
-                      </div>
+                      {option.name}
                     </Link>
                   ))}
                 </div>
-
-
               </div>
             </div>
 
