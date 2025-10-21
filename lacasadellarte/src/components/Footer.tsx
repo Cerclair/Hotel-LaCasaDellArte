@@ -1,25 +1,39 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Footer() {
   return (
-    <footer className="bg-[var(--color-beige-dark)] mt-auto">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-          {/* Left Side - Logo and Social Media */}
-          <div>
-            <div className="mb-6">
-              <h3 className="text-2xl font-bold text-[var(--color-text)] mb-2">
-                La Casa Dell&apos;Arte
-              </h3>
-              <p className="text-[var(--color-gray)] text-sm">
-                Where hospitality and artistry unite
-              </p>
+    <footer className="bg-[#E8E4D8] mt-auto border-t-2 border-[var(--color-accent)]/10">
+      <div className="container mx-auto px-6 lg:px-8 py-12">
+        {/* Main Footer Content */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+
+          {/* LEFT SECTION - Logo, Brand Name & Social Icons */}
+          <div className="lg:col-span-3">
+            {/* Logo and Brand */}
+            <div className="flex items-center gap-4 mb-6">
+              <div className="relative w-16 h-16 rounded-full overflow-hidden shadow-lg ring-2 ring-[var(--color-accent)]/20">
+                <Image
+                  src="/logo/logo.png"
+                  alt="La Casa Dell'Arte Logo"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-2xl font-bold text-[var(--color-text)] tracking-tight">
+                  La Casa Dell&apos;Arte
+                </span>
+                <span className="text-xs text-[var(--color-accent)] font-light tracking-widest uppercase">
+                  Artistic Hospitality
+                </span>
+              </div>
             </div>
 
             {/* Social Media Icons */}
-            <div className="flex space-x-4">
+            <div className="flex gap-3 mt-6">
               <div
-                className="w-10 h-10 rounded-full bg-[var(--color-accent)] flex items-center justify-center hover:bg-[var(--color-gold)] transition-colors cursor-pointer"
+                className="w-10 h-10 rounded-full bg-[var(--color-accent)] flex items-center justify-center hover:bg-[var(--color-accent)]/80 hover:scale-110 transition-all duration-300 cursor-pointer shadow-md"
                 aria-label="Facebook"
               >
                 <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -28,7 +42,7 @@ export default function Footer() {
               </div>
 
               <div
-                className="w-10 h-10 rounded-full bg-[var(--color-accent)] flex items-center justify-center hover:bg-[var(--color-gold)] transition-colors cursor-pointer"
+                className="w-10 h-10 rounded-full bg-[var(--color-accent)] flex items-center justify-center hover:bg-[var(--color-accent)]/80 hover:scale-110 transition-all duration-300 cursor-pointer shadow-md"
                 aria-label="Instagram"
               >
                 <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -37,7 +51,7 @@ export default function Footer() {
               </div>
 
               <div
-                className="w-10 h-10 rounded-full bg-[var(--color-accent)] flex items-center justify-center hover:bg-[var(--color-gold)] transition-colors cursor-pointer"
+                className="w-10 h-10 rounded-full bg-[var(--color-accent)] flex items-center justify-center hover:bg-[var(--color-accent)]/80 hover:scale-110 transition-all duration-300 cursor-pointer shadow-md"
                 aria-label="Twitter"
               >
                 <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -46,7 +60,7 @@ export default function Footer() {
               </div>
 
               <div
-                className="w-10 h-10 rounded-full bg-[var(--color-accent)] flex items-center justify-center hover:bg-[var(--color-gold)] transition-colors cursor-pointer"
+                className="w-10 h-10 rounded-full bg-[var(--color-accent)] flex items-center justify-center hover:bg-[var(--color-accent)]/80 hover:scale-110 transition-all duration-300 cursor-pointer shadow-md"
                 aria-label="LinkedIn"
               >
                 <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -56,58 +70,139 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Right Side - Contact Information */}
-          <div className="md:text-right">
-            <h4 className="text-lg font-semibold text-[var(--color-text)] mb-4">
-              Contact Us
-            </h4>
+          {/* MIDDLE SECTION - 3 Column Navigation Links */}
+          <div className="lg:col-span-6">
+            <div className="grid grid-cols-3 gap-8">
 
-            <div className="space-y-3 text-[var(--color-gray)]">
-              <div className="flex items-center md:justify-end space-x-2">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                </svg>
-                <span>+94 718 530 994</span>
+              {/* Column 1 */}
+              <div>
+                <nav className="flex flex-col space-y-3">
+                  <Link
+                    href="/"
+                    className="text-sm font-medium text-[var(--color-text)] hover:text-[var(--color-accent)] transition-colors duration-300"
+                  >
+                    Home
+                  </Link>
+                  <Link
+                    href="/rooms"
+                    className="text-sm font-medium text-[var(--color-text)] hover:text-[var(--color-accent)] transition-colors duration-300"
+                  >
+                    Rooms
+                  </Link>
+                  <Link
+                    href="/dining"
+                    className="text-sm font-medium text-[var(--color-text)] hover:text-[var(--color-accent)] transition-colors duration-300"
+                  >
+                    Dining & Drinks
+                  </Link>
+                </nav>
               </div>
 
-              <div className="flex items-center md:justify-end space-x-2">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {/* Column 2 */}
+              <div>
+                <nav className="flex flex-col space-y-3">
+                  <Link
+                    href="/atelier"
+                    className="text-sm font-medium text-[var(--color-text)] hover:text-[var(--color-accent)] transition-colors duration-300"
+                  >
+                    Atelier
+                  </Link>
+                  <Link
+                    href="/spa"
+                    className="text-sm font-medium text-[var(--color-text)] hover:text-[var(--color-accent)] transition-colors duration-300"
+                  >
+                    SPA
+                  </Link>
+                </nav>
+              </div>
+
+              {/* Column 3 */}
+              <div>
+                <nav className="flex flex-col space-y-3">
+                  <Link
+                    href="/facilities"
+                    className="text-sm font-medium text-[var(--color-text)] hover:text-[var(--color-accent)] transition-colors duration-300"
+                  >
+                    Facilities
+                  </Link>
+                  <Link
+                    href="/loyalty"
+                    className="text-sm font-medium text-[var(--color-text)] hover:text-[var(--color-accent)] transition-colors duration-300"
+                  >
+                    Loyalty
+                  </Link>
+                </nav>
+              </div>
+
+            </div>
+          </div>
+
+          {/* RIGHT SECTION - Contact Information */}
+          <div className="lg:col-span-3">
+            <div className="space-y-4">
+              {/* Phone */}
+              <div className="flex items-center gap-3 text-[var(--color-text)]">
+                <svg className="w-5 h-5 text-[var(--color-accent)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+                <span className="text-sm font-medium">+94 718 530 994</span>
+              </div>
+
+              {/* Email */}
+              <div className="flex items-center gap-3 text-[var(--color-text)]">
+                <svg className="w-5 h-5 text-[var(--color-accent)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                <a href="mailto:ladellaarte@gmail.com" className="hover:text-[var(--color-accent)] transition-colors">
+                <a
+                  href="mailto:ladellaarte@gmail.com"
+                  className="text-sm font-medium hover:text-[var(--color-accent)] transition-colors duration-300"
+                >
                   ladellaarte@gmail.com
                 </a>
               </div>
 
-              <div className="flex items-center md:justify-end space-x-2">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {/* Address */}
+              <div className="flex items-start gap-3 text-[var(--color-text)]">
+                <svg className="w-5 h-5 text-[var(--color-accent)] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
-                <span>Galle Road, Colombo 03, Sri Lanka</span>
+                <span className="text-sm font-medium">Galle Road, Colombo 03, Sri Lanka</span>
               </div>
             </div>
           </div>
+
         </div>
 
-        {/* Bottom Section - Links and Copyright */}
-        <div className="border-t border-[var(--color-accent)]/20 pt-6">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="flex flex-wrap justify-center md:justify-start gap-4 text-sm text-[var(--color-gray)]">
-              <Link href="/terms" className="hover:text-[var(--color-accent)] transition-colors">
-                Terms and Conditions
+        {/* BOTTOM BAR - Separator, Terms & Copyright */}
+        <div className="border-t-2 border-[var(--color-accent)]/20 mt-12 pt-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+
+            {/* Left - Terms & Privacy */}
+            <div className="flex items-center gap-4 text-sm text-[var(--color-text)]">
+              <Link
+                href="/terms"
+                className="font-medium hover:text-[var(--color-accent)] transition-colors duration-300"
+              >
+                Terms & Conditions
               </Link>
-              <span className="hidden md:inline">|</span>
-              <Link href="/privacy" className="hover:text-[var(--color-accent)] transition-colors">
+              <span className="text-[var(--color-accent)]">|</span>
+              <Link
+                href="/privacy"
+                className="font-medium hover:text-[var(--color-accent)] transition-colors duration-300"
+              >
                 Privacy Statement
               </Link>
             </div>
 
-            <div className="text-sm text-[var(--color-gray)]">
-              &copy; {new Date().getFullYear()} La Casa Dell&apos;Arte. All rights reserved.
+            {/* Right - Copyright */}
+            <div className="text-sm text-[var(--color-text)] font-medium">
+              &copy; {new Date().getFullYear()} LaCasaDellArte. All rights reserved.
             </div>
+
           </div>
         </div>
+
       </div>
     </footer>
   );
