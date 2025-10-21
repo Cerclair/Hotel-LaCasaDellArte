@@ -1,8 +1,5 @@
 'use client';
 
-import { rooms } from '@/lib/data';
-import RoomCard from '@/components/RoomCard';
-
 export default function RoomsPage() {
   return (
     <div className="min-h-screen bg-[var(--color-beige)]">
@@ -17,7 +14,7 @@ export default function RoomsPage() {
               letterSpacing: '0.05em'
             }}
           >
-            THE BOUTIQUE HOTEL
+            THE HOTEL
           </h1>
           <h2 
             className="text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--color-accent)] tracking-widest"
@@ -26,7 +23,7 @@ export default function RoomsPage() {
               letterSpacing: '0.15em'
             }}
           >
-            OF WESTIN
+            La Casa Dell'Arte
           </h2>
           <div className="mt-8 w-24 h-1 bg-[var(--color-gold)]"></div>
         </div>
