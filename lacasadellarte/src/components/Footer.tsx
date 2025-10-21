@@ -4,15 +4,15 @@ import Image from 'next/image';
 export default function Footer() {
   return (
     <footer className="bg-[#E8E4D8] mt-auto border-t-2 border-[var(--color-accent)]/10">
-      <div className="container mx-auto px-6 lg:px-8 py-20">
+      <div className="container mx-auto px-6 lg:px-8 pt-24 pb-16">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center min-h-[130px]">
 
           {/* LEFT SECTION - Logo, Brand Name & Social Icons */}
           <div className="lg:col-span-3 flex flex-col justify-center">
             {/* Logo and Brand */}
-            <div className="flex items-center gap-4 mb-6">
-              <div className="relative w-16 h-16 rounded-full overflow-hidden shadow-lg ring-2 ring-[var(--color-accent)]/20">
+            <Link href="/" className="flex items-center gap-4 mb-6 hover:opacity-90 transition-all duration-300 group">
+              <div className="relative w-16 h-16 rounded-full overflow-hidden shadow-lg ring-2 ring-[var(--color-accent)]/20 group-hover:ring-[var(--color-accent)]/40 transition-all">
                 <Image
                   src="/logo/logo.png"
                   alt="La Casa Dell'Arte Logo"
@@ -28,13 +28,13 @@ export default function Footer() {
                   Artistic Hospitality
                 </span>
               </div>
-            </div>
+            </Link>
 
             {/* Social Media Icons - Only Facebook and Instagram */}
             <div className="flex gap-4 mt-6">
               <a
                 href="#"
-                className="w-7 h-10 flex items-center justify-center hover:scale-110 transition-all duration-300 cursor-pointer"
+                className="w-8 h-13 flex items-center justify-center hover:scale-110 transition-all duration-300 cursor-pointer"
                 aria-label="Facebook"
               >
                 <Image
@@ -49,7 +49,7 @@ export default function Footer() {
 
               <a
                 href="#"
-                className="w-9 h-10 flex items-center justify-center hover:scale-110 transition-all duration-300 cursor-pointer"
+                className="w-10 h-13 flex items-center justify-center hover:scale-110 transition-all duration-300 cursor-pointer"
                 aria-label="Instagram"
               >
                 <Image
