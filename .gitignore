@@ -1,2 +1,5 @@
 .claude/
 context/
+
+# Terminal Paste Image folder
+.cp-images/
