@@ -1,16 +1,18 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { SmoothScrollHero } from '@/components/ui/modern-hero';
 
 export default function RoomsPage() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [useModernHero, setUseModernHero] = useState(false); // Toggle between hero versions
 
   // Background images for the hero slider
   const heroImages = [
-    '/placeholder-room-1.jpg', // Replace with actual room images
-    '/placeholder-room-2.jpg',
-    '/placeholder-room-3.jpg',
+    'public/IMG resources - Rooms/Rooms/King Delux Rooms/King Deluxe Suite Room no1.jpg', // Replace with actual room images
+    'public/IMG resources - Rooms/Rooms/King Delux Rooms/King Deluxe Suite Room no2.jpg',
+    'public/IMG resources - Rooms/Rooms/King Delux Rooms/king deluxe suite.png',
   ];
 
   // Auto-slide effect
@@ -30,8 +32,32 @@ export default function RoomsPage() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // If modern hero is enabled, render it
+  if (useModernHero) {
+    return (
+      <div className="relative">
+        {/* Toggle Button */}
+        <button
+          onClick={() => setUseModernHero(false)}
+          className="fixed top-20 right-4 z-[100] bg-[var(--color-gold)] text-white px-4 py-2 rounded-lg shadow-lg hover:bg-[var(--color-accent)] transition-colors text-sm font-semibold"
+        >
+          Switch to Classic Hero
+        </button>
+        <SmoothScrollHero />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-[var(--color-beige)]">
+      {/* Toggle Button */}
+      <button
+        onClick={() => setUseModernHero(true)}
+        className="fixed top-20 right-4 z-50 bg-[var(--color-gold)] text-white px-4 py-2 rounded-lg shadow-lg hover:bg-[var(--color-accent)] transition-colors text-sm font-semibold"
+      >
+        Try Modern Hero
+      </button>
+
       {/* Enhanced Hero Section */}
       <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">
         {/* Background Image Slider */}
@@ -52,8 +78,17 @@ export default function RoomsPage() {
           {/* Gradient Overlay for Readability */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
           
-          {/* Artistic Pattern Overlay */}
-          <div className="absolute inset-0 bg-[url('/hero-pattern.svg')] opacity-5"></div>
+          {/* Artistic Pattern Overlay - CSS Pattern as fallback until hero-pattern.svg is added */}
+          <div 
+            className="absolute inset-0 opacity-5"
+            style={{
+              backgroundImage: `
+                radial-gradient(circle at 25px 25px, white 2%, transparent 0%),
+                radial-gradient(circle at 75px 75px, white 2%, transparent 0%)
+              `,
+              backgroundSize: '100px 100px'
+            }}
+          ></div>
         </div>
 
         {/* Hero Content */}
