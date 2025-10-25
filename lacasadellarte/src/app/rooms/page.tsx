@@ -40,7 +40,7 @@ export default function RoomsPage() {
         {/* Toggle Button */}
         <button
           onClick={() => setUseModernHero(false)}
-          className="fixed top-20 right-4 z-[100] bg-[var(--color-gold)] text-white px-4 py-2 rounded-lg shadow-lg hover:bg-[var(--color-accent)] transition-colors text-sm font-semibold"
+          className="fixed top-20 right-4 z-[var(--z-modal)] bg-[var(--color-gold)] text-white px-4 py-2 rounded-lg shadow-lg hover:bg-[var(--color-accent)] transition-colors text-sm font-semibold"
         >
           Switch to Classic Hero
         </button>
@@ -54,7 +54,7 @@ export default function RoomsPage() {
       {/* Toggle Button */}
       <button
         onClick={() => setUseModernHero(true)}
-        className="fixed top-20 right-4 z-50 bg-[var(--color-gold)] text-white px-4 py-2 rounded-lg shadow-lg hover:bg-[var(--color-accent)] transition-colors text-sm font-semibold"
+        className="fixed top-20 right-4 z-[var(--z-controls)] bg-[var(--color-gold)] text-white px-4 py-2 rounded-lg shadow-lg hover:bg-[var(--color-accent)] transition-colors text-sm font-semibold"
       >
         Try Modern Hero
       </button>
@@ -78,15 +78,12 @@ export default function RoomsPage() {
           ))}
           {/* Gradient Overlay for Readability */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
-          
-          {/* Artistic Pattern Overlay */}
-          {/*<div className="absolute inset-0 bg-[url('/rounded-plus-connected.svg')] opacity-5"></div>*/}
         </div>
 
         {/* Hero Content */}
-        <div className="relative w-full max-w-7xl mx-auto px-4 flex flex-col items-center justify-center text-center z-10">
+        <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center text-center z-[var(--z-base)]">
           {/* Animated Tagline */}
-          <div className="mb-6 opacity-0 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+          <div className="mb-6 opacity-0 animate-fade-in-delay-200">
             <p className="text-[var(--color-gold)] text-sm md:text-base uppercase tracking-[0.3em] font-light">
               Experience Artistry in Every Detail
             </p>
@@ -94,12 +91,11 @@ export default function RoomsPage() {
 
           {/* Main Heading */}
           <h1 
-            className="text-5xl md:text-6xl lg:text-8xl font-bold mb-4 leading-tight tracking-wide text-white opacity-0 animate-fade-in" 
+            className="text-5xl md:text-6xl lg:text-8xl font-bold mb-4 leading-tight tracking-wide text-white opacity-0 animate-fade-in-delay-400"
             style={{ 
               fontFamily: 'var(--font-display)',
               letterSpacing: '0.05em',
-              textShadow: '2px 2px 20px rgba(0,0,0,0.5)',
-              animationDelay: '0.4s'
+              textShadow: 'var(--shadow-text-hero)'
             }}
           >
             OUR ROOMS & SUITES
@@ -107,18 +103,17 @@ export default function RoomsPage() {
 
           {/* Subtitle */}
           <h2 
-            className="text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--color-gold)] tracking-widest mb-8 opacity-0 animate-fade-in"
+            className="text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--color-gold)] tracking-widest mb-8 opacity-0 animate-fade-in-delay-600"
             style={{ 
               fontFamily: 'var(--font-display)',
-              letterSpacing: '0.15em',
-              animationDelay: '0.6s'
+              letterSpacing: '0.15em'
             }}
           >
             La Casa Dell'Arte
           </h2>
 
           {/* Decorative Divider */}
-          <div className="flex items-center gap-4 mb-10 opacity-0 animate-fade-in" style={{ animationDelay: '0.8s' }}>
+          <div className="flex items-center gap-4 mb-10 opacity-0 animate-fade-in-delay-800">
             <div className="w-16 h-[2px] bg-[var(--color-gold)]"></div>
             <svg className="w-6 h-6 text-[var(--color-gold)]" fill="currentColor" viewBox="0 0 20 20">
               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -127,13 +122,13 @@ export default function RoomsPage() {
           </div>
 
           {/* Description */}
-          <p className="text-white/90 text-lg md:text-xl max-w-3xl mb-10 leading-relaxed opacity-0 animate-fade-in" style={{ animationDelay: '1s' }}>
+          <p className="text-white/90 text-lg md:text-xl max-w-3xl mb-10 leading-relaxed opacity-0 animate-fade-in-delay-1000">
             Where every room is a masterpiece, blending luxury accommodation with artistic inspiration. 
             Discover your perfect sanctuary among our thoughtfully curated spaces.
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 opacity-0 animate-fade-in" style={{ animationDelay: '1.2s' }}>
+          <div className="flex flex-col sm:flex-row gap-4 opacity-0 animate-fade-in-delay-1200">
             <a
               href="#rooms-showcase"
               className="inline-block bg-[var(--color-gold)] text-white px-10 py-4 rounded-sm font-semibold hover:bg-[var(--color-gold)]/90 transition-all duration-300 transform hover:scale-105 shadow-2xl uppercase tracking-wider text-sm"
@@ -149,7 +144,7 @@ export default function RoomsPage() {
           </div>
 
           {/* Scroll Indicator */}
-          <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 opacity-0 animate-bounce-slow" style={{ animationDelay: '1.5s' }}>
+          <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 opacity-0 animate-bounce-slow-delay-1500">
             <div className="flex flex-col items-center gap-2">
               <span className="text-white/70 text-xs uppercase tracking-widest">Scroll to Explore</span>
               <svg className="w-6 h-6 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -160,7 +155,7 @@ export default function RoomsPage() {
         </div>
 
         {/* Slide Indicators */}
-        <div className="absolute bottom-8 right-8 z-[60]">
+        <div className="absolute bottom-8 right-8 z-[var(--z-indicators)]">
           <CarouselIndicators
             slideCount={heroImages.length}
             currentSlide={currentSlide}

@@ -20,8 +20,8 @@ export function CarouselIndicators({ slideCount, currentSlide, onSlideChange }: 
           }}
           className={`rounded-full transition-all duration-500 ease-out cursor-pointer ${
             index === currentSlide
-              ? 'w-10 h-3 bg-[#D4AF37] shadow-[0_0_20px_rgba(212,175,55,0.8)]'
-              : 'w-3 h-3 bg-[#F5F5DC] hover:bg-[#D4AF37] hover:w-7 hover:shadow-[0_0_15px_rgba(212,175,55,0.6)]'
+              ? 'w-10 h-3 bg-[var(--color-gold)] shadow-[0_0_20px_rgba(212,175,55,0.8)]'
+              : 'w-3 h-3 bg-[var(--color-beige)] hover:bg-[var(--color-gold)] hover:w-7 hover:shadow-[0_0_15px_rgba(212,175,55,0.6)]'
           }`}
           aria-label={`Go to slide ${index + 1}`}
           aria-current={index === currentSlide ? 'true' : 'false'}
