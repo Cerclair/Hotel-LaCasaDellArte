@@ -8,11 +8,11 @@ export default function RoomsPage() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [useModernHero, setUseModernHero] = useState(false); // Toggle between hero versions
 
-  // Background images for the hero slider
+  // Background images for the hero slider (URL encoded for spaces)
   const heroImages = [
-    '/IMG resources - Rooms/Rooms/King Delux Rooms/King Deluxe Suite Room no1.jpg',
-    '/IMG resources - Rooms/Rooms/King Delux Rooms/King Deluxe Suite Room no2.jpg',
-    '/IMG resources - Rooms/Rooms/King Delux Rooms/king deluxe suite.png',
+    '/IMG%20resources%20-%20Rooms/Rooms/King%20Delux%20Rooms/King%20Deluxe%20Suite%20Room%20no1.jpg',
+    '/IMG%20resources%20-%20Rooms/Rooms/King%20Delux%20Rooms/King%20Deluxe%20Suite%20Room%20no2.jpg',
+    '/IMG%20resources%20-%20Rooms/Rooms/King%20Delux%20Rooms/king%20deluxe%20suite.png',
   ];
 
   // Auto-slide effect
