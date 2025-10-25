@@ -159,20 +159,35 @@ export default function RoomsPage() {
         </div>
 
         {/* Slide Indicators */}
-        <div className="absolute bottom-8 right-8 flex gap-3 z-[60] pointer-events-auto">
-          {heroImages.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentSlide(index)}
-              className={`h-3 rounded-full transition-all duration-300 border-2 shadow-lg ${
-                index === currentSlide 
-                  ? 'bg-[var(--color-gold)] w-10 border-[var(--color-gold)] shadow-[var(--color-gold)]/50' 
-                  : 'bg-white/60 w-3 border-white/50 hover:bg-white/90 hover:border-white'
-              }`}
-              aria-label={`Go to slide ${index + 1}`}
-              style={{ backdropFilter: 'blur(4px)' }}
-            />
-          ))}
+        <div className="absolute bottom-8 right-8 z-[60] pointer-events-auto">
+          <div className="relative bg-white/20 backdrop-blur-sm px-3 py-2.5 rounded-full border border-white/30 shadow-lg">
+            <div className="flex gap-2 items-center">
+              {heroImages.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentSlide(index)}
+                  className="relative z-10"
+                  aria-label={`Go to slide ${index + 1}`}
+                >
+                  <div
+                    className={`rounded-full transition-all duration-300 ${
+                      index === currentSlide
+                        ? 'w-2 h-2 bg-transparent'
+                        : 'w-2 h-2 bg-[#F5F5DC]'
+                    }`}
+                  />
+                </button>
+              ))}
+              {/* Animated Active Indicator */}
+              <div
+                className="absolute top-1/2 -translate-y-1/2 bg-[#D4AF37] rounded-full h-2 transition-all duration-500 ease-out shadow-lg shadow-[#D4AF37]/50"
+                style={{
+                  left: `${12 + currentSlide * 16}px`,
+                  width: currentSlide < heroImages.length - 1 ? '24px' : '8px',
+                }}
+              />
+            </div>
+          </div>
         </div>
       </section>
 
