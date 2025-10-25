@@ -112,12 +112,17 @@ a:hover {
   color: var(--color-accent);
 }
 
-button {
+button:not([class*="bg-"]) {
   cursor: pointer;
   border: none;
   background: none;
   font-family: inherit;
   transition: var(--transition-fast);
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
 }
 
 /* Utility Classes */

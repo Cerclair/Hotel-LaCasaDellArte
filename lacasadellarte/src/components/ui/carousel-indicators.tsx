@@ -10,7 +10,7 @@ export function CarouselIndicators({ slideCount, currentSlide, onSlideChange }: 
   console.log('CarouselIndicators rendering:', { slideCount, currentSlide });
   
   return (
-    <div className="flex justify-center items-center gap-3 bg-white/90 px-5 py-3 rounded-full shadow-2xl border-2 border-white/50">
+    <div className="flex justify-center items-center gap-3">
       {Array.from({ length: slideCount }).map((_, index) => (
         <button
           key={index}
