@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { SmoothScrollHero } from '@/components/ui/modern-hero';
+import { CarouselIndicators } from '@/components/ui/carousel-indicators';
 
 export default function RoomsPage() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -159,35 +160,12 @@ export default function RoomsPage() {
         </div>
 
         {/* Slide Indicators */}
-        <div className="absolute bottom-8 right-8 z-[60] pointer-events-auto">
-          <div className="relative bg-white/20 backdrop-blur-sm px-3 py-2.5 rounded-full border border-white/30 shadow-lg">
-            <div className="flex gap-2 items-center">
-              {heroImages.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentSlide(index)}
-                  className="relative z-10"
-                  aria-label={`Go to slide ${index + 1}`}
-                >
-                  <div
-                    className={`rounded-full transition-all duration-300 ${
-                      index === currentSlide
-                        ? 'w-2 h-2 bg-transparent'
-                        : 'w-2 h-2 bg-[#F5F5DC]'
-                    }`}
-                  />
-                </button>
-              ))}
-              {/* Animated Active Indicator */}
-              <div
-                className="absolute top-1/2 -translate-y-1/2 bg-[#D4AF37] rounded-full h-2 transition-all duration-500 ease-out shadow-lg shadow-[#D4AF37]/50"
-                style={{
-                  left: `${12 + currentSlide * 16}px`,
-                  width: currentSlide < heroImages.length - 1 ? '24px' : '8px',
-                }}
-              />
-            </div>
-          </div>
+        <div className="absolute bottom-8 right-8 z-[60]">
+          <CarouselIndicators
+            slideCount={heroImages.length}
+            currentSlide={currentSlide}
+            onSlideChange={setCurrentSlide}
+          />
         </div>
       </section>
 
