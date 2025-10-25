@@ -10,9 +10,9 @@ export default function RoomsPage() {
 
   // Background images for the hero slider
   const heroImages = [
-    'public/IMG resources - Rooms/Rooms/King Delux Rooms/King Deluxe Suite Room no1.jpg', // Replace with actual room images
-    'public/IMG resources - Rooms/Rooms/King Delux Rooms/King Deluxe Suite Room no2.jpg',
-    'public/IMG resources - Rooms/Rooms/King Delux Rooms/king deluxe suite.png',
+    '/IMG resources - Rooms/Rooms/King Delux Rooms/King Deluxe Suite Room no1.jpg',
+    '/IMG resources - Rooms/Rooms/King Delux Rooms/King Deluxe Suite Room no2.jpg',
+    '/IMG resources - Rooms/Rooms/King Delux Rooms/king deluxe suite.png',
   ];
 
   // Auto-slide effect
@@ -78,17 +78,8 @@ export default function RoomsPage() {
           {/* Gradient Overlay for Readability */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
           
-          {/* Artistic Pattern Overlay - CSS Pattern as fallback until hero-pattern.svg is added */}
-          <div 
-            className="absolute inset-0 opacity-5"
-            style={{
-              backgroundImage: `
-                radial-gradient(circle at 25px 25px, white 2%, transparent 0%),
-                radial-gradient(circle at 75px 75px, white 2%, transparent 0%)
-              `,
-              backgroundSize: '100px 100px'
-            }}
-          ></div>
+          {/* Artistic Pattern Overlay */}
+          <div className="absolute inset-0 bg-[url('/rounded-plus-connected.svg')] opacity-5"></div>
         </div>
 
         {/* Hero Content */}
