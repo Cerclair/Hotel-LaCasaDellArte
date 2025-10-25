@@ -59,9 +59,9 @@ export default function RoomsPage() {
       </button>
 
       {/* Enhanced Hero Section */}
-      <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[90vh] flex items-center justify-center">
         {/* Background Image Slider */}
-        <div className="absolute inset-0">
+        <div className="absolute inset-0 overflow-hidden">
           {heroImages.map((img, index) => (
             <div
               key={index}
@@ -79,7 +79,7 @@ export default function RoomsPage() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
           
           {/* Artistic Pattern Overlay */}
-          <div className="absolute inset-0 bg-[url('/rounded-plus-connected.svg')] opacity-5"></div>
+          {/*<div className="absolute inset-0 bg-[url('/rounded-plus-connected.svg')] opacity-5"></div>*/}
         </div>
 
         {/* Hero Content */}
@@ -159,17 +159,18 @@ export default function RoomsPage() {
         </div>
 
         {/* Slide Indicators */}
-        <div className="absolute bottom-8 right-8 flex gap-2 z-20">
+        <div className="absolute bottom-8 right-8 flex gap-3 z-[60] pointer-events-auto">
           {heroImages.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              className={`h-3 rounded-full transition-all duration-300 border-2 shadow-lg ${
                 index === currentSlide 
-                  ? 'bg-[var(--color-gold)] w-8' 
-                  : 'bg-white/50 hover:bg-white/80'
+                  ? 'bg-[var(--color-gold)] w-10 border-[var(--color-gold)] shadow-[var(--color-gold)]/50' 
+                  : 'bg-white/60 w-3 border-white/50 hover:bg-white/90 hover:border-white'
               }`}
               aria-label={`Go to slide ${index + 1}`}
+              style={{ backdropFilter: 'blur(4px)' }}
             />
           ))}
         </div>
