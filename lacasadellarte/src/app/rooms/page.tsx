@@ -153,6 +153,8 @@ export default function RoomsPage() {
                     Book Now
                   </a>
                 </div>
+                {/* Top Spacer - Creates breathing room at the top */}
+                <div className="h-8 sm:h-10 lg:h-12"></div>
               </div>
             </div>
           </div>
