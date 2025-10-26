@@ -83,7 +83,7 @@ export default function RoomsPage() {
         {/* Hero Content with Blurred Background Box */}
         <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-center z-[var(--z-base)]">
           {/* Blurred Backdrop Box */}
-          <div className="backdrop-blur-lg bg-black/30 rounded-3xl px-12 sm:px-16 lg:px-24 shadow-2xl border border-white/20 w-full max-w-5xl">
+          <div className="backdrop-blur-lg bg-black/30 rounded-3xl px-12 sm:px-16 lg:px-24 shadow-2xl border border-white/2 w-full max-w-5xl">
             {/* Inner container with vertical padding */}
             <div className="py-20 sm:py-24 lg:py-28">
               <div className="flex flex-col items-center text-center gap-8">
