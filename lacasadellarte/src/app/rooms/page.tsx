@@ -83,8 +83,8 @@ export default function RoomsPage() {
         {/* Hero Content with Blurred Background Box */}
         <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-center z-[var(--z-base)]">
           {/* Blurred Backdrop Box */}
-          <div className="backdrop-blur-md bg-black/20 rounded-2xl px-8 sm:px-12 lg:px-16 py-12 sm:py-16 lg:py-20 shadow-2xl border border-white/10">
-            <div className="flex flex-col items-center text-center gap-6">
+          <div className="backdrop-blur-lg bg-black/30 rounded-3xl px-12 sm:px-16 lg:px-24 py-16 sm:py-20 lg:py-24 shadow-2xl border border-white/20 w-full max-w-5xl">
+            <div className="flex flex-col items-center text-center gap-8">
               {/* Animated Tagline */}
               <div className="opacity-0 animate-fade-in-delay-200">
                 <p className="text-[var(--color-gold)] text-sm md:text-base uppercase tracking-[0.3em] font-light">
@@ -125,13 +125,13 @@ export default function RoomsPage() {
               </div>
 
               {/* Description */}
-              <p className="text-white/90 text-lg md:text-xl max-w-3xl leading-relaxed opacity-0 animate-fade-in-delay-1000">
+              <p className="text-white/95 text-lg md:text-xl max-w-3xl leading-relaxed opacity-0 animate-fade-in-delay-1000">
                 Where every room is a masterpiece, blending luxury accommodation with artistic inspiration. 
                 Discover your perfect sanctuary among our thoughtfully curated spaces.
               </p>
 
               {/* Spacer for extra gap before buttons */}
-              <div className="h-8"></div>
+              <div className="h-6"></div>
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 opacity-0 animate-fade-in-delay-1200">
