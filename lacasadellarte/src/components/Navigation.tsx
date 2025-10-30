@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { useState } from 'react';
 
 export default function Navigation() {
@@ -11,153 +10,125 @@ export default function Navigation() {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const toggleDining = () => setIsDiningOpen(!isDiningOpen);
 
-  const diningOptions = [
-    {
-      name: 'Dining & Drinks Overview',
-      href: '/dining',
-    },
-    {
-      name: 'Palette 360',
-      href: '/dining/palette-360',
-    },
-    {
-      name: 'Dipinta',
-      href: '/dining/dipinta',
-    },
-    {
-      name: 'Lumière',
-      href: '/dining/lumiere',
-    },
-    {
-      name: 'Vetro',
-      href: '/dining/vetro',
-    },
-    {
-      name: 'In-Room Dining',
-      href: '/dining/in-room',
-    },
-  ];
-
   return (
-    <nav className="sticky top-0 z-50 bg-[#E8E4D8] shadow-md backdrop-blur-sm">
-      <div className="container mx-auto px-6 lg:px-8">
-        <div className="flex items-center justify-between h-24">
-          {/* Logo and Brand Name */}
-          <Link href="/" className="flex items-center gap-4 hover:opacity-90 transition-all duration-300 group">
-            <div className="relative w-16 h-16 rounded-full overflow-hidden shadow-lg ring-2 ring-[var(--color-accent)]/20 group-hover:ring-[var(--color-accent)]/40 transition-all">
-              <Image
-                src="/logo/logo.png"
-                alt="La Casa Dell'Arte Logo"
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
-            <div className="flex flex-col">
-              <span className="text-2xl lg:text-3xl font-bold text-[var(--color-text)] tracking-tight">
-                La Casa Dell&apos;Arte
-              </span>
-              <span className="text-xs text-[var(--color-accent)] font-light tracking-widest uppercase">
-                Artistic Hospitality
-              </span>
+    <nav className="sticky top-0 z-50 bg-[var(--color-beige-dark)] shadow-md">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between h-20">
+          {/* Logo and Name */}
+          <Link href="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+            <div className="text-2xl font-bold text-[var(--color-text)]">
+              La Casa Dell&apos;Arte
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-12">
+          <div className="hidden lg:flex items-center space-x-8">
             <Link
               href="/"
-              className="text-[var(--color-text)] hover:text-[var(--color-accent)] font-medium transition-all duration-300 relative group py-2"
+              className="text-[var(--color-text)] hover:text-[var(--color-accent)] font-medium transition-colors"
             >
               Home
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--color-accent)] group-hover:w-full transition-all duration-300"></span>
             </Link>
 
             <Link
               href="/rooms"
-              className="text-[var(--color-text)] hover:text-[var(--color-accent)] font-medium transition-all duration-300 relative group py-2"
+              className="text-[var(--color-text)] hover:text-[var(--color-accent)] font-medium transition-colors"
             >
               Rooms
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--color-accent)] group-hover:w-full transition-all duration-300"></span>
             </Link>
 
             {/* Dining Dropdown */}
             <div className="relative group">
               <button
-                className="text-[var(--color-text)] hover:text-[var(--color-accent)] font-medium transition-all duration-300 flex items-center gap-2 py-2"
+                className="text-[var(--color-text)] hover:text-[var(--color-accent)] font-medium transition-colors flex items-center space-x-1"
                 onMouseEnter={() => setIsDiningOpen(true)}
                 onMouseLeave={() => setIsDiningOpen(false)}
               >
-                <span>Dining & Drinks</span>
-                <svg
-                  className={`w-4 h-4 transition-transform duration-300 ${isDiningOpen ? 'rotate-180' : ''}`}
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
+                <span>Dining</span>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
 
-              {/* Clean Dropdown Menu */}
+              {/* Dropdown Menu */}
               <div
-                className={`absolute top-full left-1/2 -translate-x-1/2 mt-3 w-64 bg-[#E8E4D8] shadow-xl rounded-xl overflow-hidden transition-all duration-300 border border-[var(--color-accent)]/20 ${
-                  isDiningOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2 pointer-events-none'
+                className={`absolute top-full left-0 mt-2 w-56 bg-white shadow-lg rounded-lg overflow-hidden transition-all duration-200 ${
+                  isDiningOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
                 }`}
                 onMouseEnter={() => setIsDiningOpen(true)}
                 onMouseLeave={() => setIsDiningOpen(false)}
               >
-                {/* Menu Items */}
-                <div className="py-3 px-8">
-                  {diningOptions.map((option) => (
-                    <Link
-                      key={option.href}
-                      href={option.href}
-                      className="text-[var(--color-text)] hover:text-[var(--color-accent)] font-medium transition-colors duration-300 py-2 block text-center"
-                    >
-                      {option.name}
-                    </Link>
-                  ))}
-                </div>
+                <Link
+                  href="/dining"
+                  className="block px-4 py-3 text-[var(--color-text)] hover:bg-[var(--color-beige-light)] transition-colors"
+                >
+                  All Dining Options
+                </Link>
+                <Link
+                  href="/dining/palette-360"
+                  className="block px-4 py-3 text-[var(--color-text)] hover:bg-[var(--color-beige-light)] transition-colors"
+                >
+                  Palette 360
+                </Link>
+                <Link
+                  href="/dining/dipinta"
+                  className="block px-4 py-3 text-[var(--color-text)] hover:bg-[var(--color-beige-light)] transition-colors"
+                >
+                  Dipinta
+                </Link>
+                <Link
+                  href="/dining/lumiere"
+                  className="block px-4 py-3 text-[var(--color-text)] hover:bg-[var(--color-beige-light)] transition-colors"
+                >
+                  Lumière
+                </Link>
+                <Link
+                  href="/dining/vetro"
+                  className="block px-4 py-3 text-[var(--color-text)] hover:bg-[var(--color-beige-light)] transition-colors"
+                >
+                  Vetro
+                </Link>
+                <Link
+                  href="/dining/in-room"
+                  className="block px-4 py-3 text-[var(--color-text)] hover:bg-[var(--color-beige-light)] transition-colors"
+                >
+                  In-Room Dining
+                </Link>
               </div>
             </div>
 
             <Link
               href="/atelier"
-              className="text-[var(--color-text)] hover:text-[var(--color-accent)] font-medium transition-all duration-300 relative group py-2"
+              className="text-[var(--color-text)] hover:text-[var(--color-accent)] font-medium transition-colors"
             >
               Atelier
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--color-accent)] group-hover:w-full transition-all duration-300"></span>
             </Link>
 
             <Link
               href="/spa"
-              className="text-[var(--color-text)] hover:text-[var(--color-accent)] font-medium transition-all duration-300 relative group py-2"
+              className="text-[var(--color-text)] hover:text-[var(--color-accent)] font-medium transition-colors"
             >
               SPA
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--color-accent)] group-hover:w-full transition-all duration-300"></span>
             </Link>
 
             <Link
               href="/facilities"
-              className="text-[var(--color-text)] hover:text-[var(--color-accent)] font-medium transition-all duration-300 relative group py-2"
+              className="text-[var(--color-text)] hover:text-[var(--color-accent)] font-medium transition-colors"
             >
               Facilities
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--color-accent)] group-hover:w-full transition-all duration-300"></span>
             </Link>
 
             <Link
               href="/loyalty"
-              className="text-[var(--color-text)] hover:text-[var(--color-accent)] font-medium transition-all duration-300 relative group py-2"
+              className="text-[var(--color-text)] hover:text-[var(--color-accent)] font-medium transition-colors"
             >
               Loyalty
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--color-accent)] group-hover:w-full transition-all duration-300"></span>
             </Link>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden text-[var(--color-text)] p-2 hover:bg-[var(--color-beige)] rounded-lg transition-colors"
+            className="lg:hidden text-[var(--color-text)] p-2"
             onClick={toggleMenu}
             aria-label="Toggle menu"
           >
@@ -175,10 +146,10 @@ export default function Navigation() {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="lg:hidden pb-6 space-y-2 animate-fadeIn">
+          <div className="lg:hidden pb-4 space-y-2">
             <Link
               href="/"
-              className="block px-4 py-3 text-[var(--color-text)] hover:bg-[var(--color-beige)] rounded-lg transition-colors font-medium"
+              className="block px-4 py-2 text-[var(--color-text)] hover:bg-[var(--color-beige)] rounded transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
               Home
@@ -186,48 +157,75 @@ export default function Navigation() {
 
             <Link
               href="/rooms"
-              className="block px-4 py-3 text-[var(--color-text)] hover:bg-[var(--color-beige)] rounded-lg transition-colors font-medium"
+              className="block px-4 py-2 text-[var(--color-text)] hover:bg-[var(--color-beige)] rounded transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
               Rooms
             </Link>
 
             {/* Mobile Dining Dropdown */}
-            <div className="rounded-lg overflow-hidden bg-white/50">
+            <div>
               <button
-                className="w-full text-left px-4 py-3 text-[var(--color-text)] hover:bg-[var(--color-beige)] transition-colors flex items-center justify-between font-medium"
+                className="w-full text-left px-4 py-2 text-[var(--color-text)] hover:bg-[var(--color-beige)] rounded transition-colors flex items-center justify-between"
                 onClick={toggleDining}
               >
-                <span>Dining & Drinks</span>
-                <svg
-                  className={`w-4 h-4 transition-transform duration-300 ${isDiningOpen ? 'rotate-180' : ''}`}
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
+                <span>Dining</span>
+                <svg className={`w-4 h-4 transition-transform ${isDiningOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
 
               {isDiningOpen && (
-                <div className="bg-[#F5F5DC]/30 py-2 space-y-1">
-                  {diningOptions.map((option) => (
-                    <Link
-                      key={option.href}
-                      href={option.href}
-                      className="block px-6 py-3 text-[var(--color-text)] hover:bg-[#E8E4D8]/50 transition-colors"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      <span className="text-sm font-semibold">{option.name}</span>
-                    </Link>
-                  ))}
+                <div className="ml-4 mt-2 space-y-2">
+                  <Link
+                    href="/dining"
+                    className="block px-4 py-2 text-[var(--color-text)] hover:bg-[var(--color-beige)] rounded transition-colors"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    All Dining Options
+                  </Link>
+                  <Link
+                    href="/dining/palette-360"
+                    className="block px-4 py-2 text-[var(--color-text)] hover:bg-[var(--color-beige)] rounded transition-colors"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Palette 360
+                  </Link>
+                  <Link
+                    href="/dining/dipinta"
+                    className="block px-4 py-2 text-[var(--color-text)] hover:bg-[var(--color-beige)] rounded transition-colors"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Dipinta
+                  </Link>
+                  <Link
+                    href="/dining/lumiere"
+                    className="block px-4 py-2 text-[var(--color-text)] hover:bg-[var(--color-beige)] rounded transition-colors"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Lumière
+                  </Link>
+                  <Link
+                    href="/dining/vetro"
+                    className="block px-4 py-2 text-[var(--color-text)] hover:bg-[var(--color-beige)] rounded transition-colors"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Vetro
+                  </Link>
+                  <Link
+                    href="/dining/in-room"
+                    className="block px-4 py-2 text-[var(--color-text)] hover:bg-[var(--color-beige)] rounded transition-colors"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    In-Room Dining
+                  </Link>
                 </div>
               )}
             </div>
 
             <Link
               href="/atelier"
-              className="block px-4 py-3 text-[var(--color-text)] hover:bg-[var(--color-beige)] rounded-lg transition-colors font-medium"
+              className="block px-4 py-2 text-[var(--color-text)] hover:bg-[var(--color-beige)] rounded transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
               Atelier
@@ -235,7 +233,7 @@ export default function Navigation() {
 
             <Link
               href="/spa"
-              className="block px-4 py-3 text-[var(--color-text)] hover:bg-[var(--color-beige)] rounded-lg transition-colors font-medium"
+              className="block px-4 py-2 text-[var(--color-text)] hover:bg-[var(--color-beige)] rounded transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
               SPA
@@ -243,7 +241,7 @@ export default function Navigation() {
 
             <Link
               href="/facilities"
-              className="block px-4 py-3 text-[var(--color-text)] hover:bg-[var(--color-beige)] rounded-lg transition-colors font-medium"
+              className="block px-4 py-2 text-[var(--color-text)] hover:bg-[var(--color-beige)] rounded transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
               Facilities
@@ -251,7 +249,7 @@ export default function Navigation() {
 
             <Link
               href="/loyalty"
-              className="block px-4 py-3 text-[var(--color-text)] hover:bg-[var(--color-beige)] rounded-lg transition-colors font-medium"
+              className="block px-4 py-2 text-[var(--color-text)] hover:bg-[var(--color-beige)] rounded transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
               Loyalty
