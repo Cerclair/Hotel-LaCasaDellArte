@@ -1,4 +1,4 @@
-import './facilitiesPage.css';
+import styles from './facilitiesPage.module.css';
 
 export default function FacilitiesPage() {
   const facilities = [
@@ -56,9 +56,9 @@ export default function FacilitiesPage() {
   ];
 
   return (
-    <div className="facilities-page">
+    <div className={styles.facilitiesPage}>
       {/* Hero */}
-      <section className="facilities-hero">
+      <section className={styles.facilitiesHero}>
         <h1>Other Facilities</h1>
         <p>Discover our world-class amenities designed to enhance your stay</p>
       </section>
@@ -67,21 +67,21 @@ export default function FacilitiesPage() {
       {facilities.map((facility, index) => (
         <section
           key={facility.id}
-          className={`facility-section ${index % 2 !== 0 ? 'alt' : ''}`}
+          className={`${styles.facilitySection} ${index % 2 !== 0 ? styles.alt : ''}`}
         >
           <div
-            className="facility-content"
+            className={styles.facilityContent}
             style={{
               direction: facility.imagePosition === 'right' ? 'rtl' : 'ltr'
             }}
           >
-            <div className="facility-image">
+            <div className={styles.facilityImage}>
               <img src={facility.imageUrl} alt={facility.name} />
             </div>
-            <div className="facility-text" style={{ direction: 'ltr' }}>
+            <div className={styles.facilityText} style={{ direction: 'ltr' }}>
               <h2>{facility.name}</h2>
-              <p className="subtitle">{facility.subtitle}</p>
-              <p className="description">{facility.description}</p>
+              <p className={styles.subtitle}>{facility.subtitle}</p>
+              <p className={styles.description}>{facility.description}</p>
 
               <h3>Features:</h3>
               <ul>
@@ -110,14 +110,14 @@ export default function FacilitiesPage() {
       ))}
 
       {/* CTA */}
-      <section className="facilities-cta">
-        <div className="facilities-cta-box">
+      <section className={styles.facilitiesCta}>
+        <div className={styles.facilitiesCtaBox}>
           <h3>Need More Information?</h3>
           <p>
             Our concierge team is available to answer any questions about our
             facilities and help you make the most of your stay.
           </p>
-          <div className="buttons">
+          <div className={styles.buttons}>
             <a href="mailto:ladellaarte@gmail.com">Contact Concierge</a>
             <a href="tel:+94718530994">Call Us</a>
           </div>
