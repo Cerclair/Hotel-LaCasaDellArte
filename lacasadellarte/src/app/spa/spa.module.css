@@ -1,0 +1,157 @@
+.page {
+  min-height: 100vh;
+  background-color: var(--color-beige);
+  color: var(--color-text);
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  height: 24rem; /* h-96 */
+  background: linear-gradient(to bottom right, var(--color-beige-dark), var(--color-beige));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.heroContent {
+  max-width: 70rem;
+  width: 100%;
+  padding: 0 1rem;
+  z-index: 10;
+}
+
+.heroTitle {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.heroSubtitle {
+  font-size: 1.25rem;
+  color: var(--color-gray);
+}
+
+/* Sections */
+.section {
+  padding: 5rem 0;
+}
+
+.sectionBeige {
+  background-color: var(--color-beige);
+}
+
+.sectionLight {
+  background-color: var(--color-beige-light);
+}
+
+.sectionTitle {
+  font-size: 1.875rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.container {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Description Section */
+.description {
+  max-width: 48rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.description p {
+  font-size: 1.125rem;
+  color: var(--color-gray);
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+}
+
+/* Menu Section (Scrollable) */
+.menuScrollContainer {
+  max-height: 28rem; 
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-accent) var(--color-beige-light);
+  border-radius: 0.75rem;
+  padding-right: 0.5rem;
+}
+
+/* Custom scrollbar (Webkit) */
+.menuScrollContainer::-webkit-scrollbar {
+  width: 6px;
+}
+
+.menuScrollContainer::-webkit-scrollbar-thumb {
+  background-color: var(--color-accent);
+  border-radius: 3px;
+}
+
+.menuScrollContainer::-webkit-scrollbar-track {
+  background: var(--color-beige-light);
+}
+
+.menuWrapper {
+  max-width: 64rem;
+  margin: 0 auto;
+}
+
+.menuCategory {
+  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.menuCategoryTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text);
+  border-bottom: 2px solid var(--color-accent);
+  padding-bottom: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.menuList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.menuItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--color-beige-dark);
+}
+
+.menuItem:last-child {
+  border-bottom: none;
+}
+
+.menuText h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 0.5rem;
+}
+
+.menuText p {
+  color: var(--color-gray);
+  font-size: 0.875rem;
+}
+
+.menuDuration {
+  color: var(--color-accent);
+  font-weight: 600;
+  white-space: nowrap;
+  margin-left: 1rem;
+}
