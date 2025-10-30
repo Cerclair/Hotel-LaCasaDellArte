@@ -1,4 +1,5 @@
 import styles from './facilitiesPage.module.css';
+import Image from 'next/image';
 
 export default function FacilitiesPage() {
   const facilities = [
@@ -8,7 +9,7 @@ export default function FacilitiesPage() {
       subtitle: 'Events & Celebrations',
       description:
         "An elegant event space designed for life's most memorable moments. The Galleria combines artistic grandeur with modern functionality, making it perfect for weddings, galas, corporate events, and private celebrations.",
-      imageUrl: '/assets/event halls.png',
+      imageUrl: '/assets/event-halls.png',
       features: [
         'Capacity for up to 300 guests',
         'State-of-the-art audio-visual equipment',
@@ -42,7 +43,7 @@ export default function FacilitiesPage() {
       subtitle: 'Outdoor Pool',
       description:
         'A serene outdoor oasis inspired by the colors of the sky and sea. Azure features a beautifully designed pool surrounded by artistic touches, comfortable loungers, and lush landscaping that creates a private retreat within the city.',
-      imageUrl: 'assets/pool.png',
+      imageUrl: '/assets/pool.png',
       features: [
         'Heated infinity pool',
         'Poolside bar service',
@@ -76,7 +77,13 @@ export default function FacilitiesPage() {
             }}
           >
             <div className={styles.facilityImage}>
-              <img src={facility.imageUrl} alt={facility.name} />
+              <Image
+                src={facility.imageUrl}
+                alt={facility.name}
+                width={500}       // required
+                height={300}      // required
+                className={styles.image}
+              />
             </div>
             <div className={styles.facilityText} style={{ direction: 'ltr' }}>
               <h2>{facility.name}</h2>
