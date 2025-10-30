@@ -49,7 +49,7 @@
 .facilityImage {
   border-radius: 12px;
   overflow: hidden;
-  
+  transition: transform 0.4s ease;
 }
 
 .image {
@@ -58,6 +58,9 @@
   height: auto;
 }
 
+.facilityImage:hover {
+  transform: scale(1.05);
+}
 
 /* Text Area */
 .facilityText {

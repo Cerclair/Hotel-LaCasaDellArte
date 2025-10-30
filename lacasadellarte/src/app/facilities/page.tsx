@@ -80,8 +80,8 @@ export default function FacilitiesPage() {
               <Image
                 src={facility.imageUrl}
                 alt={facility.name}
-                width={500}       // required
-                height={300}      // required
+                width={500}      
+                height={300}      
                 className={styles.image}
               />
             </div>
