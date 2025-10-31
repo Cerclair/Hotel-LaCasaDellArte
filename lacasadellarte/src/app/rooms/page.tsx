@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { SmoothScrollHero } from '@/components/ui/modern-hero';
 import { CarouselIndicators } from '@/components/ui/carousel-indicators';
+import { HotelFilter } from '@/components/ui/hotel-filter';
 
 export default function RoomsPage() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -180,7 +181,14 @@ export default function RoomsPage() {
         </div>
       </section>
 
-      <section className="container mx-auto px-4 py-16">
+      {/* Hotel Room Filter Section */}
+      <section id="rooms-filter" className="relative -mt-20 z-20">
+        <HotelFilter />
+      </section>
+
+      {/* Rooms Showcase Section */}
+      <section id="rooms-showcase" className="container mx-auto px-4 py-16">
+        {/* Your room cards/showcase will go here */}
       </section>
     </div>
   );
