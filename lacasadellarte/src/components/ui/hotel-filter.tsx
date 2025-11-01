@@ -132,7 +132,7 @@ export function HotelFilter() {
   }
 
   return (
-    <div className="w-full max-w-6xl mx-auto p-8">
+  <div className="container mx-auto max-w-6xl px-4 sm:px-8 py-8">
       <Card className="border-0 shadow-2xl rounded-3xl bg-gradient-to-br from-[var(--color-beige-light)] via-[var(--color-white)] to-[var(--color-beige-dark)] relative">
         {/* Gold accent bar */}
         <div className="absolute top-0 left-0 w-full h-2 bg-[var(--color-gold)] rounded-t-3xl" />
