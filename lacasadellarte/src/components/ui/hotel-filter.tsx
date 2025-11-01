@@ -132,19 +132,21 @@ export function HotelFilter() {
   }
 
   return (
-    <div className="w-full max-w-6xl mx-auto p-6">
-      <Card className="border-0 shadow-lg bg-card">
-        <div className="p-8">
+    <div className="w-full max-w-6xl mx-auto p-8">
+      <Card className="border-0 shadow-2xl rounded-3xl bg-gradient-to-br from-[var(--color-beige-light)] via-[var(--color-white)] to-[var(--color-beige-dark)] relative">
+        {/* Gold accent bar */}
+        <div className="absolute top-0 left-0 w-full h-2 bg-[var(--color-gold)] rounded-t-3xl" />
+        <div className="p-10">
           {/* Header */}
-          <div className="mb-8">
-            <h2 className="text-3xl font-light tracking-tight text-foreground mb-2">Find Your Perfect Room</h2>
-            <p className="text-muted-foreground text-sm">Customize your stay with our premium selection</p>
+          <div className="mb-8 text-center">
+            <h2 className="text-4xl font-bold tracking-tight text-foreground mb-2 inline-block border-b-4 border-[var(--color-gold)] pb-2 rounded-md">Find Your Perfect Room</h2>
+            <p className="text-muted-foreground text-base">Customize your stay with our premium selection</p>
           </div>
 
           {/* Filter Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-10 divide-x-0 lg:divide-x lg:divide-border bg-white/70 rounded-2xl shadow-md p-4">
             {/* Date Range Picker */}
-            <div className="lg:col-span-2 relative">
+            <div className="lg:col-span-2 relative p-2">
               <label className="block text-xs font-semibold text-foreground/70 uppercase tracking-wider mb-3">
                 Check-in / Check-out
               </label>
@@ -168,7 +170,7 @@ export function HotelFilter() {
 
               {/* Date Picker Dropdown */}
               {showDatePicker && (
-                <div className="absolute top-full left-0 right-0 mt-2 bg-card border border-border rounded-lg shadow-xl p-6 z-50">
+                <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-border rounded-lg shadow-xl p-6 z-[999]">
                   <div className="grid grid-cols-2 gap-6">
                     {/* Current Month */}
                     <div>
@@ -245,7 +247,7 @@ export function HotelFilter() {
             </div>
 
             {/* Room Type */}
-            <div>
+            <div className="p-2">
               <label className="block text-xs font-semibold text-foreground/70 uppercase tracking-wider mb-3">
                 Room Type
               </label>
@@ -263,7 +265,7 @@ export function HotelFilter() {
             </div>
 
             {/* Bed Type */}
-            <div>
+            <div className="p-2">
               <label className="block text-xs font-semibold text-foreground/70 uppercase tracking-wider mb-3">
                 Bed Type
               </label>
@@ -281,7 +283,7 @@ export function HotelFilter() {
             </div>
 
             {/* Guest Selector */}
-            <div className="relative">
+            <div className="relative p-2">
               <label className="block text-xs font-semibold text-foreground/70 uppercase tracking-wider mb-3">
                 Guests
               </label>
@@ -301,7 +303,7 @@ export function HotelFilter() {
 
               {/* Guest Picker Dropdown */}
               {showGuestPicker && (
-                <div className="absolute top-full right-0 mt-2 bg-card border border-border rounded-lg shadow-xl p-4 z-50 w-64">
+                <div className="absolute top-full right-0 mt-2 bg-white border border-border rounded-lg shadow-xl p-4 z-50 w-64">
                   <div className="space-y-4">
                     {/* Adults */}
                     <div className="flex items-center justify-between">
@@ -387,8 +389,8 @@ export function HotelFilter() {
           </div>
 
           {/* Search Button */}
-          <Button className="w-full md:w-auto px-8 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-lg transition-all">
-            <Home className="w-4 h-4 mr-2" />
+          <Button className="w-full md:w-auto px-8 py-4 bg-[var(--color-gold)] hover:bg-[var(--color-gold)]/90 text-white font-bold rounded-lg shadow-lg text-lg uppercase tracking-wider transition-all flex items-center justify-center">
+            <Home className="w-5 h-5 mr-2" />
             Search Rooms
           </Button>
 
@@ -401,12 +403,13 @@ export function HotelFilter() {
                   <span className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 text-primary text-xs rounded-full font-medium">
                     {formatDate(filters.dateRange.checkIn)} - {formatDate(filters.dateRange.checkOut)}
                     <button
-                      onClick={() =>
+                      onClick={() => {
                         setFilters((prev) => ({
                           ...prev,
                           dateRange: { checkIn: null, checkOut: null },
-                        }))
-                      }
+                        }));
+                        setActiveCalendar("checkIn");
+                      }}
                       className="hover:opacity-70"
                     >
                       ×

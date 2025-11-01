@@ -51,7 +51,7 @@ export default function RoomsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[var(--color-beige)]">
+    <div className="min-h-screen bg-[var(--color-beige)] pb-20">
       {/* Toggle Button */}
       <button
         onClick={() => setUseModernHero(true)}
@@ -182,7 +182,7 @@ export default function RoomsPage() {
       </section>
 
       {/* Hotel Room Filter Section */}
-      <section id="rooms-filter" className="relative -mt-20 z-20">
+      <section id="rooms-filter" className="relative mt-12 z-20">
         <HotelFilter />
       </section>
 
