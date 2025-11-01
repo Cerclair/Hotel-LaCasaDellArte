@@ -77,8 +77,6 @@ export default function RoomsPage() {
               }}
             />
           ))}
-          {/* Gradient Overlay for Readability */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70"></div>
         </div>
 
         {/* Hero Content with Blurred Background Box */}
