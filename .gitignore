@@ -1,5 +1,6 @@
 .claude/
 context/
+.mcp.json
 
 # Terminal Paste Image folder
 .cp-images/
