@@ -230,31 +230,53 @@ export default function AIAssistant() {
                 } animate-fadeIn`}
               >
                 <div
-                  className={`max-w-[80%] px-4 py-3 rounded shadow-md text-sm ${
+                  className={`relative max-w-[85%] px-5 py-4 shadow-md text-sm rounded-2xl ${
                     message.isBot
-                      ? "bg-white text-[#2C2C2C]"
-                      : "bg-[#8B7355] text-white"
+                      ? "bg-white text-[#2C2C2C] rounded-bl-none"
+                      : "bg-[#8B7355] text-white rounded-br-none"
                   }`}
+                  style={{
+                    position: 'relative'
+                  }}
                 >
                   <p className="leading-relaxed break-words whitespace-normal">
                     {message.text}
                   </p>
                   {message.timestamp && (
                     <p
-                      className={`text-[11px] mt-1 ${
+                      className={`text-[11px] mt-2 ${
                         message.isBot ? "text-[#999]" : "text-white/70"
                       }`}
                     >
                       {message.timestamp}
                     </p>
                   )}
+                  {/* Speech bubble tail */}
+                  <div
+                    style={{
+                      position: 'absolute',
+                      bottom: 0,
+                      width: 0,
+                      height: 0,
+                      borderStyle: 'solid',
+                      ...(message.isBot ? {
+                        left: -8,
+                        borderWidth: '0 8px 8px 0',
+                        borderColor: 'transparent white transparent transparent'
+                      } : {
+                        right: -8,
+                        borderWidth: '0 0 8px 8px',
+                        borderColor: 'transparent transparent #8B7355 transparent'
+                      })
+                    }}
+                  />
                 </div>
               </div>
             ))}
 
             {isTyping && (
               <div className="flex justify-start animate-fadeIn">
-                <div className="bg-white text-[#2C2C2C] rounded px-5 py-3 shadow-md">
+                <div className="relative bg-white text-[#2C2C2C] px-5 py-4 shadow-md rounded-2xl rounded-bl-none">
                   <div className="flex space-x-2 items-center">
                     <div
                       className="w-2.5 h-2.5 bg-[#8B7355] rounded-full animate-bounce"
@@ -269,6 +291,19 @@ export default function AIAssistant() {
                       style={{ animationDelay: "300ms" }}
                     ></div>
                   </div>
+                  {/* Speech bubble tail */}
+                  <div
+                    style={{
+                      position: 'absolute',
+                      bottom: 0,
+                      left: -8,
+                      width: 0,
+                      height: 0,
+                      borderStyle: 'solid',
+                      borderWidth: '0 8px 8px 0',
+                      borderColor: 'transparent white transparent transparent'
+                    }}
+                  />
                 </div>
               </div>
             )}
