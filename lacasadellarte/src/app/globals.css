@@ -1,4 +1,6 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* La Casa Dell'Arte Custom Theme */
 :root {
@@ -46,41 +48,7 @@
   --opacity-low: 0.5;
 }
 
-@theme inline {
-  /* Colors */
-  --color-beige: #f5f5dc;
-  --color-beige-light: #fafaef;
-  --color-beige-dark: #e8e8cd;
-  --color-accent: #8b7355;
-  --color-text: #2c2c2c;
-  --color-gold: #d4af37;
-  --color-white: #ffffff;
-  --color-gray-light: #f8f8f8;
-  --color-gray: #6b6b6b;
-
-  /* Spacing */
-  --spacing-xs: 0.5rem;
-  --spacing-sm: 1rem;
-  --spacing-md: 1.5rem;
-  --spacing-lg: 2rem;
-  --spacing-xl: 3rem;
-  --spacing-2xl: 4rem;
-
-  /* Border Radius */
-  --radius-sm: 0.25rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 1rem;
-
-  /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
-
-  /* Transitions */
-  --transition-fast: 150ms ease-in-out;
-  --transition-base: 300ms ease-in-out;
-  --transition-slow: 500ms ease-in-out;
-}
+/* Removed Tailwind v4-only @theme inline block for Tailwind v3 compatibility */
 
 * {
   box-sizing: border-box;
