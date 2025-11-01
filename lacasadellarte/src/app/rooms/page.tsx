@@ -83,11 +83,13 @@ export default function RoomsPage() {
 
         {/* Hero Content with Blurred Background Box */}
         <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-center z-[var(--z-base)]">
-          {/* Blurred Backdrop Box */}
-          <div className="backdrop-blur-lg bg-black/30 rounded-none shadow-xl w-full max-w-[min(92vw,56rem)] px-4 sm:px-8 lg:px-12">
-            {/* Inner container with vertical padding */}
-            <div className="py-10 sm:py-12 md:py-14 lg:py-16">
-              <div className="flex flex-col items-center text-center gap-6 md:gap-8">
+          {/* Wrapper constrained to blurred box width for proper centering */}
+          <div className="relative w-full max-w-[min(92vw,56rem)]">
+            {/* Blurred Backdrop Box */}
+            <div className="backdrop-blur-lg bg-black/30 rounded-none shadow-xl w-full px-4 sm:px-8 lg:px-12">
+              {/* Inner container with vertical padding */}
+              <div className="py-10 sm:py-12 md:py-14 lg:py-16">
+                <div className="flex flex-col items-center text-center gap-6 md:gap-8">
                 {/* Top Spacer - Creates breathing room at the top */}
                 <div className="h-2 sm:h-4 md:h-6"></div>
                 
@@ -100,7 +102,7 @@ export default function RoomsPage() {
 
                 {/* Main Heading */}
                 <h1 
-                  className="font-bold leading-tight tracking-wide text-white opacity-0 animate-fade-in-delay-400 text-[clamp(2rem,6.5vw,3.75rem)]"
+                  className="font-semibold leading-tight tracking-wide text-white opacity-0 animate-fade-in-delay-400 text-[clamp(2rem,6.5vw,3.75rem)]"
                   style={{ 
                     fontFamily: 'var(--font-display)',
                     letterSpacing: '0.05em',
@@ -154,20 +156,19 @@ export default function RoomsPage() {
                     Book Now
                   </a>
                 </div>
-                {/* Top Spacer - Creates breathing room at the top */}
-                <div className="h-6 md:h-8 lg:h-10"></div>
+                {/* Scroll Indicator - centered at bottom inside blurred box */}
+                <div className="flex flex-col items-center gap-2 opacity-0 animate-bounce-slow-delay-1500">
+                  <span className="text-white/70 text-xs uppercase tracking-widest">Scroll to Explore</span>
+                  <svg className="w-6 h-6 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                  </svg>
+                </div>
+
+                {/* Bottom Spacer */}
+                {/* <div className="h-6 md:h-8 lg:h-10"></div> */}
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 animate-bounce-slow-delay-1500 z-[var(--z-base)]">
-          <div className="flex flex-col items-center gap-2">
-            <span className="text-white/70 text-xs uppercase tracking-widest">Scroll to Explore</span>
-            <svg className="w-6 h-6 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-            </svg>
           </div>
         </div>
 
