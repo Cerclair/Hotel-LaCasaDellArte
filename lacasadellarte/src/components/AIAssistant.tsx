@@ -192,30 +192,13 @@ export default function AIAssistant() {
           }}
         >
           {/* Header */}
-          <div className="bg-[#E8E4D8] border-b border-[#8B7355]/15 px-5 py-4 flex items-center justify-between flex-shrink-0">
-            <div className="flex items-center gap-3 min-w-0">
-              <div className="w-10 h-10 bg-[#8B7355] rounded-full flex items-center justify-center flex-shrink-0">
-                <svg
-                  className="w-5 h-5 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                  />
-                </svg>
-              </div>
-              <h3 className="font-bold text-[#2C2C2C] text-lg truncate">
-                La Casa Concierge
-              </h3>
-            </div>
+          <div className="bg-[#E8E4D8] border-b border-[#8B7355]/15 px-5 py-4 flex items-center justify-center relative flex-shrink-0">
+            <h3 className="font-bold text-[#2C2C2C] text-lg text-center">
+              La Casa Concierge
+            </h3>
             <button
               onClick={() => setIsOpen(false)}
-              className="p-1.5 hover:bg-[#8B7355]/10 rounded-lg transition-colors flex-shrink-0"
+              className="absolute right-5 p-1.5 hover:bg-[#8B7355]/10 rounded-lg transition-colors"
               aria-label="Close"
             >
               <svg
@@ -235,7 +218,10 @@ export default function AIAssistant() {
           </div>
 
           {/* Messages Area */}
-          <div className="flex-1 overflow-y-auto px-4 py-5 space-y-3 bg-gradient-to-b from-[#F5F5DC]/40 to-[#E8E4D8]/40">
+          <div
+            className="flex-1 overflow-y-auto space-y-3 bg-gradient-to-b from-[#F5F5DC]/40 to-[#E8E4D8]/40"
+            style={{ paddingLeft: '24px', paddingRight: '24px', paddingTop: '20px', paddingBottom: '20px' }}
+          >
             {messages.map((message, index) => (
               <div
                 key={index}
@@ -244,10 +230,10 @@ export default function AIAssistant() {
                 } animate-fadeIn`}
               >
                 <div
-                  className={`max-w-[80%] px-4 py-3 rounded-2xl shadow-md text-sm ${
+                  className={`max-w-[80%] px-4 py-3 rounded shadow-md text-sm ${
                     message.isBot
-                      ? "bg-white text-[#2C2C2C] rounded-tl-sm"
-                      : "bg-[#8B7355] text-white rounded-br-sm"
+                      ? "bg-white text-[#2C2C2C]"
+                      : "bg-[#8B7355] text-white"
                   }`}
                 >
                   <p className="leading-relaxed break-words whitespace-normal">
@@ -268,7 +254,7 @@ export default function AIAssistant() {
 
             {isTyping && (
               <div className="flex justify-start animate-fadeIn">
-                <div className="bg-white text-[#2C2C2C] rounded-2xl rounded-tl-sm px-5 py-3 shadow-md">
+                <div className="bg-white text-[#2C2C2C] rounded px-5 py-3 shadow-md">
                   <div className="flex space-x-2 items-center">
                     <div
                       className="w-2.5 h-2.5 bg-[#8B7355] rounded-full animate-bounce"
@@ -292,7 +278,10 @@ export default function AIAssistant() {
 
           {/* Quick Actions */}
           {messages.length === 1 && !isTyping && (
-            <div className="px-6 py-4 bg-[#E8E4D8] border-t border-[#8B7355]/15 flex-shrink-0">
+            <div
+              className="bg-[#E8E4D8] border-t border-[#8B7355]/15 flex-shrink-0"
+              style={{ paddingLeft: '24px', paddingRight: '24px', paddingTop: '16px', paddingBottom: '16px' }}
+            >
               <div className="grid grid-cols-2 gap-2.5">
                 {quickActions.map((action) => (
                   <button
@@ -317,7 +306,10 @@ export default function AIAssistant() {
           )}
 
           {/* Input Area */}
-          <div className="px-6 py-4 bg-[#E8E4D8] border-t-2 border-[#8B7355]/15 flex-shrink-0">
+          <div
+            className="bg-[#E8E4D8] border-t-2 border-[#8B7355]/15 flex-shrink-0"
+            style={{ paddingLeft: '24px', paddingRight: '24px', paddingTop: '16px', paddingBottom: '16px' }}
+          >
             <div className="flex gap-2.5 items-center mb-2">
               <input
                 type="text"
@@ -330,7 +322,15 @@ export default function AIAssistant() {
               <button
                 onClick={handleSend}
                 disabled={!inputValue.trim()}
-                className="bg-[#8B7355] text-white w-11 h-11 rounded-lg hover:bg-[#D4AF37] transition-all duration-300 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center flex-shrink-0 transform hover:scale-105 active:scale-95"
+                className="text-white w-11 h-11 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center flex-shrink-0 transform hover:scale-105 active:scale-95"
+                style={{ backgroundColor: "#8B7355" }}
+                onMouseEnter={(e) => {
+                  if (!inputValue.trim()) return;
+                  e.currentTarget.style.backgroundColor = "#D4AF37";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = "#8B7355";
+                }}
                 aria-label="Send message"
               >
                 <svg
