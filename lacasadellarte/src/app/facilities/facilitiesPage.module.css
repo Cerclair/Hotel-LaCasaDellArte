@@ -1,13 +1,10 @@
-.facilitiesPage {
-  min-height: 100vh;
-  background-color: var(--color-beige);
-}
+
 
 /* Hero Section */
 .facilitiesHero {
   background: linear-gradient(to bottom right, var(--color-beige-dark), var(--color-beige));
   text-align: center;
-  padding: 1.5rem 1rem;
+  padding: 4rem 1rem;
 }
 
 .facilitiesHero h1 {
