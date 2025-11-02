@@ -1,34 +1,39 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Calendar, Users, Home } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 
-interface DateRange {
+export interface DateRange {
   checkIn: Date | null
   checkOut: Date | null
 }
 
-interface GuestCount {
+export interface GuestCount {
   adults: number
   children: number
 }
 
-interface FilterState {
+export interface FilterState {
   dateRange: DateRange
   roomType: string
   bedType: string
   guests: GuestCount
 }
 
-export function HotelFilter() {
+export function HotelFilter({ onChange }: { onChange?: (filters: FilterState) => void }) {
   const [filters, setFilters] = useState<FilterState>({
     dateRange: { checkIn: null, checkOut: null },
     roomType: "all",
     bedType: "all",
     guests: { adults: 1, children: 0 },
   })
+
+  // Notify parent whenever filters change (live filtering)
+  useEffect(() => {
+    onChange?.(filters)
+  }, [filters, onChange])
 
   const [showDatePicker, setShowDatePicker] = useState(false)
   const [showGuestPicker, setShowGuestPicker] = useState(false)
@@ -390,7 +395,7 @@ export function HotelFilter() {
           </div>
 
           {/* Search Button */}
-          <Button className="w-full md:w-auto px-8 py-4 bg-[var(--color-gold)] hover:bg-[var(--color-gold)]/90 text-white font-bold rounded-lg shadow-lg text-lg uppercase tracking-wider transition-all flex items-center justify-center">
+          <Button onClick={() => onChange?.(filters)} className="w-full md:w-auto px-8 py-4 bg-[var(--color-gold)] hover:bg-[var(--color-gold)]/90 text-white font-bold rounded-lg shadow-lg text-lg uppercase tracking-wider transition-all flex items-center justify-center">
             <Home className="w-5 h-5 mr-2" />
             Search Rooms
           </Button>

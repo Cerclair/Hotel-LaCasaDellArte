@@ -4,12 +4,83 @@ import { useState, useEffect } from 'react';
 import { SmoothScrollHero } from '@/components/ui/modern-hero';
 import { CarouselIndicators } from '@/components/ui/carousel-indicators';
 import { HotelFilter } from '@/components/ui/hotel-filter';
+import type { FilterState } from '@/components/ui/hotel-filter';
 import HotelRoomCard from '@/components/room/hotel-room-card';
 
 export default function RoomsPage() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
   const [useModernHero, setUseModernHero] = useState(false); // Toggle between hero versions
+  const [activeFilters, setActiveFilters] = useState<FilterState>({
+    dateRange: { checkIn: null, checkOut: null },
+    roomType: 'all',
+    bedType: 'all',
+    guests: { adults: 1, children: 0 },
+  });
+
+  type Room = {
+    id: string;
+    type: 'standard' | 'deluxe' | 'king-deluxe';
+    bedType: 'queen' | 'king' | 'king-sofa';
+    maxGuests: number;
+    image: string;
+    roomTypeLabel: string;
+    title: string;
+    description: string;
+    price: number;
+    amenities: string[];
+    guestsLabel: string;
+  };
+
+  const roomsData: Room[] = [
+    {
+      id: 'standard',
+      type: 'standard',
+      bedType: 'queen',
+      maxGuests: 3,
+      image: '/IMG resources - Rooms/Rooms/Standard Rooms/standard room.png',
+      roomTypeLabel: 'Standard Room',
+      title: 'Standard Rooms',
+      description: 'A haven of tranquility designed for effortless comfort and serene simplicity.',
+      price: 400000,
+      amenities: ['Free WiFi', 'Room Service', 'Air Conditioning', 'Premium Bedding'],
+      guestsLabel: 'Adults: 2, Children: 1',
+    },
+    {
+      id: 'deluxe',
+      type: 'deluxe',
+      bedType: 'king',
+      maxGuests: 4,
+      image: '/IMG resources - Rooms/Rooms/Delux Rooms/deluxe room.png',
+      roomTypeLabel: 'Deluxe Room',
+      title: 'Deluxe Rooms',
+      description: 'Step into elevated luxury with spacious, stylish rooms infused with art-inspired décor.',
+      price: 500000,
+      amenities: ['Free WiFi', 'Room Service', 'Mini Bar', 'City View'],
+      guestsLabel: 'Adults: 2, Children: 2',
+    },
+    {
+      id: 'king-deluxe',
+      type: 'king-deluxe',
+      bedType: 'king-sofa',
+      maxGuests: 6,
+      image: '/IMG resources - Rooms/Rooms/King Delux Rooms/king deluxe suite.png',
+      roomTypeLabel: 'King Deluxe Suite',
+      title: 'King Deluxe Suites',
+      description: 'The pinnacle of our collection embodying grandeur and grace with generous living spaces.',
+      price: 700000,
+      amenities: ['Free WiFi', 'Room Service', 'Kitchenette', 'Ocean View'],
+      guestsLabel: 'Adults: 4, Children: 2',
+    },
+  ];
+
+  const totalGuestsRequested = activeFilters.guests.adults + activeFilters.guests.children;
+  const filteredRooms = roomsData.filter((room) => {
+    const byType = activeFilters.roomType === 'all' || activeFilters.roomType === room.type;
+    const byBed = activeFilters.bedType === 'all' || activeFilters.bedType === room.bedType;
+    const byGuests = totalGuestsRequested <= room.maxGuests;
+    return byType && byBed && byGuests;
+  });
 
   // Background images for the hero slider (URL encoded for spaces)
   const heroImages = [
@@ -183,7 +254,7 @@ export default function RoomsPage() {
 
       {/* Hotel Room Filter Section */}
       <section id="rooms-filter" className="relative mt-12 z-20">
-        <HotelFilter />
+        <HotelFilter onChange={setActiveFilters} />
       </section>
 
       {/* Rooms Showcase Section */}
@@ -198,47 +269,27 @@ export default function RoomsPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {/* Standard Room */}
-          <HotelRoomCard
-            image="/IMG resources - Rooms/Rooms/Standard Rooms/standard room.png"
-            roomType="Standard Room"
-            title="Standard Rooms"
-            description="A haven of tranquility designed for effortless comfort and serene simplicity."
-            price={400000}
-            currency="LKR "
-            amenities={["Free WiFi", "Room Service", "Air Conditioning", "Premium Bedding"]}
-            guests={3}
-            size="Adults: 2, Children: 1"
-            onBook={() => window.location.href = '/booking'}
-          />
-
-          {/* Deluxe Room */}
-          <HotelRoomCard
-            image="/IMG resources - Rooms/Rooms/Delux Rooms/deluxe room.png"
-            roomType="Deluxe Room"
-            title="Deluxe Rooms"
-            description="Step into elevated luxury with spacious, stylish rooms infused with art-inspired décor."
-            price={500000}
-            currency="LKR "
-            amenities={["Free WiFi", "Room Service", "Mini Bar", "City View"]}
-            guests={4}
-            size="Adults: 2, Children: 2"
-            onBook={() => window.location.href = '/booking'}
-          />
-
-          {/* King Deluxe Suite */}
-          <HotelRoomCard
-            image="/IMG resources - Rooms/Rooms/King Delux Rooms/king deluxe suite.png"
-            roomType="King Deluxe Suite"
-            title="King Deluxe Suites"
-            description="The pinnacle of our collection embodying grandeur and grace with generous living spaces."
-            price={700000}
-            currency="LKR "
-            amenities={["Free WiFi", "Room Service", "Kitchenette", "Ocean View"]}
-            guests={6}
-            size="Adults: 4, Children: 2"
-            onBook={() => window.location.href = '/booking'}
-          />
+          {filteredRooms.length > 0 ? (
+            filteredRooms.map((room) => (
+              <HotelRoomCard
+                key={room.id}
+                image={room.image}
+                roomType={room.roomTypeLabel}
+                title={room.title}
+                description={room.description}
+                price={room.price}
+                currency="LKR "
+                amenities={room.amenities}
+                guests={room.maxGuests}
+                size={room.guestsLabel}
+                onBook={() => (window.location.href = '/booking')}
+              />
+            ))
+          ) : (
+            <div className="col-span-full text-center text-[var(--color-gray)]">
+              No rooms match your filters. Try adjusting your selections.
+            </div>
+          )}
         </div>
       </section>
     </div>
