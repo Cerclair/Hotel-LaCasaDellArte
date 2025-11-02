@@ -3,7 +3,7 @@ export default function Home() {
     <div>
       {/* Hero Section */}
       <section className="relative h-[70vh] md:h-[80vh] flex items-center justify-center bg-gradient-to-br from-[var(--color-beige)] to-[var(--color-beige-dark)]">
-        <div className="absolute inset-0 bg-[url('/hero-pattern.svg')] opacity-10"></div>
+        <div className="absolute inset-0 bg-[url('/rounded-plus-connected.svg')] opacity-10"></div>
         <div className="w-full max-w-7xl mx-auto px-4 flex flex-col items-center justify-center text-center z-10">
           <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-tight" style={{ fontFamily: 'var(--font-display)' }}>
             Welcome to La Casa Dell&apos;Arte
