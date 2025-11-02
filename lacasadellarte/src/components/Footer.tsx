@@ -3,25 +3,36 @@ import Image from 'next/image';
 
 export default function Footer() {
   return (
-    <footer className="bg-[#E8E4D8] mt-auto border-t-2 border-[var(--color-accent)]/10">
-      <div className="container mx-auto px-6 lg:px-8 pt-24 pb-16">
+    <>
+      <style dangerouslySetInnerHTML={{__html: `
+        .footer-logo-ring {
+          box-shadow: 0 0 0 2px #8B7355 !important;
+          transition: all 0.3s ease !important;
+        }
+        .footer-logo-ring:hover {
+          box-shadow: 0 0 0 2px #8B7355, 0 0 20px 4px rgba(212, 175, 55, 0.6) !important;
+        }
+      `}} />
+      <footer className="bg-[#E8E4D8] mt-auto border-t-2 border-[var(--color-accent)]/10">
+        <div className="container mx-auto px-6 lg:px-8 pb-6" style={{ paddingTop: '15px' }}>
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center min-h-[130px]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
 
           {/* LEFT SECTION - Logo, Brand Name & Social Icons */}
-          <div className="lg:col-span-3 flex flex-col justify-center">
+          <div className="lg:col-span-3 flex flex-col">
             {/* Logo and Brand */}
-            <Link href="/" className="flex items-center gap-4 mb-6 hover:opacity-90 transition-all duration-300 group">
-              <div className="relative w-16 h-16 rounded-full overflow-hidden shadow-lg ring-2 ring-[var(--color-accent)]/20 group-hover:ring-[var(--color-accent)]/40 transition-all">
+            <Link href="/" className="flex items-center gap-4 mb-4 transition-all duration-300 group">
+              <div className="relative w-16 h-16 rounded-full overflow-hidden shadow-lg footer-logo-ring">
                 <Image
                   src="/logo/logo.png"
                   alt="La Casa Dell'Arte Logo"
                   fill
                   className="object-cover"
+                  priority
                 />
               </div>
               <div className="flex flex-col">
-                <span className="text-2xl font-bold text-[var(--color-text)] tracking-tight">
+                <span className="text-2xl font-bold text-[var(--color-text)] tracking-tight whitespace-nowrap">
                   La Casa Dell&apos;Arte
                 </span>
                 <span className="text-xs text-[var(--color-accent)] font-light tracking-widest uppercase">
@@ -31,17 +42,17 @@ export default function Footer() {
             </Link>
 
             {/* Social Media Icons - Only Facebook and Instagram */}
-            <div className="flex gap-4 mt-6">
+            <div className="flex gap-2">
               <a
                 href="#"
-                className="w-8 h-13 flex items-center justify-center hover:scale-110 transition-all duration-300 cursor-pointer"
+                className="w-7 h-7 flex items-center justify-center hover:scale-110 transition-all duration-300 cursor-pointer"
                 aria-label="Facebook"
               >
                 <Image
                   src="/social-icons/facebook.svg"
                   alt="Facebook"
-                  width={48}
-                  height={48}
+                  width={28}
+                  height={28}
                   className="object-contain"
                   style={{ filter: 'brightness(0) saturate(100%) invert(44%) sepia(13%) saturate(854%) hue-rotate(353deg) brightness(95%) contrast(88%)' }}
                 />
@@ -49,14 +60,14 @@ export default function Footer() {
 
               <a
                 href="#"
-                className="w-10 h-13 flex items-center justify-center hover:scale-110 transition-all duration-300 cursor-pointer"
+                className="w-7 h-7 flex items-center justify-center hover:scale-110 transition-all duration-300 cursor-pointer"
                 aria-label="Instagram"
               >
                 <Image
                   src="/social-icons/insta.svg"
                   alt="Instagram"
-                  width={48}
-                  height={48}
+                  width={28}
+                  height={28}
                   className="object-contain"
                   style={{ filter: 'brightness(0) saturate(100%) invert(44%) sepia(13%) saturate(854%) hue-rotate(353deg) brightness(95%) contrast(88%)' }}
                 />
@@ -65,29 +76,29 @@ export default function Footer() {
           </div>
 
           {/* MIDDLE SECTION - 3 Column Navigation Links */}
-          <div className="lg:col-span-6 flex items-center justify-center">
-            <div className="grid grid-cols-3 gap-12 w-full">
+          <div className="lg:col-span-6 flex items-start justify-center">
+            <div className="grid grid-cols-3 gap-6 w-full">
 
               {/* Column 1 */}
               <div className="flex justify-center">
-                <nav className="flex flex-col space-y-4">
+                <nav className="flex flex-col space-y-2">
                   <Link
                     href="/"
-                    className="text-base font-medium text-[var(--color-text)] hover:text-[var(--color-accent)] transition-all duration-300 relative group py-1"
+                    className="text-base font-medium text-[var(--color-text)] hover:text-[var(--color-accent)] transition-all duration-300 relative group"
                   >
                     Home
                     <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--color-accent)] group-hover:w-full transition-all duration-300"></span>
                   </Link>
                   <Link
                     href="/rooms"
-                    className="text-base font-medium text-[var(--color-text)] hover:text-[var(--color-accent)] transition-all duration-300 relative group py-1"
+                    className="text-base font-medium text-[var(--color-text)] hover:text-[var(--color-accent)] transition-all duration-300 relative group"
                   >
                     Rooms
                     <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--color-accent)] group-hover:w-full transition-all duration-300"></span>
                   </Link>
                   <Link
                     href="/dining"
-                    className="text-base font-medium text-[var(--color-text)] hover:text-[var(--color-accent)] transition-all duration-300 relative group py-1"
+                    className="text-base font-medium text-[var(--color-text)] hover:text-[var(--color-accent)] transition-all duration-300 relative group"
                   >
                     Dining & Drinks
                     <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--color-accent)] group-hover:w-full transition-all duration-300"></span>
@@ -97,17 +108,17 @@ export default function Footer() {
 
               {/* Column 2 */}
               <div className="flex justify-center">
-                <nav className="flex flex-col space-y-4">
+                <nav className="flex flex-col space-y-2">
                   <Link
                     href="/atelier"
-                    className="text-base font-medium text-[var(--color-text)] hover:text-[var(--color-accent)] transition-all duration-300 relative group py-1"
+                    className="text-base font-medium text-[var(--color-text)] hover:text-[var(--color-accent)] transition-all duration-300 relative group"
                   >
                     Atelier
                     <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--color-accent)] group-hover:w-full transition-all duration-300"></span>
                   </Link>
                   <Link
                     href="/spa"
-                    className="text-base font-medium text-[var(--color-text)] hover:text-[var(--color-accent)] transition-all duration-300 relative group py-1"
+                    className="text-base font-medium text-[var(--color-text)] hover:text-[var(--color-accent)] transition-all duration-300 relative group"
                   >
                     SPA
                     <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--color-accent)] group-hover:w-full transition-all duration-300"></span>
@@ -117,17 +128,17 @@ export default function Footer() {
 
               {/* Column 3 */}
               <div className="flex justify-center">
-                <nav className="flex flex-col space-y-4">
+                <nav className="flex flex-col space-y-2">
                   <Link
                     href="/facilities"
-                    className="text-base font-medium text-[var(--color-text)] hover:text-[var(--color-accent)] transition-all duration-300 relative group py-1"
+                    className="text-base font-medium text-[var(--color-text)] hover:text-[var(--color-accent)] transition-all duration-300 relative group"
                   >
                     Facilities
                     <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--color-accent)] group-hover:w-full transition-all duration-300"></span>
                   </Link>
                   <Link
                     href="/loyalty"
-                    className="text-base font-medium text-[var(--color-text)] hover:text-[var(--color-accent)] transition-all duration-300 relative group py-1"
+                    className="text-base font-medium text-[var(--color-text)] hover:text-[var(--color-accent)] transition-all duration-300 relative group"
                   >
                     Loyalty
                     <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--color-accent)] group-hover:w-full transition-all duration-300"></span>
@@ -139,8 +150,8 @@ export default function Footer() {
           </div>
 
           {/* RIGHT SECTION - Contact Information (Right Aligned) */}
-          <div className="lg:col-span-3 flex items-center justify-end">
-            <div className="space-y-5 text-right">
+          <div className="lg:col-span-3 flex items-start justify-end">
+            <div className="space-y-2 text-right">
               {/* Phone */}
               <div className="flex items-center justify-end gap-2 text-[var(--color-text)]">
                 <svg className="w-5 h-5 text-[var(--color-accent)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -176,11 +187,11 @@ export default function Footer() {
         </div>
 
         {/* BOTTOM BAR - Separator, Terms & Copyright */}
-        <div className="border-t-2 border-[var(--color-accent)]/20 mt-12 pt-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="border-t pt4" style={{ marginTop: '7px', borderTopColor: '#8B7355' }}>
+          <div className="flex flex-col md:flex-row justify-between items-center gap-3">
 
             {/* Left - Terms & Privacy */}
-            <div className="flex items-center gap-4 text-sm text-[var(--color-text)]">
+            <div className="flex items-center gap-3 text-[var(--color-text)]" style={{ fontSize: '13px' }}>
               <Link
                 href="/terms"
                 className="font-medium hover:text-[var(--color-accent)] transition-colors duration-300"
@@ -197,7 +208,7 @@ export default function Footer() {
             </div>
 
             {/* Right - Copyright */}
-            <div className="text-sm text-[var(--color-text)] font-medium">
+            <div className="text-[var(--color-text)] font-medium" style={{ fontSize: '13px' }}>
               &copy; {new Date().getFullYear()} LaCasaDellArte. All rights reserved.
             </div>
 
@@ -206,5 +217,6 @@ export default function Footer() {
 
       </div>
     </footer>
+    </>
   );
 }
