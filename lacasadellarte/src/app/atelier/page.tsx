@@ -14,14 +14,24 @@ export default function AtelierPage() {
   return (
     <div className={styles.page}>
       {/* Hero Section */}
-      <section className={styles.hero}>
-        <div className={styles.heroContainer}>
-          <h1 className={styles.heroTitle}>Atelier - Art Gallery</h1>
-          <p className={styles.heroText}>
-            Where contemporary and classic art converge in a celebration of human creativity
-          </p>
-        </div>
-      </section>
+    <section className={styles.heroSection}>
+  {/* Full-width image */}
+  <img 
+    src="/assets/gallery.png" 
+    alt="Art gallery" 
+    className={styles.heroImage} 
+  />
+
+  {/* Text block below the image */}
+  <div className={styles.heroContent}>
+    <h1 className={styles.heroTitle}>Atelier - Art Gallery</h1>
+    <p className={styles.heroText}>
+      Where contemporary and classic art converge in a celebration of human creativity
+    </p>
+  </div>
+</section>
+
+
 
       {/* Description Section */}
       <section className={`${styles.section} ${styles.sectionLight}`}>
