@@ -92,7 +92,7 @@ export const loyaltyPrograms: LoyaltyProgram[] = [
     name: "Diamond",
     description:
       "Our most elevated experience with premium upgrades and personalized services.",
-    benefits: [
+    benefits: [ 
       "All Gold benefits",
       "Suite upgrade priority (subject to availability)",
       "Complimentary breakfast for two",

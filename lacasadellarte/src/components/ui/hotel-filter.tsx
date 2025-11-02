@@ -26,7 +26,7 @@ export function HotelFilter() {
   const [filters, setFilters] = useState<FilterState>({
     dateRange: { checkIn: null, checkOut: null },
     roomType: "all",
-    bedType: "queen",
+    bedType: "all",
     guests: { adults: 1, children: 0 },
   })
 
@@ -42,6 +42,7 @@ export function HotelFilter() {
   ]
 
   const bedTypes = [
+    { value: "all", label: "All Beds" },
     { value: "queen", label: "Queen Bed" },
     { value: "king", label: "King Bed" },
     { value: "king-sofa", label: "King + Sofa Bed" },
@@ -395,7 +396,7 @@ export function HotelFilter() {
           </Button>
 
           {/* Filter Summary */}
-          {(filters.dateRange.checkIn || filters.roomType !== "all" || filters.bedType !== "queen") && (
+          {(filters.dateRange.checkIn || filters.roomType !== "all" || filters.bedType !== "all") && (
             <div className="mt-6 pt-6 border-t border-border">
               <p className="text-xs text-muted-foreground mb-3">Active Filters:</p>
               <div className="flex flex-wrap gap-2">
@@ -427,11 +428,11 @@ export function HotelFilter() {
                     </button>
                   </span>
                 )}
-                {filters.bedType !== "queen" && (
+                {filters.bedType !== "all" && (
                   <span className="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 text-primary text-xs rounded-full font-medium">
                     {bedTypes.find((t) => t.value === filters.bedType)?.label}
                     <button
-                      onClick={() => setFilters((prev) => ({ ...prev, bedType: "queen" }))}
+                      onClick={() => setFilters((prev) => ({ ...prev, bedType: "all" }))}
                       className="hover:opacity-70"
                     >
                       ×
