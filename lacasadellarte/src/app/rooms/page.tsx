@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { SmoothScrollHero } from '@/components/ui/modern-hero';
 import { CarouselIndicators } from '@/components/ui/carousel-indicators';
 import { HotelFilter } from '@/components/ui/hotel-filter';
+import HotelRoomCard from '@/components/room/hotel-room-card';
 
 export default function RoomsPage() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -187,7 +188,58 @@ export default function RoomsPage() {
 
       {/* Rooms Showcase Section */}
       <section id="rooms-showcase" className="container mx-auto px-4 py-16">
-        {/* Your room cards/showcase will go here */}
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-bold text-[var(--color-text)] mb-4" style={{ fontFamily: 'var(--font-display)' }}>
+            Our Room Collection
+          </h2>
+          <p className="text-lg text-[var(--color-gray)] max-w-2xl mx-auto">
+            Each room is thoughtfully designed to provide the perfect blend of comfort, elegance, and artistic inspiration
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Standard Room */}
+          <HotelRoomCard
+            image="/IMG resources - Rooms/Rooms/Standard Rooms/standard room.png"
+            roomType="Standard Room"
+            title="Standard Rooms"
+            description="A haven of tranquility designed for effortless comfort and serene simplicity."
+            price={400000}
+            currency="LKR "
+            amenities={["Free WiFi", "Room Service", "Air Conditioning", "Premium Bedding"]}
+            guests={3}
+            size="Adults: 2, Children: 1"
+            onBook={() => window.location.href = '/booking'}
+          />
+
+          {/* Deluxe Room */}
+          <HotelRoomCard
+            image="/IMG resources - Rooms/Rooms/Delux Rooms/deluxe room.png"
+            roomType="Deluxe Room"
+            title="Deluxe Rooms"
+            description="Step into elevated luxury with spacious, stylish rooms infused with art-inspired décor."
+            price={5000000}
+            currency="LKR "
+            amenities={["Free WiFi", "Room Service", "Mini Bar", "City View"]}
+            guests={4}
+            size="Adults: 2, Children: 2"
+            onBook={() => window.location.href = '/booking'}
+          />
+
+          {/* King Deluxe Suite */}
+          <HotelRoomCard
+            image="/IMG resources - Rooms/Rooms/King Delux Rooms/king deluxe suite.png"
+            roomType="King Deluxe Suite"
+            title="King Deluxe Suites"
+            description="The pinnacle of our collection embodying grandeur and grace with generous living spaces."
+            price={7000000}
+            currency="LKR "
+            amenities={["Free WiFi", "Room Service", "Kitchenette", "Ocean View"]}
+            guests={6}
+            size="Adults: 4, Children: 2"
+            onBook={() => window.location.href = '/booking'}
+          />
+        </div>
       </section>
     </div>
   );
