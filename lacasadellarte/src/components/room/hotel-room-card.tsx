@@ -81,7 +81,7 @@ export default function HotelRoomCard({
           {/* Price Tag */}
           <div className="absolute bottom-4 right-4 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-lg">
             <p className="text-xs text-gray-500 font-medium">Per Night</p>
-            <p className="text-2xl font-bold" style={{ color: "#1e3a8a" }}>
+            <p className="text-2xl font-bold" style={{ color: "#8B7355" }}>
               {currency}
               {price}
             </p>
@@ -94,7 +94,7 @@ export default function HotelRoomCard({
           <div>
             <h3
               className="text-2xl font-serif font-bold mb-2 transition-colors duration-300"
-              style={{ color: "#1e3a8a" }}
+              style={{ color: "#8B7355" }}
             >
               {title}
             </h3>
@@ -132,7 +132,7 @@ export default function HotelRoomCard({
             onClick={onBook}
             className="w-full mt-6 py-3 px-4 rounded-lg font-semibold text-white transition-all duration-300 hover:shadow-lg hover:scale-105 active:scale-95"
             style={{
-              backgroundColor: "#1e3a8a",
+              backgroundColor: "#8B7355",
             }}
           >
             Book Now
