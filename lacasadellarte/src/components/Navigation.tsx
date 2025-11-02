@@ -39,12 +39,22 @@ export default function Navigation() {
   ];
 
   return (
-    <nav className="sticky top-0 z-50 bg-[#E8E4D8] shadow-md backdrop-blur-sm">
+    <>
+      <style dangerouslySetInnerHTML={{__html: `
+        .nav-logo-ring {
+          box-shadow: 0 0 0 2px #8B7355 !important;
+          transition: all 0.3s ease !important;
+        }
+        .nav-logo-ring:hover {
+          box-shadow: 0 0 0 2px #8B7355, 0 0 20px 4px rgba(212, 175, 55, 0.6) !important;
+        }
+      `}} />
+      <nav className="sticky top-0 z-50 bg-[#E8E4D8] shadow-md backdrop-blur-sm">
       <div className="container mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-24">
           {/* Logo and Brand Name */}
-          <Link href="/" className="flex items-center gap-4 hover:opacity-90 transition-all duration-300 group">
-            <div className="relative w-16 h-16 rounded-full overflow-hidden shadow-lg ring-2 ring-[var(--color-accent)]/20 group-hover:ring-[var(--color-accent)]/40 transition-all">
+          <Link href="/" className="flex items-center gap-4 transition-all duration-300 group">
+            <div className="relative w-16 h-16 rounded-full overflow-hidden shadow-lg nav-logo-ring">
               <Image
                 src="/logo/logo.png"
                 alt="La Casa Dell'Arte Logo"
@@ -260,5 +270,6 @@ export default function Navigation() {
         )}
       </div>
     </nav>
+    </>
   );
 }

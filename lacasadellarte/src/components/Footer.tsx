@@ -3,16 +3,26 @@ import Image from 'next/image';
 
 export default function Footer() {
   return (
-    <footer className="bg-[#E8E4D8] mt-auto border-t-2 border-[var(--color-accent)]/10">
-      <div className="container mx-auto px-6 lg:px-8 pb-6" style={{ paddingTop: '15px' }}>
+    <>
+      <style dangerouslySetInnerHTML={{__html: `
+        .footer-logo-ring {
+          box-shadow: 0 0 0 2px #8B7355 !important;
+          transition: all 0.3s ease !important;
+        }
+        .footer-logo-ring:hover {
+          box-shadow: 0 0 0 2px #8B7355, 0 0 20px 4px rgba(212, 175, 55, 0.6) !important;
+        }
+      `}} />
+      <footer className="bg-[#E8E4D8] mt-auto border-t-2 border-[var(--color-accent)]/10">
+        <div className="container mx-auto px-6 lg:px-8 pb-6" style={{ paddingTop: '15px' }}>
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
 
           {/* LEFT SECTION - Logo, Brand Name & Social Icons */}
           <div className="lg:col-span-3 flex flex-col">
             {/* Logo and Brand */}
-            <Link href="/" className="flex items-center gap-4 mb-4 hover:opacity-90 transition-all duration-300 group">
-              <div className="relative w-16 h-16 rounded-full overflow-hidden shadow-lg ring-2 ring-[var(--color-accent)]/20 group-hover:ring-[var(--color-accent)]/40 transition-all">
+            <Link href="/" className="flex items-center gap-4 mb-4 transition-all duration-300 group">
+              <div className="relative w-16 h-16 rounded-full overflow-hidden shadow-lg footer-logo-ring">
                 <Image
                   src="/logo/logo.png"
                   alt="La Casa Dell'Arte Logo"
@@ -177,11 +187,11 @@ export default function Footer() {
         </div>
 
         {/* BOTTOM BAR - Separator, Terms & Copyright */}
-        <div className="border-t border-[var(--color-accent)]/20 mt-2 pt-4">
+        <div className="border-t pt4" style={{ marginTop: '7px', borderTopColor: '#8B7355' }}>
           <div className="flex flex-col md:flex-row justify-between items-center gap-3">
 
             {/* Left - Terms & Privacy */}
-            <div className="flex items-center gap-3 text-[var(--color-text)]" style={{ fontSize: '15px' }}>
+            <div className="flex items-center gap-3 text-[var(--color-text)]" style={{ fontSize: '13px' }}>
               <Link
                 href="/terms"
                 className="font-medium hover:text-[var(--color-accent)] transition-colors duration-300"
@@ -198,7 +208,7 @@ export default function Footer() {
             </div>
 
             {/* Right - Copyright */}
-            <div className="text-[var(--color-text)] font-medium" style={{ fontSize: '15px' }}>
+            <div className="text-[var(--color-text)] font-medium" style={{ fontSize: '13px' }}>
               &copy; {new Date().getFullYear()} LaCasaDellArte. All rights reserved.
             </div>
 
@@ -207,5 +217,6 @@ export default function Footer() {
 
       </div>
     </footer>
+    </>
   );
 }
