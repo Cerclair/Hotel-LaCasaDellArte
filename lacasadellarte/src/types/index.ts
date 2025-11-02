@@ -67,7 +67,9 @@ export interface LoyaltyProgram {
   tier: LoyaltyTier;
   name: string;
   description: string;
+  introduction: string;
   benefits: string[];
+  qualification: string;
 }
 
 // Facility Types
