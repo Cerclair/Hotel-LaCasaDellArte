@@ -2,14 +2,41 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDiningOpen, setIsDiningOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const toggleDining = () => setIsDiningOpen(!isDiningOpen);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      // Show navbar when at the top
+      if (currentScrollY < 10) {
+        setIsVisible(true);
+      }
+      // Hide when scrolling down, show when scrolling up
+      else if (currentScrollY > lastScrollY) {
+        setIsVisible(false); // Scrolling down
+      } else {
+        setIsVisible(true); // Scrolling up
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [lastScrollY]);
 
   const diningOptions = [
     {
@@ -49,7 +76,9 @@ export default function Navigation() {
           box-shadow: 0 0 0 2px #8B7355, 0 0 20px 4px rgba(212, 175, 55, 0.6) !important;
         }
       `}} />
-      <nav className="sticky top-0 z-50 bg-[#E8E4D8] shadow-md backdrop-blur-sm">
+      <nav className={`sticky top-0 z-50 bg-[#E8E4D8] shadow-md backdrop-blur-sm transition-transform duration-500 ease-in-out ${
+        isVisible ? 'translate-y-0' : '-translate-y-full'
+      }`}>
       <div className="container mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-24">
           {/* Logo and Brand Name */}
@@ -92,11 +121,13 @@ export default function Navigation() {
             </Link>
 
             {/* Dining Dropdown */}
-            <div className="relative group">
+            <div
+              className="relative group"
+              onMouseEnter={() => setIsDiningOpen(true)}
+              onMouseLeave={() => setIsDiningOpen(false)}
+            >
               <button
                 className="text-[var(--color-text)] hover:text-[var(--color-accent)] font-medium transition-all duration-300 flex items-center gap-2 py-2"
-                onMouseEnter={() => setIsDiningOpen(true)}
-                onMouseLeave={() => setIsDiningOpen(false)}
               >
                 <span>Dining & Drinks</span>
                 <svg
@@ -111,19 +142,17 @@ export default function Navigation() {
 
               {/* Clean Dropdown Menu */}
               <div
-                className={`absolute top-full left-1/2 -translate-x-1/2 mt-3 w-64 bg-[#E8E4D8] shadow-xl rounded-xl overflow-hidden transition-all duration-300 border border-[var(--color-accent)]/20 ${
+                className={`absolute top-full left-1/2 -translate-x-1/2 mt-0 w-64 bg-[#E8E4D8] shadow-xl rounded-xl overflow-hidden transition-all duration-300 border border-[var(--color-accent)]/20 ${
                   isDiningOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2 pointer-events-none'
                 }`}
-                onMouseEnter={() => setIsDiningOpen(true)}
-                onMouseLeave={() => setIsDiningOpen(false)}
               >
                 {/* Menu Items */}
-                <div className="py-3 px-8">
+                <div className="py-2 px-8">
                   {diningOptions.map((option) => (
                     <Link
                       key={option.href}
                       href={option.href}
-                      className="text-[var(--color-text)] hover:text-[var(--color-accent)] font-medium transition-colors duration-300 py-2 block text-center"
+                      className="text-[var(--color-text)] hover:text-[var(--color-accent)] font-medium transition-colors duration-300 py-1.5 block text-center"
                     >
                       {option.name}
                     </Link>
