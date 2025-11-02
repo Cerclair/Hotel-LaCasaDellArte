@@ -17,44 +17,174 @@ export default function LoyaltyPage() {
   return (
     <div className="min-h-screen bg-[var(--color-beige)]">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-[var(--color-beige-dark)] to-[var(--color-beige)] py-16">
-        <div className="w-full max-w-7xl mx-auto px-4 flex flex-col items-center justify-center text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight" style={{ fontFamily: 'var(--font-display)' }}>
+      <section
+        className="bg-gradient-to-br from-[var(--color-beige-dark)] to-[var(--color-beige)]"
+        style={{ paddingTop: '64px', paddingBottom: '64px' }}
+      >
+        <div className="w-full max-w-4xl mx-auto px-6 flex flex-col items-center justify-center">
+          <h1
+            className="text-4xl md:text-5xl font-bold mb-4 leading-tight"
+            style={{ fontFamily: 'var(--font-display)', textAlign: 'center' }}
+          >
             Loyalty Program
           </h1>
-          <p className="text-xl text-[var(--color-gray)] max-w-3xl leading-relaxed">
-            Elevate your experience with exclusive benefits and rewards
+          <p
+            className="text-xl text-[var(--color-gray)] max-w-3xl leading-relaxed"
+            style={{ textAlign: 'center' }}
+          >
+            Where Every Stay Becomes a Masterpiece of Privilege
           </p>
         </div>
       </section>
 
       {/* Introduction Section */}
-      <section className="section bg-[var(--color-beige-light)]">
+      <section className="section bg-[var(--color-beige-light)]" style={{ paddingTop: '64px', paddingBottom: '64px' }}>
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-6 text-[var(--color-text)]" style={{ fontFamily: 'var(--font-display)' }}>
-              Coming Soon
-            </h2>
             <p className="text-lg text-[var(--color-gray)] leading-relaxed mb-6">
-              We&apos;re excited to launch our loyalty program that rewards our most valued guests.
-              From exclusive member rates to personalized experiences, our tiered program is designed
-              to make every stay even more extraordinary.
+              Welcome to the La Casa DellArte Loyalty Program, where your continued patronage is celebrated as art in motion. Our tiered membership program is designed to transform each visit into a more enriching experience, offering exclusive benefits that grow with your journey alongside us.
             </p>
-            <p className="text-lg text-[var(--color-gray)] leading-relaxed">
-              Join now to be among the first to enjoy these exceptional benefits when we officially launch.
+            <p className="text-lg text-[var(--color-gray)] leading-relaxed mb-6">
+              From priority reservations and room upgrades to personalized dining experiences and spa privileges, our loyalty program ensures that your devotion to artful hospitality is rewarded with the finest touches of luxury. Whether you&apos;re a frequent traveler or an occasional art enthusiast, every stay brings you closer to extraordinary rewards.
             </p>
+            <p className="text-lg text-[var(--color-gray)] leading-relaxed mb-10">
+              Join us in this celebration of loyalty, where your preferences are remembered, your comfort is prioritized, and every return feels like coming home to a gallery curated just for you.
+            </p>
+
+            {/* Key Benefits Icons */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
+              {/* Room Upgrade */}
+              <div className="flex flex-col items-center">
+                <div className="w-16 h-16 rounded-full bg-[var(--color-accent)] flex items-center justify-center mb-3 shadow-md transition-all duration-300">
+                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                  </svg>
+                </div>
+                <p className="text-sm font-semibold text-[var(--color-text)]">Room Upgrades</p>
+              </div>
+
+              {/* Dining */}
+              <div className="flex flex-col items-center">
+                <div className="w-16 h-16 rounded-full bg-[var(--color-accent)] flex items-center justify-center mb-3 shadow-md transition-all duration-300">
+                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                  </svg>
+                </div>
+                <p className="text-sm font-semibold text-[var(--color-text)]">Dining Benefits</p>
+              </div>
+
+              {/* Spa */}
+              <div className="flex flex-col items-center">
+                <div className="w-16 h-16 rounded-full bg-[var(--color-accent)] flex items-center justify-center mb-3 shadow-md transition-all duration-300">
+                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                  </svg>
+                </div>
+                <p className="text-sm font-semibold text-[var(--color-text)]">Spa Privileges</p>
+              </div>
+
+              {/* Priority Access */}
+              <div className="flex flex-col items-center">
+                <div className="w-16 h-16 rounded-full bg-[var(--color-accent)] flex items-center justify-center mb-3 shadow-md transition-all duration-300">
+                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <p className="text-sm font-semibold text-[var(--color-text)]">Priority Access</p>
+              </div>
+            </div>
+
+            {/* Join Now CTA Button */}
+            <a
+              href="#membership-tiers"
+              className="inline-block bg-[var(--color-accent)] text-white px-10 py-4 rounded-lg font-bold text-lg hover:bg-[var(--color-gold)] transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+              style={{ textDecoration: 'none' }}
+            >
+              Join Now
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works Section */}
+      <section className="bg-[var(--color-beige)]" style={{ paddingTop: '64px', paddingBottom: '64px' }}>
+        <div className="container mx-auto px-4">
+          <div className="max-w-5xl mx-auto">
+            <h2
+              className="text-3xl font-bold mb-12 text-[var(--color-text)]"
+              style={{ fontFamily: 'var(--font-display)', textAlign: 'center' }}
+            >
+              How It Works
+            </h2>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              {/* Earn Points */}
+              <div className="bg-white rounded-lg p-8 shadow-lg hover:shadow-xl transition-all duration-300">
+                <div className="flex justify-center mb-4">
+                  <div className="w-16 h-16 rounded-full bg-[var(--color-accent)] flex items-center justify-center">
+                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                </div>
+                <h3 className="text-xl font-bold text-[var(--color-text)] mb-3 text-center" style={{ fontFamily: 'var(--font-display)' }}>
+                  Earn Points
+                </h3>
+                <p className="text-[var(--color-gray)] text-center leading-relaxed">
+                  Accumulate points with every stay, dining experience, spa visit, and eligible purchase at La Casa DellArte. The more you experience, the more you earn.
+                </p>
+              </div>
+
+              {/* Redeem Rewards */}
+              <div className="bg-white rounded-lg p-8 shadow-lg hover:shadow-xl transition-all duration-300">
+                <div className="flex justify-center mb-4">
+                  <div className="w-16 h-16 rounded-full bg-[var(--color-accent)] flex items-center justify-center">
+                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
+                    </svg>
+                  </div>
+                </div>
+                <h3 className="text-xl font-bold text-[var(--color-text)] mb-3 text-center" style={{ fontFamily: 'var(--font-display)' }}>
+                  Redeem Rewards
+                </h3>
+                <p className="text-[var(--color-gray)] text-center leading-relaxed">
+                  Transform your points into exclusive benefits including complimentary nights, room upgrades, dining credits, spa treatments, and unique art experiences.
+                </p>
+              </div>
+
+              {/* Tier Progression */}
+              <div className="bg-white rounded-lg p-8 shadow-lg hover:shadow-xl transition-all duration-300">
+                <div className="flex justify-center mb-4">
+                  <div className="w-16 h-16 rounded-full bg-[var(--color-accent)] flex items-center justify-center">
+                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                    </svg>
+                  </div>
+                </div>
+                <h3 className="text-xl font-bold text-[var(--color-text)] mb-3 text-center" style={{ fontFamily: 'var(--font-display)' }}>
+                  Tier Progression
+                </h3>
+                <p className="text-[var(--color-gray)] text-center leading-relaxed">
+                  Advance through Silver, Gold, and Diamond tiers based on your stays and spending. Each tier unlocks enhanced privileges and more exclusive rewards.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Tier Dropdown Section */}
-      <section className="section bg-[var(--color-beige)]">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12 text-[var(--color-text)]" style={{ fontFamily: 'var(--font-display)' }}>
+      <section id="membership-tiers" className="bg-[var(--color-beige)]" style={{ paddingTop: '64px', paddingBottom: '64px' }}>
+        <div className="w-full max-w-4xl mx-auto px-6">
+          <h2
+            className="text-3xl font-bold mb-12 text-[var(--color-text)]"
+            style={{ fontFamily: 'var(--font-display)', textAlign: 'center' }}
+          >
             Membership Tiers
           </h2>
 
-          <div className="max-w-4xl mx-auto space-y-6">
+          <div className="space-y-6">
             {loyaltyPrograms.map((program) => (
               <div
                 key={program.tier}
