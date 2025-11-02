@@ -187,7 +187,7 @@ export default function RoomsPage() {
       </section>
 
       {/* Rooms Showcase Section */}
-      <section id="rooms-showcase" className="container mx-auto px-4 py-16">
+      <section id="rooms-showcase" className="container mx-auto px-4 mt-16 md:mt-24 py-16">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-[var(--color-text)] mb-4" style={{ fontFamily: 'var(--font-display)' }}>
             Our Room Collection
