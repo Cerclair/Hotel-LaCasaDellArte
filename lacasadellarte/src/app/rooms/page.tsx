@@ -218,7 +218,7 @@ export default function RoomsPage() {
             roomType="Deluxe Room"
             title="Deluxe Rooms"
             description="Step into elevated luxury with spacious, stylish rooms infused with art-inspired décor."
-            price={5000000}
+            price={500000}
             currency="LKR "
             amenities={["Free WiFi", "Room Service", "Mini Bar", "City View"]}
             guests={4}
@@ -232,7 +232,7 @@ export default function RoomsPage() {
             roomType="King Deluxe Suite"
             title="King Deluxe Suites"
             description="The pinnacle of our collection embodying grandeur and grace with generous living spaces."
-            price={7000000}
+            price={700000}
             currency="LKR "
             amenities={["Free WiFi", "Room Service", "Kitchenette", "Ocean View"]}
             guests={6}

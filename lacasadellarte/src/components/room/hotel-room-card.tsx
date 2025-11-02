@@ -81,7 +81,7 @@ export default function HotelRoomCard({
           {/* Price Tag */}
           <div className="absolute bottom-4 right-4 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-lg">
             <p className="text-xs text-gray-500 font-medium">Per Night</p>
-            <p className="text-2xl font-bold" style={{ color: "#8B7355" }}>
+            <p className="text-2xl font-bold" style={{ color: "#D4AF37" }}>
               {currency}
               {price}
             </p>
@@ -94,7 +94,7 @@ export default function HotelRoomCard({
           <div>
             <h3
               className="text-2xl font-serif font-bold mb-2 transition-colors duration-300"
-              style={{ color: "#8B7355" }}
+              style={{ color: "#D4AF37" }}
             >
               {title}
             </h3>
