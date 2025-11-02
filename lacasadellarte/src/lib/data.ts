@@ -149,47 +149,52 @@ export const loyaltyPrograms: LoyaltyProgram[] = [
     tier: 'silver',
     name: 'Silver Member',
     description: 'Begin your artistic journey with exclusive benefits designed for frequent guests.',
+    introduction: 'Begin your artistic journey with La Casa DellArte\'s Silver membership, designed for guests who appreciate the finer things in life. As a Silver member, you\'ll enjoy exclusive privileges that enhance every stay, from the moment you arrive to the time you depart.\n\nExperience the convenience of seamless check-in, members-only rates, and special recognition that makes you feel truly valued. This is where your relationship with artful hospitality begins, setting the foundation for even greater rewards as you continue your journey with us.',
     benefits: [
-      'Earn points on every stay',
-      'Member-only room rates',
-      'Late check-out (subject to availability)',
-      'Welcome amenity',
-      'Digital check-in/out',
-      'Free Wi-Fi'
-    ]
+      'Earn 5 points per dollar spent on all services',
+      'Member-only room rates with up to 10% savings',
+      'Late check-out until 2:00 PM (subject to availability)',
+      'Welcome amenity upon arrival',
+      'Complimentary Wi-Fi and digital check-in/out',
+      '10% discount at all restaurants and bars'
+    ],
+    qualification: 'Join free with your first stay'
   },
   {
     tier: 'gold',
     name: 'Gold Member',
     description: 'Elevate your experience with enhanced privileges and personalized service.',
+    introduction: 'Step into a world of elevated luxury with Gold membership, where personalized service and enhanced privileges transform each visit into something extraordinary. Gold members enjoy priority access, room upgrades, and exclusive experiences that reflect your loyalty and refined taste.\n\nFrom complimentary breakfast to private gallery events, every benefit is designed to enrich your stay with artistic touches and thoughtful gestures. Whether you\'re visiting for business or leisure, Gold membership ensures your comfort is our priority and your preferences are always remembered.\n\nAs a Gold member, you\'ll also unlock accelerated points earning, bringing you closer to exclusive rewards and unforgettable experiences that go beyond ordinary hospitality.',
     benefits: [
-      'All Silver benefits',
-      'Complimentary room upgrade (subject to availability)',
-      'Guaranteed late check-out until 2:00 PM',
-      'Bonus points on all stays',
-      'Complimentary breakfast for two',
-      'Access to Atelier gallery events',
-      'Priority reservations at restaurants',
-      'Welcome gift upon arrival'
-    ]
+      'All Silver benefits included',
+      'Earn 7 points per dollar (40% bonus earning rate)',
+      'Complimentary room upgrade at check-in',
+      'Guaranteed late check-out until 3:00 PM',
+      'Complimentary breakfast for two daily',
+      'Access to exclusive Atelier gallery events',
+      '15% discount on spa treatments and dining',
+      'Welcome gift with curated local artisan products'
+    ],
+    qualification: '10 stays or 15 nights within 12 months'
   },
   {
     tier: 'diamond',
     name: 'Diamond Member',
     description: 'Our highest tier of recognition, offering unparalleled luxury and exclusive experiences.',
+    introduction: 'Welcome to the pinnacle of recognition at La Casa DellArte. Diamond membership represents our highest level of commitment to guests who have made us their home away from home. Here, luxury meets exclusivity with unparalleled privileges designed to exceed every expectation.\n\nAs a Diamond member, you\'ll experience guaranteed suite upgrades, personalized concierge service, and access to exclusive art workshops with renowned artists. Your stays are elevated with complimentary spa treatments, executive lounge access, and a dedicated hotline that ensures every request is handled with precision and care.\n\nBeyond the tangible benefits, Diamond membership is about creating lasting memories through unique experiences—from private art collection tours to annual complimentary nights. This is where loyalty is celebrated as an art form, and every visit becomes a masterpiece of personalized hospitality.',
     benefits: [
-      'All Gold benefits',
-      'Guaranteed suite upgrade (subject to availability)',
-      'Complimentary spa treatment',
-      '48-hour reservation guarantee',
-      'Executive lounge access',
-      'Personalized concierge service',
-      'Exclusive art workshops',
-      'Double points on all stays',
-      'Annual complimentary night',
-      'Private art collection tours',
-      'Birthday surprise',
-      'Dedicated Diamond Member hotline'
-    ]
+      'All Gold benefits included',
+      'Earn 10 points per dollar (double earning rate)',
+      'Guaranteed suite upgrade at check-in',
+      'Complimentary 60-minute spa treatment per stay',
+      'Executive lounge access with evening cocktails',
+      'Exclusive art workshops and private gallery tours',
+      'Annual complimentary night after 50,000 points',
+      'Dedicated Diamond Member hotline',
+      '20% discount on all services',
+      'Complimentary airport transfer (one way per stay)',
+      'Personalized concierge and birthday surprise'
+    ],
+    qualification: '25 stays or 40 nights within 12 months'
   }
 ];

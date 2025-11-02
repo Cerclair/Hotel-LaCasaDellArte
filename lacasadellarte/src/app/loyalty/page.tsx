@@ -229,27 +229,42 @@ export default function LoyaltyPage() {
                 {/* Tier Content */}
                 {expandedTier === program.tier && (
                   <div className="px-6 py-6 border-t border-[var(--color-beige-dark)]">
-                    <p className="text-[var(--color-gray)] mb-4">
-                      {program.description}
-                    </p>
+                    {/* Introduction */}
+                    <div className="mb-6">
+                      {/* <h4 className="font-bold text-[var(--color-text)] mb-3 text-lg">Introduction</h4> */}
+                      <p className="text-[var(--color-gray)] leading-relaxed whitespace-pre-line">
+                        {program.introduction}
+                      </p>
+                    </div>
 
-                    <h4 className="font-semibold text-[var(--color-text)] mb-3">Benefits:</h4>
-                    <ul className="space-y-2 mb-6">
-                      {program.benefits.map((benefit, index) => (
-                        <li key={index} className="flex items-start text-[var(--color-gray)]">
-                          <svg className="w-5 h-5 mr-2 mt-0.5 text-[var(--color-accent)] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                          </svg>
-                          {benefit}
-                        </li>
-                      ))}
-                    </ul>
+                    {/* Key Benefits */}
+                    <div className="mb-6">
+                      <h4 className="font-bold text-[var(--color-text)] mb-3 text-lg">Key Benefits:</h4>
+                      <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2">
+                        {program.benefits.map((benefit, index) => (
+                          <li key={index} className="flex items-start text-[var(--color-gray)]">
+                            <svg className="w-5 h-5 mr-2 mt-0.5 text-[var(--color-accent)] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                            </svg>
+                            {benefit}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Qualification */}
+                    <div className="mb-6">
+                      <p className="text-[var(--color-gray)]">
+                        <span className="font-bold text-[var(--color-text)]">Qualification: </span>
+                        <span className="font-semibold">{program.qualification}</span>
+                      </p>
+                    </div>
 
                     <button
                       onClick={() => handleSignIn(program.tier)}
                       className="w-full bg-[var(--color-accent)] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[var(--color-gold)] transition-all duration-300 transform hover:scale-105 shadow-md"
                     >
-                      Sign In
+                      Become a Member Today
                     </button>
                   </div>
                 )}
