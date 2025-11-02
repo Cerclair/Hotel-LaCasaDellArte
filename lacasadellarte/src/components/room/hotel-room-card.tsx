@@ -33,14 +33,14 @@ export default function HotelRoomCard({
 
   return (
     <div
-      className="w-full max-w-md mx-auto"
+      className="w-full max-w-md mx-auto h-full"
       style={{
         fontFamily: "'Geist', 'Geist Fallback', sans-serif",
       }}
     >
       {/* Card Container */}
       <div
-        className="bg-white rounded-lg overflow-hidden shadow-lg transition-all duration-500 hover:shadow-2xl"
+        className="bg-white rounded-lg overflow-hidden shadow-lg transition-all duration-500 hover:shadow-2xl h-full flex flex-col"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
@@ -89,7 +89,7 @@ export default function HotelRoomCard({
         </div>
 
         {/* Content Container */}
-        <div className="p-6 space-y-4">
+        <div className="p-6 space-y-4 flex-1 flex flex-col">
           {/* Title */}
           <div>
             <h3
@@ -101,8 +101,8 @@ export default function HotelRoomCard({
             <p className="text-gray-600 text-sm leading-relaxed">{description}</p>
           </div>
 
-          {/* Amenities */}
-          <div className="space-y-2 pt-2">
+          {/* Amenities - flex-grow to push buttons to bottom */}
+          <div className="space-y-2 pt-2 flex-grow">
             <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Amenities</p>
             <div className="flex flex-wrap gap-2">
               {amenities.map((amenity, index) => (
