@@ -116,7 +116,7 @@ export default function AIAssistant() {
           {/* Clean Header */}
           <div className="bg-[#E8E4D8] border-b border-[#8B7355]/15 px-6 py-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="relative w-12 h-12 rounded-full overflow-hidden shadow-lg ai-assistant-logo-ring">
+              <div className="relative w-12 h-12 rounded-full overflow-hidden shadow-lg ai-assistant-logo-ring" style={{ borderRadius: '50%', width: '48px', height: '48px', minWidth: '48px', minHeight: '48px' }}>
                 <Image
                   src="/logo/logo.png"
                   alt="La Casa Dell'Arte Logo"
@@ -125,7 +125,10 @@ export default function AIAssistant() {
                   priority
                 />
               </div>
-              <h3 className="font-bold text-[#2C2C2C] text-lg">La Casa Concierge</h3>
+              <h3 className="font-bold text-[#2C2C2C] text-lg">
+                <span style={{ fontFamily: "'Brittany Signature', cursive", fontSize: '1.5rem', lineHeight: '1' }}>La Casa</span>
+                {' '}Concierge
+              </h3>
             </div>
             <button
               onClick={() => setIsOpen(false)}

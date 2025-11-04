@@ -22,7 +22,7 @@ export default function Footer() {
           <div className="lg:col-span-3 flex flex-col">
             {/* Logo and Brand */}
             <Link href="/" className="flex items-center gap-4 mb-4 transition-all duration-300 group">
-              <div className="relative w-16 h-16 rounded-full overflow-hidden shadow-lg footer-logo-ring">
+              <div className="relative w-16 h-16 rounded-full overflow-hidden shadow-lg footer-logo-ring" style={{ borderRadius: '50%', width: '64px', height: '64px', minWidth: '64px', minHeight: '64px' }}>
                 <Image
                   src="/logo/logo.png"
                   alt="La Casa Dell'Arte Logo"
@@ -32,7 +32,7 @@ export default function Footer() {
                 />
               </div>
               <div className="flex flex-col">
-                <span className="text-2xl font-bold text-[var(--color-text)] tracking-tight whitespace-nowrap">
+                <span className="text-2xl font-bold text-[var(--color-text)] tracking-tight whitespace-nowrap" style={{ fontFamily: "'Brittany Signature', cursive", fontSize: '1.8rem', lineHeight: '1.5' }}>
                   La Casa Dell&apos;Arte
                 </span>
                 <span className="text-xs text-[var(--color-accent)] font-light tracking-widest uppercase">
@@ -45,7 +45,7 @@ export default function Footer() {
             <div className="flex gap-2">
               <a
                 href="#"
-                className="w-7 h-7 flex items-center justify-center hover:scale-110 transition-all duration-300 cursor-pointer"
+                className="w-6 h-7 flex items-center justify-center hover:scale-110 transition-all duration-300 cursor-pointer"
                 aria-label="Facebook"
               >
                 <Image

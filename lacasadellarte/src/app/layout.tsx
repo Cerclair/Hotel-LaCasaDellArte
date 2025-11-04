@@ -42,6 +42,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${playfair.variable} ${lato.variable}`}>
+      <head>
+        <link href="https://fonts.cdnfonts.com/css/brittany-signature" rel="stylesheet" />
+      </head>
       <body className="flex flex-col min-h-screen" style={{ fontFamily: 'var(--font-body)' }}>
         <Navigation />
         <main className="flex-grow">
