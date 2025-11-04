@@ -1,4 +1,13 @@
-export default function TermsPage() {
+'use client';
+
+interface TermsModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export default function TermsModal({ isOpen, onClose }: TermsModalProps) {
+  if (!isOpen) return null;
+
   const sections = [
     {
       title: '1. Reservations and Payments',
@@ -120,68 +129,73 @@ export default function TermsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[var(--color-beige)]">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-[var(--color-beige-dark)] to-[var(--color-beige)] py-16">
-        <div className="w-full max-w-7xl mx-auto px-4 flex flex-col items-center justify-center text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight" style={{ fontFamily: 'var(--font-display)' }}>
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" onClick={onClose}>
+      <div
+        className="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="bg-[#E8E4D8] border-b border-[var(--color-accent)]/15 px-6 py-4 flex items-center justify-between">
+          <h2 className="text-2xl font-bold text-[var(--color-text)]" style={{ fontFamily: 'var(--font-display)' }}>
             Terms and Conditions
-          </h1>
-          <p className="text-xl text-[var(--color-gray)] max-w-3xl leading-relaxed">
-            Please read these terms carefully before booking with La Casa Dell&apos;Arte
-          </p>
+          </h2>
+          <button
+            onClick={onClose}
+            className="text-[var(--color-gray)] hover:text-[var(--color-text)] transition-colors"
+            aria-label="Close"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
         </div>
-      </section>
 
-      {/* Content Section */}
-      <section className="section">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-8 md:p-12">
-            <div className="mb-8">
-              <p className="text-[var(--color-gray)] mb-4">
-                <strong>Last Updated:</strong> October 18, 2025
-              </p>
-              <p className="text-[var(--color-gray)] leading-relaxed">
-                Welcome to La Casa Dell&apos;Arte. By making a reservation or using our services, you agree to comply with and be bound by the following terms and conditions. Please review them carefully.
-              </p>
-            </div>
+        {/* Scrollable Content */}
+        <div className="flex-1 overflow-y-auto px-6 py-6">
+          <div className="mb-6">
+            <p className="text-[var(--color-gray)] mb-4">
+              <strong>Last Updated:</strong> October 18, 2025
+            </p>
+            <p className="text-[var(--color-gray)] leading-relaxed">
+              Welcome to La Casa Dell&apos;Arte. By making a reservation or using our services, you agree to comply with and be bound by the following terms and conditions. Please review them carefully.
+            </p>
+          </div>
 
-            {/* Terms Sections */}
-            <div className="space-y-8">
-              {sections.map((section, index) => (
-                <div key={index}>
-                  <h2 className="text-2xl font-bold mb-4 text-[var(--color-text)]" style={{ fontFamily: 'var(--font-display)' }}>
-                    {section.title}
-                  </h2>
-                  <ul className="space-y-2">
-                    {section.content.map((item, idx) => (
-                      <li key={idx} className="flex items-start text-[var(--color-gray)]">
-                        <svg className="w-5 h-5 mr-2 mt-0.5 text-[var(--color-accent)] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                        </svg>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
+          {/* Terms Sections */}
+          <div className="space-y-6">
+            {sections.map((section, index) => (
+              <div key={index}>
+                <h3 className="text-xl font-bold mb-3 text-[var(--color-text)]" style={{ fontFamily: 'var(--font-display)' }}>
+                  {section.title}
+                </h3>
+                <ul className="space-y-2">
+                  {section.content.map((item, idx) => (
+                    <li key={idx} className="flex items-start text-[var(--color-gray)] text-sm">
+                      <svg className="w-4 h-4 mr-2 mt-0.5 text-[var(--color-accent)] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
 
-            {/* Acceptance */}
-            <div className="mt-12 pt-8 border-t-2 border-[var(--color-beige-dark)]">
-              <h2 className="text-2xl font-bold mb-4 text-[var(--color-text)]" style={{ fontFamily: 'var(--font-display)' }}>
-                Acceptance of Terms
-              </h2>
-              <p className="text-[var(--color-gray)] leading-relaxed mb-6">
-                By booking a room or using any of our services, you acknowledge that you have read, understood, and agree to be bound by these terms and conditions, as well as our Privacy Policy.
-              </p>
-              <p className="text-[var(--color-gray)] leading-relaxed">
-                If you do not agree with any part of these terms, please do not make a reservation or use our services.
-              </p>
-            </div>
+          {/* Acceptance */}
+          <div className="mt-8 pt-6 border-t-2 border-[var(--color-beige-dark)]">
+            <h3 className="text-xl font-bold mb-3 text-[var(--color-text)]" style={{ fontFamily: 'var(--font-display)' }}>
+              Acceptance of Terms
+            </h3>
+            <p className="text-[var(--color-gray)] leading-relaxed mb-4 text-sm">
+              By booking a room or using any of our services, you acknowledge that you have read, understood, and agree to be bound by these terms and conditions, as well as our Privacy Policy.
+            </p>
+            <p className="text-[var(--color-gray)] leading-relaxed text-sm">
+              If you do not agree with any part of these terms, please do not make a reservation or use our services.
+            </p>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 }

@@ -1,7 +1,14 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
+import { useState } from 'react';
+import TermsModal from './TermsModal';
+import PrivacyModal from './PrivacyModal';
 
 export default function Footer() {
+  const [showTerms, setShowTerms] = useState(false);
+  const [showPrivacy, setShowPrivacy] = useState(false);
   return (
     <>
       <style dangerouslySetInnerHTML={{__html: `
@@ -196,24 +203,24 @@ export default function Footer() {
 
             {/* Left - Terms & Privacy */}
             <div className="flex items-center gap-3 text-[var(--color-text)]" style={{ fontSize: '13px' }}>
-              <Link
-                href="/terms"
-                className="font-medium hover:text-[var(--color-accent)] transition-colors duration-300"
+              <button
+                onClick={() => setShowTerms(true)}
+                className="font-medium hover:text-[var(--color-accent)] transition-colors duration-300 cursor-pointer"
               >
                 Terms & Conditions
-              </Link>
+              </button>
               <span className="text-[var(--color-accent)]">|</span>
-              <Link
-                href="/privacy"
-                className="font-medium hover:text-[var(--color-accent)] transition-colors duration-300"
+              <button
+                onClick={() => setShowPrivacy(true)}
+                className="font-medium hover:text-[var(--color-accent)] transition-colors duration-300 cursor-pointer"
               >
                 Privacy Statement
-              </Link>
+              </button>
             </div>
 
             {/* Right - Copyright */}
             <div className="text-[var(--color-text)] font-medium" style={{ fontSize: '13px' }}>
-              &copy; {new Date().getFullYear()} LaCasaDellArte. All rights reserved.
+              &copy; {new Date().getFullYear()} La Casa Dell&apos;Arte. All rights reserved.
             </div>
 
           </div>
@@ -221,6 +228,10 @@ export default function Footer() {
 
       </div>
     </footer>
+
+    {/* Modals */}
+    <TermsModal isOpen={showTerms} onClose={() => setShowTerms(false)} />
+    <PrivacyModal isOpen={showPrivacy} onClose={() => setShowPrivacy(false)} />
     </>
   );
 }
