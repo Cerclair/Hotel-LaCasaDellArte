@@ -3,12 +3,24 @@ import Image from 'next/image';
 
 export default function AtelierPage() {
   const artworks = [
-    { id: 1, title: 'Chromatic Dreams', imageUrl:'/assets/ChromaticDreams.jpg'},
-    { id: 2, title: 'Urban Symphony', imageUrl:'/assets/UrbanSymphony.jpg'},
-    { id: 3, title: 'Liquid Light', imageUrl:'/assets/ColorsOfTime.jpg'},
-    { id: 4, title: 'Abstract Harmony', imageUrl:'/assets/AbstractHarmony.jpg'},
-    { id: 5, title: 'Colors of Time', imageUrl:'/assets/ColorsOfTime.jpg'},
-    { id: 6, title: 'Geometric Poetry', imageUrl:'/assets/GeometricPoetry.jpg'},
+    { id: 1, title: 'Caffè a Montmartre- Coffee in Montmartre', 
+      imageUrl:'/assets/atelier/coffee in montmartre.jpg'},
+    { id: 2, title: 'Danza d\'Ombra- Dance of Shadow', 
+      imageUrl:'/assets/atelier/dance of shadow.jpg'},
+    { id: 3, title: 'Il Valzer del Lampadario- The Chandelier Waltz', 
+      imageUrl:'/assets/atelier/the chandelier waltz.jpg'},
+    { id: 4, title: 'L\'Eleganza della Notte- The Elegance of the Night', 
+      imageUrl:'/assets/atelier/the elegance of the night.jpg'},
+    { id: 5, title: 'Notturno Veneziano- Venetian Nocturne', 
+      imageUrl:'/assets/atelier/venetian nocturne.jpg'},
+    { id: 6, title: 'Passione di Siviglia- Passion of Seville', 
+      imageUrl:'/assets/atelier/passion of seville.jpg'},
+    { id: 7, title: 'Serenità Nascosta- Hidden Serenity', 
+      imageUrl:'/assets/atelier/hidden serenity.jpg'},
+    { id: 8, title: 'Tramonto sulla Laguna- Sunset on the Lagoon', 
+      imageUrl:'/assets/atelier/sunset on the lagoon.jpg'},
+    { id: 9, title: 'Visione di Parigi- Vision of Paris', 
+      imageUrl:'/assets/atelier/vision of paris.jpg'},
   ];
 
   return (
@@ -17,7 +29,7 @@ export default function AtelierPage() {
     <section className={styles.heroSection}>
   {/* Full-width image */}
   <img 
-    src="/assets/gallery.png" 
+    src="assets/atelier/atelier.png" 
     alt="Art gallery" 
     className={styles.heroImage} 
   />
