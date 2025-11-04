@@ -117,7 +117,7 @@ export default function FacilitiesPage() {
       ))}
 
       {/* CTA */}
-      <section className={styles.facilitiesCta}>
+      {/* <section className={styles.facilitiesCta}>
         <div className={styles.facilitiesCtaBox}>
           <h3>Need More Information?</h3>
           <p>
@@ -129,7 +129,7 @@ export default function FacilitiesPage() {
             <a href="tel:+94718530994">Call Us</a>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }
