@@ -9,7 +9,7 @@ export default function FacilitiesPage() {
       subtitle: 'Events & Celebrations',
       description:
         "An elegant event space designed for life's most memorable moments. The Galleria combines artistic grandeur with modern functionality, making it perfect for weddings, galas, corporate events, and private celebrations.",
-      imageUrl: '/assets/event-halls.png',
+      imageUrl: '/assets/facilities/event halls.png',
       features: [
         'Capacity for up to 300 guests',
         'State-of-the-art audio-visual equipment',
@@ -26,7 +26,7 @@ export default function FacilitiesPage() {
       subtitle: 'Fitness & Wellness',
       description:
         'A modern fitness center where wellness meets inspiration. The Studio features top-of-the-line equipment, personal training services, and a motivating environment that encourages guests to maintain their fitness routines while away from home.',
-      imageUrl: '/assets/gym.png',
+      imageUrl: '/assets/facilities/gym.png',
       features: [
         'Cardio machines with entertainment systems',
         'Free weights and strength training equipment',
@@ -43,7 +43,7 @@ export default function FacilitiesPage() {
       subtitle: 'Outdoor Pool',
       description:
         'A serene outdoor oasis inspired by the colors of the sky and sea. Azure features a beautifully designed pool surrounded by artistic touches, comfortable loungers, and lush landscaping that creates a private retreat within the city.',
-      imageUrl: '/assets/pool.png',
+      imageUrl: '/assets/facilities/pool.png',
       features: [
         'Heated infinity pool',
         'Poolside bar service',

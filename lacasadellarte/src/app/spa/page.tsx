@@ -36,7 +36,7 @@ export default function SpaPage() {
     <div className={styles.page}>
       {/* Hero Section */}
       <section className={styles.hero}>
-        <img src="/assets/spa.png" alt="Spa" className={styles.heroImage} />
+        <img src="/assets/spa/spa.png" alt="Spa" className={styles.heroImage} />
         <div className={styles.heroContent}>
           <h1 className={styles.heroTitle}>ZEN Spa</h1>
           <p className={styles.heroSubtitle}>
