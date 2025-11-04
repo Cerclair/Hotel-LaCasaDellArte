@@ -44,7 +44,9 @@ export default function Footer() {
             {/* Social Media Icons - Only Facebook and Instagram */}
             <div className="flex gap-2">
               <a
-                href="#"
+                href="https://www.facebook.com/share/17kG7oMnd1/?mibextid=wwXIfr"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-6 h-7 flex items-center justify-center hover:scale-110 transition-all duration-300 cursor-pointer"
                 aria-label="Facebook"
               >
@@ -59,7 +61,9 @@ export default function Footer() {
               </a>
 
               <a
-                href="#"
+                href="https://www.instagram.com/lacasadelllarte?igsh=MXV3bG01NXMwdzQ0ZA=="
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-7 h-7 flex items-center justify-center hover:scale-110 transition-all duration-300 cursor-pointer"
                 aria-label="Instagram"
               >
