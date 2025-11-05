@@ -96,7 +96,7 @@ export const restaurants: Restaurant[] = [
     name: 'Palette 360',
     slug: 'palette-360',
     cuisine: 'International Buffet',
-    description: 'A 360-degree culinary experience featuring flavors from around the world. Our international buffet celebrates diversity with an artistic presentation.',
+    description: 'Embark on a global culinary journey at Palette 360, where vibrant flavours, live stations, and artful presentations come together in a symphony of taste. A celebration of world cuisine, crafted fresh and served with flair',
     image: '/assets/dining&drinks/palette360/palette 360.png',
     ambiance: 'Vibrant and eclectic, with colorful displays and open kitchen concepts that make dining an interactive experience.',
     openingHours: 'Breakfast: 6:30 AM - 10:30 AM | Lunch: 12:00 PM - 3:00 PM | Dinner: 6:00 PM - 10:30 PM'
@@ -106,7 +106,7 @@ export const restaurants: Restaurant[] = [
     name: 'Dipinta',
     slug: 'dipinta',
     cuisine: 'Italian Fine Dining',
-    description: 'Meaning "painted" in Italian, Dipinta brings authentic Italian flavors with an artistic twist. Each dish is a masterpiece.',
+    description: 'Experience the warmth of Italy at Dipinta, where handcrafted pastas, rustic flavours, and regional wines paint a picture of authentic Italian charm in every dish',
     image: '/assets/dining&drinks/dipinta/dipinta.png',
     ambiance: 'Intimate and romantic, with warm lighting and Italian-inspired décor that transports you to the streets of Rome.',
     openingHours: 'Dinner: 6:00 PM - 11:00 PM'
@@ -116,7 +116,7 @@ export const restaurants: Restaurant[] = [
     name: 'Lumière',
     slug: 'lumiere',
     cuisine: 'French Fine Dining',
-    description: 'Named after "light" in French, Lumière illuminates the art of French cuisine with exceptional flavors and presentation.',
+    description: 'Savour the elegance of Lumière, where French artistry meets modern refinement. Each dish is a masterpiece, delicately plated and paired with exquisite wines',
     image: '/assets/dining&drinks/lumiere/lumiere.png',
     ambiance: 'Sophisticated and elegant, featuring crystal chandeliers and refined table settings perfect for special occasions.',
     openingHours: 'Dinner: 7:00 PM - 11:00 PM (Reservations Required)'
@@ -126,7 +126,7 @@ export const restaurants: Restaurant[] = [
     name: 'Vetro',
     slug: 'vetro',
     cuisine: 'Bar & Lounge',
-    description: 'Italian for "glass," Vetro is a modern bar and lounge where cocktails are crafted like glass art, inspired by Chihuly.',
+    description: 'Shimmering with style, Vetro invites you to sip signature cocktails, enjoy live music, and unwind in an ambiance where glass, light, and creativity glow in perfect harmony',
     image: '/assets/dining&drinks/vetro/vetro.png',
     ambiance: 'Chic and contemporary with glass art installations, mood lighting, and a vibrant atmosphere perfect for evening relaxation.',
     openingHours: 'Daily: 4:00 PM - 1:00 AM'
@@ -136,7 +136,7 @@ export const restaurants: Restaurant[] = [
     name: 'In-Room Dining',
     slug: 'in-room',
     cuisine: 'Personalized Service',
-    description: 'Enjoy our curated menu selections in the comfort and privacy of your room, available 24/7.',
+    description: 'Indulge in the comfort of your private sanctuary with La Casa Dell’Arte’s in-room dining. From global favourites to signature creations, enjoy gourmet experiences delivered right to your door 24/7',
     image: '/assets/dining&drinks/lumiere/lumiere.png',
     ambiance: 'Experience fine dining in the privacy of your own space, with impeccable service and artistic presentation.',
     openingHours: '24 Hours'

@@ -156,19 +156,27 @@ export default function VetroPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* Special Note */}
       <section style={{
-        background: 'var(--color-beige)',
-        padding: '64px 16px'
+        background: 'var(--color-beige-light)',
+        padding: '48px 16px'
       }}>
-        <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+        <div style={{ maxWidth: '768px', margin: '0 auto' }}>
           <div style={{
             background: 'white',
-            padding: '48px 32px',
+            padding: '32px',
             borderRadius: '8px',
             boxShadow: '0 4px 16px rgba(0,0,0,0.1)',
             textAlign: 'center'
           }}>
+            <svg style={{
+              width: '48px',
+              height: '48px',
+              margin: '0 auto 16px',
+              color: 'var(--color-gold)'
+            }} fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+            </svg>
             <h3 style={{
               fontSize: '32px',
               fontWeight: 'bold',
@@ -176,20 +184,20 @@ export default function VetroPage() {
               color: 'var(--color-text)',
               fontFamily: 'var(--font-display)'
             }}>
-              Make a Reservation
+              Reservations Recommended
             </h3>
             <p style={{
               color: 'var(--color-gray)',
-              marginBottom: '32px'
+              marginBottom: '24px',
+              fontSize: '16px'
             }}>
-              Contact our team to reserve your table and ensure an unforgettable dining experience.
+              To ensure the best dining experience, we recommend making reservations in advance.
             </p>
             <div style={{
               display: 'flex',
-              flexDirection: 'column',
               gap: '16px',
               justifyContent: 'center',
-              alignItems: 'center'
+              flexWrap: 'wrap'
             }}>
               <a
                 href="mailto:ladellaarte@gmail.com"
@@ -225,7 +233,7 @@ export default function VetroPage() {
                 Call Us
               </a>
             </div>
-            <div style={{ marginTop: '32px' }}>
+            <div style={{ marginTop: '24px' }}>
               <Link
                 href="/dining"
                 style={{
@@ -233,7 +241,8 @@ export default function VetroPage() {
                   textDecoration: 'none',
                   display: 'inline-flex',
                   alignItems: 'center',
-                  transition: 'color 0.3s'
+                  transition: 'color 0.3s',
+                  fontSize: '14px'
                 }}
               >
                 <svg style={{ width: '16px', height: '16px', marginRight: '8px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
