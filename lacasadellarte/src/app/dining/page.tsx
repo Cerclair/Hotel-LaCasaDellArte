@@ -4,16 +4,38 @@ import RestaurantCard from '@/components/RestaurantCard';
 export default function DiningPage() {
   return (
     <div className="min-h-screen bg-[var(--color-beige)]">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-[var(--color-beige-dark)] to-[var(--color-beige)] py-16">
-        <div className="w-full max-w-7xl mx-auto px-4 flex flex-col items-center justify-center text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight" style={{ fontFamily: 'var(--font-display)' }}>
-            Dining & Drinks
-          </h1>
-          <p className="text-xl text-[var(--color-gray)] max-w-3xl leading-relaxed">
-            Embark on a culinary journey through our art-inspired dining experiences
-          </p>
-        </div>
+      {/* Hero Image Section */}
+      <section style={{ width: '100%', margin: 0, padding: 0, overflow: 'hidden' }}>
+        <img
+          src="/assets/dining&drinks/dining.png"
+          alt="Dining"
+          style={{ width: '100%', height: '60vh', objectFit: 'cover', display: 'block' }}
+        />
+      </section>
+
+      {/* Title Section */}
+      <section style={{
+        background: 'var(--color-beige)',
+        padding: '48px 16px',
+        textAlign: 'center'
+      }}>
+        <h1 style={{
+          fontSize: '48px',
+          fontWeight: 'bold',
+          color: 'var(--color-text)',
+          marginBottom: '16px',
+          fontFamily: 'var(--font-display)'
+        }}>
+          Dining & Drinks
+        </h1>
+        <p style={{
+          fontSize: '20px',
+          color: 'var(--color-gray)',
+          maxWidth: '800px',
+          margin: '0 auto'
+        }}>
+          Embark on a culinary journey through our art-inspired dining experiences
+        </p>
       </section>
 
       {/* Introduction Section */}
@@ -38,16 +60,29 @@ export default function DiningPage() {
           <h2 className="text-3xl font-bold text-center mb-12 text-[var(--color-text)]" style={{ fontFamily: 'var(--font-display)' }}>
             Our Dining Venues
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '32px',
+            justifyContent: 'center',
+            maxWidth: '1200px',
+            margin: '0 auto'
+          }}>
             {restaurants.map((restaurant) => (
-              <RestaurantCard key={restaurant.id} restaurant={restaurant} />
+              <div key={restaurant.id} style={{
+                width: '100%',
+                maxWidth: '350px',
+                minWidth: '280px'
+              }}>
+                <RestaurantCard restaurant={restaurant} />
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Special Note */}
-      <section className="bg-[var(--color-beige-light)] py-12">
+      {/* <section className="bg-[var(--color-beige-light)] py-12">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-lg text-center">
             <svg className="w-12 h-12 mx-auto mb-4 text-[var(--color-gold)]" fill="currentColor" viewBox="0 0 20 20">
@@ -68,7 +103,7 @@ export default function DiningPage() {
             </a>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }

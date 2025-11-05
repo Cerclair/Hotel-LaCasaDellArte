@@ -10,10 +10,12 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
     <Link href={`/dining/${restaurant.slug}`}>
       <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:scale-105 h-full">
         {/* Restaurant Image */}
-        <div className="relative h-64 bg-[var(--color-beige-dark)] flex items-center justify-center">
-          <p className="text-[var(--color-gray)] text-center px-4">
-            [{restaurant.name} Image]
-          </p>
+        <div style={{ position: 'relative', height: '256px', overflow: 'hidden', background: 'var(--color-beige-dark)' }}>
+          <img
+            src={restaurant.image}
+            alt={restaurant.name}
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          />
         </div>
 
         {/* Restaurant Details */}
