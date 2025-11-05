@@ -97,7 +97,7 @@ export const restaurants: Restaurant[] = [
     slug: 'palette-360',
     cuisine: 'International Buffet',
     description: 'A 360-degree culinary experience featuring flavors from around the world. Our international buffet celebrates diversity with an artistic presentation.',
-    image: '/dining/palette-360.jpg',
+    image: '/assets/dining&drinks/palette360/palette 360.png',
     ambiance: 'Vibrant and eclectic, with colorful displays and open kitchen concepts that make dining an interactive experience.',
     openingHours: 'Breakfast: 6:30 AM - 10:30 AM | Lunch: 12:00 PM - 3:00 PM | Dinner: 6:00 PM - 10:30 PM'
   },
@@ -107,7 +107,7 @@ export const restaurants: Restaurant[] = [
     slug: 'dipinta',
     cuisine: 'Italian Fine Dining',
     description: 'Meaning "painted" in Italian, Dipinta brings authentic Italian flavors with an artistic twist. Each dish is a masterpiece.',
-    image: '/dining/dipinta.jpg',
+    image: '/assets/dining&drinks/dipinta/dipinta.png',
     ambiance: 'Intimate and romantic, with warm lighting and Italian-inspired décor that transports you to the streets of Rome.',
     openingHours: 'Dinner: 6:00 PM - 11:00 PM'
   },
@@ -117,7 +117,7 @@ export const restaurants: Restaurant[] = [
     slug: 'lumiere',
     cuisine: 'French Fine Dining',
     description: 'Named after "light" in French, Lumière illuminates the art of French cuisine with exceptional flavors and presentation.',
-    image: '/dining/lumiere.jpg',
+    image: '/assets/dining&drinks/lumiere/lumiere.png',
     ambiance: 'Sophisticated and elegant, featuring crystal chandeliers and refined table settings perfect for special occasions.',
     openingHours: 'Dinner: 7:00 PM - 11:00 PM (Reservations Required)'
   },
@@ -127,7 +127,7 @@ export const restaurants: Restaurant[] = [
     slug: 'vetro',
     cuisine: 'Bar & Lounge',
     description: 'Italian for "glass," Vetro is a modern bar and lounge where cocktails are crafted like glass art, inspired by Chihuly.',
-    image: '/dining/vetro.jpg',
+    image: '/assets/dining&drinks/vetro/vetro.png',
     ambiance: 'Chic and contemporary with glass art installations, mood lighting, and a vibrant atmosphere perfect for evening relaxation.',
     openingHours: 'Daily: 4:00 PM - 1:00 AM'
   },
@@ -137,7 +137,7 @@ export const restaurants: Restaurant[] = [
     slug: 'in-room',
     cuisine: 'Personalized Service',
     description: 'Enjoy our curated menu selections in the comfort and privacy of your room, available 24/7.',
-    image: '/dining/in-room.jpg',
+    image: '/assets/dining&drinks/lumiere/lumiere.png',
     ambiance: 'Experience fine dining in the privacy of your own space, with impeccable service and artistic presentation.',
     openingHours: '24 Hours'
   }
