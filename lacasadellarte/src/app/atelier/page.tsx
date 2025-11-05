@@ -3,23 +3,23 @@ import Image from 'next/image';
 
 export default function AtelierPage() {
   const artworks = [
-    { id: 1, title: 'Caffè a Montmartre- Coffee in Montmartre', 
+    { id: 1, title: 'Caffè a Montmartre', subtitle: 'Coffee in Montmartre',
       imageUrl:'/assets/atelier/coffee in montmartre.jpg'},
-    { id: 2, title: 'Danza d\'Ombra- Dance of Shadow', 
+    { id: 2, title: 'Danza d\'Ombra', subtitle: 'Dance of Shadow', 
       imageUrl:'/assets/atelier/dance of shadow.jpg'},
-    { id: 3, title: 'Il Valzer del Lampadario- The Chandelier Waltz', 
+    { id: 3, title: 'Il Valzer del Lampadario', subtitle: 'The Chandelier Waltz', 
       imageUrl:'/assets/atelier/the chandelier waltz.jpg'},
-    { id: 4, title: 'L\'Eleganza della Notte- The Elegance of the Night', 
+    { id: 4, title: 'L\'Eleganza della Notte', subtitle: 'The Elegance of the Night', 
       imageUrl:'/assets/atelier/the elegance of the night.jpg'},
-    { id: 5, title: 'Notturno Veneziano- Venetian Nocturne', 
+    { id: 5, title: 'Notturno Veneziano', subtitle: 'Venetian Nocturne', 
       imageUrl:'/assets/atelier/venetian nocturne.jpg'},
-    { id: 6, title: 'Passione di Siviglia- Passion of Seville', 
+    { id: 6, title: 'Passione di Siviglia', subtitle: 'Passion of Seville', 
       imageUrl:'/assets/atelier/passion of seville.jpg'},
-    { id: 7, title: 'Serenità Nascosta- Hidden Serenity', 
+    { id: 7, title: 'Serenità Nascosta', subtitle: 'Hidden Serenity', 
       imageUrl:'/assets/atelier/hidden serenity.jpg'},
-    { id: 8, title: 'Tramonto sulla Laguna- Sunset on the Lagoon', 
+    { id: 8, title: 'Tramonto sulla Laguna', subtitle: 'Sunset on the Lagoon', 
       imageUrl:'/assets/atelier/sunset on the lagoon.jpg'},
-    { id: 9, title: 'Visione di Parigi- Vision of Paris', 
+    { id: 9, title: 'Visione di Parigi', subtitle: 'Vision of Paris', 
       imageUrl:'/assets/atelier/vision of paris.jpg'},
   ];
 
@@ -87,6 +87,7 @@ export default function AtelierPage() {
                 </div>
                 <div className={styles.artContent}>
                   <h3 className={styles.artTitle}>{art.title}</h3>
+                  <h3 className="text-xs text-[var(--color-gold)] font-light tracking-widest uppercase text-center">{art.subtitle}</h3>
                 </div>
 
               </div>
