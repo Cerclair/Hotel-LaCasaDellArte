@@ -8,7 +8,7 @@
 }
 
 .facilitiesHero h1 {
-  /*font-family: var(--font-display);*/
+  font-family: var(--font-display);
   font-weight: 700;
   margin-bottom: 1rem;
   line-height: 1.2;
@@ -68,6 +68,7 @@
 .facilityText h2 {
   font-weight: 700;
   margin-bottom: 0.5rem;
+  font-family: var(--font-display);
 }
 
 .facilityText p.subtitle {
@@ -106,6 +107,7 @@
 .facilityText h3 {
     margin-bottom: 1rem;
     font-size: 1.5rem;
+    font-family: var(--font-display);
 }
 
 /* Contact CTA */
