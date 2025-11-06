@@ -1,22 +1,118 @@
 export default function Home() {
   return (
     <div>
-      {/* Hero Section */}
-      <section className="relative h-[70vh] md:h-[80vh] flex items-center justify-center bg-gradient-to-br from-[var(--color-beige)] to-[var(--color-beige-dark)]">
-        <div className="absolute inset-0 bg-[url('/hero-pattern.svg')] opacity-10"></div>
-        <div className="w-full max-w-7xl mx-auto px-4 flex flex-col items-center justify-center text-center z-10">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-tight" style={{ fontFamily: 'var(--font-display)' }}>
-            Welcome to La Casa Dell&apos;Arte
+      {/* Hero Section with Background Image and Overlay Content */}
+      <section style={{
+        position: 'relative',
+        width: '100%',
+        height: '90vh',
+        margin: 0,
+        padding: 0,
+        overflow: 'hidden',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        {/* Background Image */}
+        <img
+          src="/assets/home/home.png"
+          alt="La Casa Dell'Arte Background"
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            zIndex: 1
+          }}
+        />
+
+        {/* Logo - Positioned at Top */}
+        <img
+          src="/logo/logo-removebg-white.png"
+          alt="La Casa Dell'Arte Logo"
+          style={{
+            position: 'absolute',
+            top: '1px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '350px',
+            height: 'auto',
+            zIndex: 3,
+            filter: 'drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3))'
+          }}
+        />
+
+        {/* Text Content - Centered */}
+        <div style={{
+          position: 'relative',
+          zIndex: 2,
+          textAlign: 'center',
+          color: 'white',
+          padding: '0 20px',
+          paddingTop: '200px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}>
+
+          {/* Welcome Text */}
+          <h1 style={{
+            fontSize: 'clamp(3rem, 8vw, 7rem)',
+            fontWeight: 'normal',
+            fontStyle: 'italic',
+            fontFamily: "'Brittany Signature', cursive",
+            margin: '0 0 10px 0',
+            textShadow: '2px 2px 8px rgba(0, 0, 0, 0.5)',
+            letterSpacing: '0.05em',
+            color: 'white'
+          }}>
+            Welcome
           </h1>
-          <p className="text-lg md:text-xl lg:text-2xl text-[var(--color-gray)] max-w-3xl mb-8 leading-relaxed">
-            Where hospitality and artistry unite in perfect harmony
+
+          {/* "to" text */}
+          <p style={{
+            fontSize: 'clamp(1rem, 2vw, 1.5rem)',
+            margin: '0 0 10px 0',
+            textShadow: '1px 1px 4px rgba(0, 0, 0, 0.5)',
+            letterSpacing: '0.2em',
+            textTransform: 'uppercase',
+            fontWeight: 400,
+            fontFamily: "'Cinzel', 'Cormorant Garamond', serif",
+            color: 'white'
+          }}>
+            TO
           </p>
-          <a
-            href="/rooms"
-            className="inline-block bg-[var(--color-accent)] text-white px-8 py-4 rounded-lg font-semibold hover:bg-[var(--color-gold)] transition-all duration-300 transform hover:scale-105 shadow-lg"
-          >
-            Explore Our Rooms
-          </a>
+
+          {/* La casa Dell'Arte */}
+          <h2 style={{
+            fontSize: 'clamp(2.5rem, 6vw, 5.5rem)',
+            fontWeight: 'normal',
+            fontStyle: 'italic',
+            fontFamily: "'Brittany Signature', cursive",
+            margin: '0 0 30px 0',
+            textShadow: '2px 2px 8px rgba(0, 0, 0, 0.5)',
+            letterSpacing: '0.05em',
+            color: 'white'
+          }}>
+            La casa Dell&apos;Arte
+          </h2>
+
+          {/* Tagline */}
+          <p style={{
+            fontSize: 'clamp(0.9rem, 1.8vw, 1.3rem)',
+            margin: 0,
+            textShadow: '1px 1px 4px rgba(0, 0, 0, 0.5)',
+            letterSpacing: '0.15em',
+            fontWeight: 400,
+            fontFamily: "'Cinzel', 'Cormorant Garamond', serif",
+            maxWidth: '800px',
+            color: 'white'
+          }}>
+            Where Hospitality Becomes an Art Form
+          </p>
         </div>
       </section>
 
