@@ -7,6 +7,7 @@ export default function Home() {
           position: "relative",
           width: "100%",
           height: "90vh",
+          minHeight: "600px",
           margin: 0,
           padding: 0,
           overflow: "hidden",
@@ -34,31 +35,18 @@ export default function Home() {
         <img
           src="/logo/logo-removebg-white.png"
           alt="La Casa Dell'Arte Logo"
+          className="absolute top-[1px] left-1/2 -translate-x-1/2 z-[3] drop-shadow-lg"
           style={{
-            position: "absolute",
-            top: "1px",
-            left: "50%",
-            transform: "translateX(-50%)",
-            width: "350px",
+            width: "clamp(350px, 50vw, 350px)",
             height: "auto",
-            zIndex: 3,
-            filter: "drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3))",
           }}
         />
 
         {/* Text Content - Centered */}
         <div
+          className="relative z-[2] text-center text-white px-5 flex flex-col items-center justify-center"
           style={{
-            position: "relative",
-            zIndex: 2,
-            textAlign: "center",
-            color: "white",
-            padding: "0 20px",
-            paddingTop: "200px",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
+            paddingTop: "clamp(120px, 25vh, 200px)",
           }}
         >
           {/* Welcome Text */}
@@ -164,7 +152,7 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl w-full">
             <div className="space-y-6 text-center md:text-left">
               <h3
-                className="text-4xl font-semibold text-[var(--color-text)]"
+                className="text-3xl md:text-4xl font-semibold text-[var(--color-text)]"
                 style={{ fontFamily: "'Brittany Signature', cursive" }}
               >
                 Chihuly Garden and Glass
@@ -207,13 +195,13 @@ export default function Home() {
           >
             Our Philosophy
           </h2>
-          <div className="grid md:grid-cols-2 gap-12 max-w-6xl w-full">
+          <div className="grid md:grid-cols-2 gap-12 md:gap-12 gap-y-16 max-w-6xl w-full mt-8">
             {/* Vision */}
             <div
-              className="bg-white p-8 rounded-lg shadow-lg relative"
-              style={{ transform: "translateY(-20px)" }}
+              className="bg-white p-6 md:p-8 rounded-lg shadow-lg relative"
+              style={{ transform: "translateY(0)" }}
             >
-              <div className="w-16 h-16 bg-[var(--color-accent)] rounded-full flex items-center justify-center mb-6 absolute -top-8 left-8 shadow-xl">
+              <div className="w-14 h-14 md:w-16 md:h-16 bg-[var(--color-accent)] rounded-full flex items-center justify-center mb-6 absolute -top-7 md:-top-8 left-6 md:left-8 shadow-xl">
                 <svg
                   className="w-8 h-8 text-white"
                   fill="currentColor"
@@ -223,7 +211,7 @@ export default function Home() {
                 </svg>
               </div>
               <h3
-                className="text-3xl font-bold mb-4 text-[var(--color-text)] mt-6"
+                className="text-2xl md:text-3xl font-bold mb-4 text-[var(--color-text)] mt-6"
                 style={{ fontFamily: "var(--font-display)" }}
               >
                 Our Vision
@@ -242,10 +230,10 @@ export default function Home() {
 
             {/* Mission */}
             <div
-              className="bg-white p-8 rounded-lg shadow-lg relative"
-              style={{ transform: "translateY(20px)" }}
+              className="bg-white p-6 md:p-8 rounded-lg shadow-lg relative"
+              style={{ transform: "translateY(0)" }}
             >
-              <div className="w-16 h-16 bg-[var(--color-gold)] rounded-full flex items-center justify-center mb-6 absolute -top-8 left-8 shadow-xl">
+              <div className="w-14 h-14 md:w-16 md:h-16 bg-[var(--color-gold)] rounded-full flex items-center justify-center mb-6 absolute -top-7 md:-top-8 left-6 md:left-8 shadow-xl">
                 <svg
                   className="w-8 h-8 text-white"
                   fill="currentColor"
@@ -255,7 +243,7 @@ export default function Home() {
                 </svg>
               </div>
               <h3
-                className="text-3xl font-bold mb-4 text-[var(--color-text)] mt-6"
+                className="text-2xl md:text-3xl font-bold mb-4 text-[var(--color-text)] mt-6"
                 style={{ fontFamily: "var(--font-display)" }}
               >
                 Our Mission
@@ -294,7 +282,7 @@ export default function Home() {
                 <div className="space-y-4">
                   <div className="flex items-start space-x-3 justify-center md:justify-start">
                     <svg
-                      className="w-6 h-6 text-[var(--color-accent)] mt-1 flex-shrink-0"
+                      className="hidden md:block w-6 h-6 text-[var(--color-accent)] mt-1 flex-shrink-0"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -312,7 +300,7 @@ export default function Home() {
                         d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                       />
                     </svg>
-                    <div className="text-left">
+                    <div className="text-center md:text-left">
                       <p className="font-medium text-[var(--color-text)]">
                         Address
                       </p>
@@ -324,7 +312,7 @@ export default function Home() {
 
                   <div className="flex items-start space-x-3 justify-center md:justify-start">
                     <svg
-                      className="w-6 h-6 text-[var(--color-accent)] mt-1 flex-shrink-0"
+                      className="hidden md:block w-6 h-6 text-[var(--color-accent)] mt-1 flex-shrink-0"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -336,7 +324,7 @@ export default function Home() {
                         d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                       />
                     </svg>
-                    <div className="text-left">
+                    <div className="text-center md:text-left">
                       <p className="font-medium text-[var(--color-text)]">
                         Phone
                       </p>
@@ -348,7 +336,7 @@ export default function Home() {
 
                   <div className="flex items-start space-x-3 justify-center md:justify-start">
                     <svg
-                      className="w-6 h-6 text-[var(--color-accent)] mt-1 flex-shrink-0"
+                      className="hidden md:block w-6 h-6 text-[var(--color-accent)] mt-1 flex-shrink-0"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -360,7 +348,7 @@ export default function Home() {
                         d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                       />
                     </svg>
-                    <div className="text-left">
+                    <div className="text-center md:text-left">
                       <p className="font-medium text-[var(--color-text)]">
                         Email
                       </p>
