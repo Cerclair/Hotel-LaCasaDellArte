@@ -390,29 +390,18 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Map Placeholder */}
-            <div className="bg-[var(--color-beige-dark)] h-96 rounded-lg shadow-xl flex items-center justify-center">
-              <div className="text-center px-8">
-                <svg
-                  className="w-16 h-16 mx-auto mb-4 text-[var(--color-accent)]"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"
-                  />
-                </svg>
-                <p className="text-[var(--color-gray)] font-medium">
-                  [Interactive Map Placeholder]
-                </p>
-                <p className="text-[var(--color-gray)] text-sm mt-2">
-                  Galle Road, Colombo 03
-                </p>
-              </div>
+            {/* Map */}
+            <div className="h-96 rounded-lg shadow-xl overflow-hidden">
+              <iframe
+                src="https://maps.google.com/maps?width=100%25&amp;height=650&amp;hl=en&amp;q=6.925472638003899,79.84610426437254+(La%20Casa%20DellArte)&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="La Casa DellArte Location"
+              ></iframe>
             </div>
           </div>
         </div>
