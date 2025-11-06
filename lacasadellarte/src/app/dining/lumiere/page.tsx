@@ -11,87 +11,42 @@ export default function LumierePage() {
         <img
           src="/assets/dining&drinks/lumiere/lumiere.png"
           alt="Lumière"
-          style={{ width: '100%', height: '60vh', objectFit: 'cover', display: 'block' }}
+          style={{ width: '100%', height: '60vh', minHeight: '400px', objectFit: 'cover', display: 'block' }}
         />
       </section>
 
       {/* Title Section */}
-      <section style={{
-        background: 'var(--color-beige)',
-        padding: '48px 16px',
-        textAlign: 'center'
-      }}>
-        <h1 style={{
-          fontSize: '48px',
-          fontWeight: 'bold',
-          color: 'var(--color-text)',
-          marginBottom: '16px',
-          fontFamily: 'var(--font-display)'
-        }}>
+      <section className="bg-[var(--color-beige)] py-8 md:py-12 px-4 text-center">
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--color-text)] mb-4" style={{ fontFamily: 'var(--font-display)' }}>
           {restaurant.name}
         </h1>
-        <p style={{
-          fontSize: '20px',
-          color: 'var(--color-accent)',
-          fontWeight: '600'
-        }}>
+        <p className="text-base md:text-lg lg:text-xl text-[var(--color-accent)] font-semibold">
           {restaurant.cuisine}
         </p>
       </section>
 
       {/* About Section */}
-      <section style={{
-        background: 'var(--color-beige-light)',
-        padding: '64px 16px'
-      }}>
-        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-          <h2 style={{
-            fontSize: '36px',
-            fontWeight: 'bold',
-            marginBottom: '24px',
-            color: 'var(--color-text)',
-            textAlign: 'center',
-            fontFamily: 'var(--font-display)'
-          }}>
+      <section className="bg-[var(--color-beige-light)] py-12 md:py-16 px-4">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 text-[var(--color-text)] text-center" style={{ fontFamily: 'var(--font-display)' }}>
             About {restaurant.name}
           </h2>
-          <p style={{
-            fontSize: '18px',
-            color: 'var(--color-gray)',
-            lineHeight: '1.6',
-            textAlign: 'center',
-            marginBottom: '32px'
-          }}>
+          <p className="text-base md:text-lg text-[var(--color-gray)] leading-relaxed text-center mb-8">
             {restaurant.description}
           </p>
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: 'var(--color-text)'
-          }}>
-            <svg style={{ width: '24px', height: '24px', marginRight: '12px', color: 'var(--color-accent)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="flex flex-col md:flex-row items-center justify-center text-[var(--color-text)] gap-2 md:gap-3">
+            <svg className="w-6 h-6 md:w-6 md:h-6 text-[var(--color-accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            <span style={{ fontWeight: '600' }}>{restaurant.openingHours}</span>
+            <span className="font-semibold text-sm md:text-base">{restaurant.openingHours}</span>
           </div>
         </div>
       </section>
 
       {/* Menu Section */}
-      <section style={{
-        background: 'var(--color-beige)',
-        padding: '80px 0'
-      }}>
-        <div style={{ maxWidth: '65rem', margin: '0 auto', padding: '0 1rem' }}>
-          <h2 style={{
-            fontSize: '1.875rem',
-            fontWeight: '700',
-            textAlign: 'center',
-            marginBottom: '3rem',
-            color: 'var(--color-text)',
-            fontFamily: 'var(--font-display)'
-          }}>
+      <section className="bg-[var(--color-beige)] py-12 md:py-20">
+        <div className="max-w-7xl mx-auto px-4">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-8 md:mb-12 text-[var(--color-text)]" style={{ fontFamily: 'var(--font-display)' }}>
             Menu
           </h2>
           <div style={{
@@ -132,120 +87,50 @@ export default function LumierePage() {
       </section>
 
       {/* Ambiance Section */}
-      <section style={{
-        background: 'var(--color-beige-light)',
-        padding: '64px 16px'
-      }}>
-        <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
-          <h2 style={{
-            fontSize: '36px',
-            fontWeight: 'bold',
-            marginBottom: '24px',
-            color: 'var(--color-text)',
-            fontFamily: 'var(--font-display)'
-          }}>
+      <section className="bg-[var(--color-beige-light)] py-12 md:py-16 px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 text-[var(--color-text)]" style={{ fontFamily: 'var(--font-display)' }}>
             Ambiance
           </h2>
-          <p style={{
-            fontSize: '18px',
-            color: 'var(--color-gray)',
-            lineHeight: '1.6'
-          }}>
+          <p className="text-base md:text-lg text-[var(--color-gray)] leading-relaxed">
             {restaurant.ambiance}
           </p>
         </div>
       </section>
 
       {/* Special Note */}
-      <section style={{
-        background: 'var(--color-beige-light)',
-        padding: '48px 16px'
-      }}>
-        <div style={{ maxWidth: '768px', margin: '0 auto' }}>
-          <div style={{
-            background: 'white',
-            padding: '32px',
-            borderRadius: '8px',
-            boxShadow: '0 4px 16px rgba(0,0,0,0.1)',
-            textAlign: 'center'
-          }}>
-            <svg style={{
-              width: '48px',
-              height: '48px',
-              margin: '0 auto 16px',
-              color: 'var(--color-gold)'
-            }} fill="currentColor" viewBox="0 0 20 20">
+      <section className="bg-[var(--color-beige-light)] py-8 md:py-12 px-4">
+        <div className="max-w-3xl mx-auto">
+          <div className="bg-white p-6 md:p-8 rounded-lg shadow-lg text-center">
+            <svg className="w-10 h-10 md:w-12 md:h-12 mx-auto mb-4 text-[var(--color-gold)]" fill="currentColor" viewBox="0 0 20 20">
               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
             </svg>
-            <h3 style={{
-              fontSize: '32px',
-              fontWeight: 'bold',
-              marginBottom: '16px',
-              color: 'var(--color-text)',
-              fontFamily: 'var(--font-display)'
-            }}>
+            <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-4 text-[var(--color-text)]" style={{ fontFamily: 'var(--font-display)' }}>
               Reservations Recommended
             </h3>
-            <p style={{
-              color: 'var(--color-gray)',
-              marginBottom: '24px',
-              fontSize: '16px'
-            }}>
+            <p className="text-sm md:text-base text-[var(--color-gray)] mb-6">
               To ensure the best dining experience, we recommend making reservations in advance.
             </p>
-            <div style={{
-              display: 'flex',
-              gap: '16px',
-              justifyContent: 'center',
-              flexWrap: 'wrap'
-            }}>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="mailto:ladellaarte@gmail.com"
-                style={{
-                  display: 'inline-block',
-                  background: 'var(--color-accent)',
-                  color: 'white',
-                  padding: '12px 32px',
-                  borderRadius: '8px',
-                  fontWeight: '600',
-                  textDecoration: 'none',
-                  transition: 'all 0.3s',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
-                }}
+                className="inline-block bg-[var(--color-accent)] text-white px-6 md:px-8 py-3 rounded-lg font-semibold hover:bg-[var(--color-gold)] transition-all duration-300 shadow-md"
               >
                 Email Us
               </a>
               <a
                 href="tel:+94718530994"
-                style={{
-                  display: 'inline-block',
-                  background: 'white',
-                  border: '2px solid var(--color-accent)',
-                  color: 'var(--color-accent)',
-                  padding: '12px 32px',
-                  borderRadius: '8px',
-                  fontWeight: '600',
-                  textDecoration: 'none',
-                  transition: 'all 0.3s',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
-                }}
+                className="inline-block bg-white border-2 border-[var(--color-accent)] text-[var(--color-accent)] px-6 md:px-8 py-3 rounded-lg font-semibold hover:bg-[var(--color-beige)] transition-all duration-300 shadow-md"
               >
                 Call Us
               </a>
             </div>
-            <div style={{ marginTop: '24px' }}>
+            <div className="mt-6">
               <Link
                 href="/dining"
-                style={{
-                  color: 'var(--color-accent)',
-                  textDecoration: 'none',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  transition: 'color 0.3s',
-                  fontSize: '14px'
-                }}
+                className="text-[var(--color-accent)] hover:text-[var(--color-gold)] inline-flex items-center transition-colors text-sm md:text-base"
               >
-                <svg style={{ width: '16px', height: '16px', marginRight: '8px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                 </svg>
                 Back to All Dining Options

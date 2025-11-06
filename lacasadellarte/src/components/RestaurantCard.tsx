@@ -19,16 +19,16 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
         </div>
 
         {/* Restaurant Details */}
-        <div className="p-6">
-          <h3 className="text-2xl font-bold text-[var(--color-text)] mb-2" style={{ fontFamily: 'var(--font-display)' }}>
+        <div className="p-4 md:p-6">
+          <h3 className="text-xl md:text-2xl font-bold text-[var(--color-text)] mb-2" style={{ fontFamily: 'var(--font-display)' }}>
             {restaurant.name}
           </h3>
 
-          <p className="text-[var(--color-accent)] font-semibold mb-3">
+          <p className="text-sm md:text-base text-[var(--color-accent)] font-semibold mb-3">
             {restaurant.cuisine}
           </p>
 
-          <p className="text-[var(--color-gray)] leading-relaxed mb-4 line-clamp-3">
+          <p className="text-sm md:text-base text-[var(--color-gray)] leading-relaxed mb-4 line-clamp-3">
             {restaurant.description}
           </p>
 
