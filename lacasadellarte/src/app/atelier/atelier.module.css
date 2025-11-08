@@ -114,24 +114,7 @@
   text-align: center;
 }
 
-.textGray {
-  color: var(--color-gray);
-  margin-bottom: 1rem;
-  font-size: 1rem;
-  line-height: 1.6;
-}
 
-@media (min-width: 768px) {
-  .textGray {
-    font-size: 1.125rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .textGray {
-    font-size: 1.25rem;
-  }
-}
 
 .badge {
   display: inline-flex;

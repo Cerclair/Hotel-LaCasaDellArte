@@ -139,31 +139,7 @@
   padding: 0 1rem;
 }
 
-/* Description Section */
-.description {
-  max-width: 48rem;
-  margin: 0 auto;
-  text-align: center;
-}
 
-.description p {
-  font-size: 1rem;
-  color: var(--color-gray);
-  line-height: 1.75;
-  margin-bottom: 1.5rem;
-}
-
-@media (min-width: 768px) {
-  .description p {
-    font-size: 1.125rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .description p {
-    font-size: 1.25rem;
-  }
-}
 
 /* Menu Section (Scrollable) */
 .menuScrollContainer {

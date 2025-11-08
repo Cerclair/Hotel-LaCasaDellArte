@@ -46,7 +46,7 @@ export default function SpaPage() {
       {/* Description Section */}
       <section className={`${styles.section} ${styles.sectionLight}`}>
         <div className={styles.container}>
-          <div className={styles.description}>
+          <div className="text-base md:text-lg text-[var(--color-gray)] leading-relaxed text-center mb-8">
             <p>
               Retreat into serenity at our signature spa — a haven where wellness and artistry unite. Indulge in rejuvenating massages, bespoke facials, and holistic therapies crafted to restore balance and calm. Here, every treatment is a gentle brushstroke of renewal, inviting you to unwind, recharge, and embrace the beauty of stillness.
             </p>
