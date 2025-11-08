@@ -53,7 +53,7 @@ export default function RoomsPage() {
       type: 'standard',
       bedType: 'queen',
       maxGuests: 3,
-      image: '/IMG resources - Rooms/Rooms/Standard Rooms/standard room.png',
+      image: '/assets/rooms/Standard%20Rooms/standard-room.png',
       roomTypeLabel: 'Standard Room',
       title: 'Standard Rooms',
       description: 'A haven of tranquility designed for effortless comfort and serene simplicity.',
@@ -66,7 +66,7 @@ export default function RoomsPage() {
       type: 'deluxe',
       bedType: 'king',
       maxGuests: 4,
-      image: '/IMG resources - Rooms/Rooms/Delux Rooms/deluxe room.png',
+      image: '/assets/rooms/Delux-Rooms/deluxe-room.png',
       roomTypeLabel: 'Deluxe Room',
       title: 'Deluxe Rooms',
       description: 'Step into elevated luxury with spacious, stylish rooms infused with art-inspired décor.',
@@ -79,7 +79,7 @@ export default function RoomsPage() {
       type: 'king-deluxe',
       bedType: 'king-sofa',
       maxGuests: 6,
-      image: '/IMG resources - Rooms/Rooms/King Delux Rooms/king deluxe suite.png',
+      image: '/assets/rooms/King-Delux-Rooms/king-deluxe-suite.png',
       roomTypeLabel: 'King Deluxe Suite',
       title: 'King Deluxe Suites',
       description: 'The pinnacle of our collection embodying grandeur and grace with generous living spaces.',
@@ -99,9 +99,9 @@ export default function RoomsPage() {
 
   // Background images for the hero slider (URL encoded for spaces)
   const heroImages = [
-    '/IMG%20resources%20-%20Rooms/Rooms/King%20Delux%20Rooms/King%20Deluxe%20Suite%20Room%20no1.jpg',
-    '/IMG%20resources%20-%20Rooms/Rooms/King%20Delux%20Rooms/King%20Deluxe%20Suite%20Room%20no2.jpg',
-    '/IMG%20resources%20-%20Rooms/Rooms/King%20Delux%20Rooms/king%20deluxe%20suite.png',
+    '/assets/rooms/King-Delux-Rooms/King-Deluxe-Suite-Room-no1.jpg',
+    '/assets/rooms/King-Delux-Rooms/King-Deluxe-Suite-Room-no2.jpg',
+    '/assets/rooms/King-Delux-Rooms/king-deluxe-suite.png',
   ];
 
   // Auto-slide effect
