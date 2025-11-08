@@ -97,7 +97,7 @@ export const restaurants: Restaurant[] = [
     slug: 'palette-360',
     cuisine: 'International Buffet',
     description: 'Embark on a global culinary journey at Palette 360, where vibrant flavours, live stations, and artful presentations come together in a symphony of taste. A celebration of world cuisine, crafted fresh and served with flair',
-    image: '/assets/dining&drinks/palette360/palette 360.png',
+    image: '/assets/dining&drinks/palette360/palette-360.png',
     ambiance: 'Vibrant and eclectic, with colorful displays and open kitchen concepts that make dining an interactive experience.',
     openingHours: 'Breakfast: 6:30 AM - 10:30 AM | Lunch: 12:00 PM - 3:00 PM | Dinner: 6:00 PM - 10:30 PM'
   },

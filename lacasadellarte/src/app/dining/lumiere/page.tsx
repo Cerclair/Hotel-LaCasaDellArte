@@ -71,7 +71,7 @@ export default function LumierePage() {
                 {[1, 2, 3, 4, 5].map((pageNum) => (
                   <img
                     key={pageNum}
-                    src={`/assets/dining&drinks/lumiere/lumiere menu_${pageNum}.jpg`}
+                    src={`/assets/dining&drinks/lumiere/lumieremenu_${pageNum}.jpg`}
                     alt={`Lumière Menu Page ${pageNum}`}
                     style={{
                       width: '100%',

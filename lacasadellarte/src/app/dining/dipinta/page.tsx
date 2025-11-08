@@ -71,7 +71,7 @@ export default function DipintaPage() {
                 {[1, 2, 3, 4, 5, 6].map((pageNum) => (
                   <img
                     key={pageNum}
-                    src={`/assets/dining&drinks/dipinta/dipinta menu_${pageNum}.jpg`}
+                    src={`/assets/dining&drinks/dipinta/dipintamenu_${pageNum}.jpg`}
                     alt={`Dipinta Menu Page ${pageNum}`}
                     style={{
                       width: '100%',

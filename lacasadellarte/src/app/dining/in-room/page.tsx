@@ -116,7 +116,7 @@ export default function InRoomDiningPage() {
                 {[1, 2].map((pageNum) => (
                   <img
                     key={pageNum}
-                    src={`/assets/dining&drinks/in-room dining/in-room dining menu_${pageNum}.jpg`}
+                    src={`/assets/dining&drinks/in-room-dining/in-room-diningmenu_${pageNum}.jpg`}
                     alt={`In-Room Dining Menu Page ${pageNum}`}
                     style={{
                       width: '100%',

@@ -9,7 +9,7 @@ export default function Palette360Page() {
       {/* Hero Image Section */}
       <section style={{ width: '100%', margin: 0, padding: 0, overflow: 'hidden' }}>
         <img
-          src="/assets/dining&drinks/palette360/palette 360.png"
+          src="/assets/dining&drinks/palette360/palette-360.png"
           alt="Palette 360"
           style={{ width: '100%', height: '60vh', minHeight: '400px', objectFit: 'cover', display: 'block' }}
         />

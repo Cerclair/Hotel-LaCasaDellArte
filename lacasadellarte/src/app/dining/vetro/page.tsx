@@ -116,7 +116,7 @@ export default function VetroPage() {
                 {[1, 2, 3, 4, 5, 6, 7, 8].map((pageNum) => (
                   <img
                     key={pageNum}
-                    src={`/assets/dining&drinks/vetro/vetro menu_${pageNum}.jpg`}
+                    src={`/assets/dining&drinks/vetro/vetromenu_${pageNum}.jpg`}
                     alt={`Vetro Menu Page ${pageNum}`}
                     style={{
                       width: '100%',
