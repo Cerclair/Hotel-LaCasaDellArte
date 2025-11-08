@@ -83,6 +83,7 @@ export default function FacilitiesPage() {
                 width={500}      
                 height={300}      
                 className={styles.image}
+                
               />
             </div>
             <div className={styles.facilityText} style={{ direction: 'ltr' }}>

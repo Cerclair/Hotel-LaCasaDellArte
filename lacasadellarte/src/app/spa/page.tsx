@@ -36,8 +36,8 @@ export default function SpaPage() {
     <div className={styles.page}>
       {/* Hero Section */}
       <section className={styles.hero}>
-        <img src="/assets/spa/spa.png" alt="Spa" className={styles.heroImage} />
-        <div className={styles.heroContent}>
+        <img src="/assets/spa/spa.png" alt="Spa" style={{ width: '100%', height: '60vh', minHeight: '400px', objectFit: 'cover', display: 'block' }} />
+        <div className="bg-[var(--color-beige)] py-8 md:py-12 px-4 text-center">
           <h1 className={styles.heroTitle}>ZEN SPA</h1>
           <p className={styles.heroSubtitle}>
             A sanctuary of serenity where wellness meets artistry

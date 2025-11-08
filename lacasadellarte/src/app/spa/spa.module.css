@@ -54,6 +54,7 @@
   font-weight: 700;
   color: var(--color-text);
   margin-bottom: 0.75rem;
+  font-family: var(--font-display);
 }
 
 @media (min-width: 768px) {
@@ -70,7 +71,6 @@
 }
 
 .heroSubtitle {
-  font-size: 1rem;
   color: var(--color-gray);
 }
 
