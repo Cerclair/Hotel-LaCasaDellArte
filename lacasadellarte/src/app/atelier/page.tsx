@@ -50,11 +50,15 @@ export default function AtelierPage() {
       <section className={`${styles.section} ${styles.sectionLight}`}>
         <div className={styles.container}>
           <div className={styles.textCenter}>
-            <p className="text-base md:text-lg text-[var(--color-gray)] leading-relaxed text-center mb-8">
-              At the heart of La Casa Dell’Arte lies Atelier, a living gallery that celebrates creativity in every form. Showcasing a curated collection of contemporary and classic works from local and international artists, each piece tells a story of culture and imagination.
-
-              Wander through luminous halls where art and architecture meet, and let every brushstroke inspire reflection and wonder. At Atelier, art isn’t just observed — it’s experienced, making every visit a journey through beauty and expression
-
+            <p className={styles.textGray}>
+              The Atelier is more than a gallery—it&apos;s a living, breathing space where art becomes part of the experience.
+              Our curated collection features works from both established and emerging artists, celebrating diverse styles,
+              mediums, and perspectives.
+            </p>
+            <p className={styles.textGray}>
+              As a guest of La Casa Dell&apos;Arte, you have free access to our gallery spaces. Immerse yourself in
+              paintings, sculptures, digital art, and mixed media installations that change seasonally, ensuring
+              each visit offers something new.
             </p>
             <div className={styles.badge}>
               <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

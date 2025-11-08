@@ -16,11 +16,16 @@ export default function SpaPage() {
       {/* Description Section */}
       <section className={`${styles.section} ${styles.sectionLight}`}>
         <div className={styles.container}>
-          <div className="text-base md:text-lg text-[var(--color-gray)] leading-relaxed text-center mb-8">
+          <div className={styles.description}>
             <p>
-              Retreat into serenity at our signature spa — a haven where wellness and artistry unite. Indulge in rejuvenating massages, bespoke facials, and holistic therapies crafted to restore balance and calm. Here, every treatment is a gentle brushstroke of renewal, inviting you to unwind, recharge, and embrace the beauty of stillness.
+              At ZEN Spa, we believe that wellness is an art form. Our expertly trained therapists combine traditional
+              techniques with modern innovations to create personalized experiences that restore balance, rejuvenate
+              the body, and calm the mind.
             </p>
-          
+            <p>
+              Every treatment is designed with intention, using premium, natural products and performed in serene
+              spaces that reflect our artistic ethos. Allow yourself to unwind, refresh, and reconnect with your inner peace.
+            </p>
           </div>
         </div>
       </section>
