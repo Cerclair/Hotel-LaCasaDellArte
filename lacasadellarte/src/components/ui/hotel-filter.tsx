@@ -138,10 +138,11 @@ export function HotelFilter({ onChange }: { onChange?: (filters: FilterState) =>
   }
 
   return (
-  <div className="container mx-auto max-w-6xl px-4 sm:px-8 py-8">
-      <Card className="border-0 shadow-2xl rounded-3xl bg-gradient-to-br from-[var(--color-beige-light)] via-[var(--color-white)] to-[var(--color-beige-dark)] relative">
+    // Full-width section wrapper (previously constrained with container/max-w)
+    <div className="w-full px-4 sm:px-8 py-8">
+      <Card className="border-0 shadow-2xl bg-[var(--color-beige)] relative">
         {/* Gold accent bar */}
-        <div className="absolute top-0 left-0 w-full h-2 bg-[var(--color-gold)] rounded-t-3xl" />
+        <div className="absolute top-0 left-0 w-full h-2 bg-[var(--color-gold)]" />
         <div className="p-10">
           {/* Header */}
           <div className="mb-8 text-center">
@@ -150,7 +151,7 @@ export function HotelFilter({ onChange }: { onChange?: (filters: FilterState) =>
           </div>
 
           {/* Filter Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-10 divide-x-0 lg:divide-x lg:divide-border bg-white/70 rounded-2xl shadow-md p-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-10 divide-x-0 lg:divide-x lg:divide-border bg-[var(--color-beige)] shadow-md p-4">
             {/* Date Range Picker */}
             <div className="lg:col-span-2 relative p-2">
               <label className="block text-xs font-semibold text-foreground/70 uppercase tracking-wider mb-3">
@@ -158,7 +159,7 @@ export function HotelFilter({ onChange }: { onChange?: (filters: FilterState) =>
               </label>
               <button
                 onClick={() => setShowDatePicker(!showDatePicker)}
-                className="w-full px-4 py-3 bg-input border border-border rounded-lg text-left text-sm font-medium text-foreground hover:bg-muted transition-colors flex items-center justify-between"
+                className="w-full px-4 py-3 bg-[var(--color-beige)] border border-border rounded-lg text-left text-sm font-medium text-foreground hover:bg-[var(--color-beige)]/90 transition-colors flex items-center justify-between"
               >
                 <span className="flex items-center gap-2">
                   <Calendar className="w-4 h-4 text-primary" />
@@ -176,7 +177,7 @@ export function HotelFilter({ onChange }: { onChange?: (filters: FilterState) =>
 
               {/* Date Picker Dropdown */}
               {showDatePicker && (
-                <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-border rounded-lg shadow-xl p-6 z-[999]">
+                <div className="absolute top-full left-0 right-0 mt-2 bg-[var(--color-beige)] border border-border rounded-lg shadow-xl p-6 z-[999]">
                   <div className="grid grid-cols-2 gap-6">
                     {/* Current Month */}
                     <div>
@@ -260,7 +261,7 @@ export function HotelFilter({ onChange }: { onChange?: (filters: FilterState) =>
               <select
                 value={filters.roomType}
                 onChange={(e) => setFilters((prev) => ({ ...prev, roomType: e.target.value }))}
-                className="w-full px-4 py-3 bg-input border border-border rounded-lg text-sm font-medium text-foreground appearance-none cursor-pointer hover:bg-muted transition-colors"
+                className="w-full px-4 py-3 bg-[var(--color-beige)] border border-border rounded-lg text-sm font-medium text-foreground appearance-none cursor-pointer hover:bg-[var(--color-beige)]/90 transition-colors"
               >
                 {roomTypes.map((type) => (
                   <option key={type.value} value={type.value}>
@@ -278,7 +279,7 @@ export function HotelFilter({ onChange }: { onChange?: (filters: FilterState) =>
               <select
                 value={filters.bedType}
                 onChange={(e) => setFilters((prev) => ({ ...prev, bedType: e.target.value }))}
-                className="w-full px-4 py-3 bg-input border border-border rounded-lg text-sm font-medium text-foreground appearance-none cursor-pointer hover:bg-muted transition-colors"
+                className="w-full px-4 py-3 bg-[var(--color-beige)] border border-border rounded-lg text-sm font-medium text-foreground appearance-none cursor-pointer hover:bg-[var(--color-beige)]/90 transition-colors"
               >
                 {bedTypes.map((type) => (
                   <option key={type.value} value={type.value}>
@@ -295,7 +296,7 @@ export function HotelFilter({ onChange }: { onChange?: (filters: FilterState) =>
               </label>
               <button
                 onClick={() => setShowGuestPicker(!showGuestPicker)}
-                className="w-full px-4 py-3 bg-input border border-border rounded-lg text-left text-sm font-medium text-foreground hover:bg-muted transition-colors flex items-center justify-between"
+                className="w-full px-4 py-3 bg-[var(--color-beige)] border border-border rounded-lg text-left text-sm font-medium text-foreground hover:bg-[var(--color-beige)]/90 transition-colors flex items-center justify-between"
               >
                 <span className="flex items-center gap-2">
                   <Users className="w-4 h-4 text-primary" />
@@ -309,7 +310,7 @@ export function HotelFilter({ onChange }: { onChange?: (filters: FilterState) =>
 
               {/* Guest Picker Dropdown */}
               {showGuestPicker && (
-                <div className="absolute top-full right-0 mt-2 bg-white border border-border rounded-lg shadow-xl p-4 z-50 w-64">
+                <div className="absolute top-full right-0 mt-2 bg-[var(--color-beige)] border border-border rounded-lg shadow-xl p-4 z-50 w-64">
                   <div className="space-y-4">
                     {/* Adults */}
                     <div className="flex items-center justify-between">
