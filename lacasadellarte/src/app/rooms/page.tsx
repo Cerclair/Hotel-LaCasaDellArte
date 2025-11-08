@@ -245,6 +245,8 @@ export default function RoomsPage() {
 
   {/* Rooms Showcase Section */}
   <section id="rooms-showcase" className="container mx-auto px-4 mt-12 py-16">
+    {/* Separator between filter and room cards */}
+    <div className="mt-8 mb-12 h-1 w-full bg-[var(--color-gold)] rounded-full" />
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-[var(--color-text)] mb-4" style={{ fontFamily: 'var(--font-display)' }}>
             Our Room Collection
