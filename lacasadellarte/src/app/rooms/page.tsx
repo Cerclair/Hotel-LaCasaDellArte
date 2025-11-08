@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { CarouselIndicators } from '@/components/ui/carousel-indicators';
 import { HotelFilter } from '@/components/ui/hotel-filter';
 import type { FilterState } from '@/components/ui/hotel-filter';
@@ -110,12 +111,16 @@ export default function RoomsPage() {
               className={`absolute inset-0 transition-opacity duration-1000 ${
                 index === currentSlide ? 'opacity-100' : 'opacity-0'
               }`}
-              style={{
-                backgroundImage: `url(${img})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-              }}
-            />
+            >
+              <Image
+                src={img}
+                alt="Luxury room showcase"
+                fill
+                priority={index === 0}
+                sizes="100vw"
+                className="object-cover"
+              />
+            </div>
           ))}
         </div>
 
