@@ -88,7 +88,7 @@ export default function HotelRoomCard({
             <p className="text-xs text-gray-500 font-medium">Per Night</p>
             <p className="text-2xl font-bold" style={{ color: "#D4AF37" }}>
               {currency}
-              {price}
+              {price.toLocaleString('en-US')}
             </p>
           </div>
         </div>
