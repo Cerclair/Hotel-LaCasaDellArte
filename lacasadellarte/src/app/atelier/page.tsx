@@ -38,9 +38,7 @@ export default function AtelierPage() {
   {/* Text block below the image */}
   <div className="bg-[var(--color-beige)] py-8 md:py-12 px-4 text-center">
     <h1 className={styles.heroTitle}>Atelier - Art Gallery</h1>
-    <p className={styles.heroText}>
-      Where contemporary and classic art converge in a celebration of human creativity
-    </p>
+    
   </div>
 </section>
 
@@ -51,14 +49,10 @@ export default function AtelierPage() {
         <div className={styles.container}>
           <div className={styles.textCenter}>
             <p className={styles.textGray}>
-              The Atelier is more than a gallery—it&apos;s a living, breathing space where art becomes part of the experience.
-              Our curated collection features works from both established and emerging artists, celebrating diverse styles,
-              mediums, and perspectives.
-            </p>
-            <p className={styles.textGray}>
-              As a guest of La Casa Dell&apos;Arte, you have free access to our gallery spaces. Immerse yourself in
-              paintings, sculptures, digital art, and mixed media installations that change seasonally, ensuring
-              each visit offers something new.
+              At the heart of La Casa Dell’Arte lies Atelier, a living gallery that celebrates creativity in every form. Showcasing a curated collection of contemporary and classic works from local and international artists, each piece tells a story of culture and imagination.
+
+              Wander through luminous halls where art and architecture meet, and let every brushstroke inspire reflection and wonder. At Atelier, art isn’t just observed — it’s experienced, making every visit a journey through beauty and expression
+
             </p>
             <div className={styles.badge}>
               <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

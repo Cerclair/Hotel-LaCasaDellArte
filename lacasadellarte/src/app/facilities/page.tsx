@@ -5,52 +5,46 @@ export default function FacilitiesPage() {
   const facilities = [
     {
       id: 'galleria',
-      name: 'The Galleria',
+      name: 'Event',
       subtitle: 'Events & Celebrations',
       description:
-        "An elegant event space designed for life's most memorable moments. The Galleria combines artistic grandeur with modern functionality, making it perfect for weddings, galas, corporate events, and private celebrations.",
+        "Transform your celebrations into timeless masterpieces at The Galleria. Designed with modern artistry and flexible layouts, these elegant halls are ideal for weddings, galas, and corporate events alike. From intimate gatherings to grand occasions, every detail is curated to reflect sophistication, creativity, and unforgettable moments.",
       imageUrl: '/assets/facilities/event halls.png',
       features: [
         'Capacity for up to 300 guests',
         'State-of-the-art audio-visual equipment',
         'Customizable lighting and décor',
         'Dedicated event planning team',
-        'Catering services from our award-winning restaurants',
-        'Gallery-style ambiance with rotating art displays',
       ],
       imagePosition: 'left',
     },
     {
       id: 'studio',
-      name: 'The Studio',
+      name: 'Gym',
       subtitle: 'Fitness & Wellness',
       description:
-        'A modern fitness center where wellness meets inspiration. The Studio features top-of-the-line equipment, personal training services, and a motivating environment that encourages guests to maintain their fitness routines while away from home.',
+        'Stay active and inspired at The Studio, our fully equipped fitness centre designed for both movement and mindfulness. With state-of-the-art equipment, serene interiors, and panoramic views, it’s a sanctuary where wellness meets creativity. Whether it’s a morning cardio session or evening yoga, every workout here feels like a work of art.',
       imageUrl: '/assets/facilities/gym.png',
       features: [
         'Cardio machines with entertainment systems',
         'Free weights and strength training equipment',
         'Yoga and stretching area',
         'Personal training sessions available',
-        'Complimentary workout towels and water',
-        '24/7 access for hotel guests',
       ],
       imagePosition: 'right',
     },
     {
       id: 'azure',
-      name: 'Azure',
+      name: 'Pool',
       subtitle: 'Outdoor Pool',
       description:
-        'A serene outdoor oasis inspired by the colors of the sky and sea. Azure features a beautifully designed pool surrounded by artistic touches, comfortable loungers, and lush landscaping that creates a private retreat within the city.',
+        'Step into serenity at Azure, our shimmering outdoor pool. Framed by tranquil surroundings and soft, artistic touches, it’s the perfect retreat to unwind under the sun or cool off after a day of exploration. Enjoy refreshing beverages poolside or simply float your cares away in a setting that blends elegance and calm.',
       imageUrl: '/assets/facilities/pool.png',
       features: [
         'Heated infinity pool',
         'Poolside bar service',
         'Private cabanas (reservation required)',
         'Sun loungers with umbrellas',
-        'Towel service',
-        'Open from 7:00 AM to 10:00 PM',
       ],
       imagePosition: 'left',
     },
@@ -61,7 +55,7 @@ export default function FacilitiesPage() {
       {/* Hero */}
       <section className={styles.facilitiesHero}>
         <h1>Other Facilities</h1>
-        <p>Discover our world-class amenities designed to enhance your stay</p>
+        {/*<p>Discover our world-class amenities designed to enhance your stay</p>*/}
       </section>
 
       {/* Facilities */}

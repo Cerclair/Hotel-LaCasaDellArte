@@ -39,9 +39,7 @@ export default function SpaPage() {
         <img src="/assets/spa/spa.png" alt="Spa" style={{ width: '100%', height: '60vh', minHeight: '400px', objectFit: 'cover', display: 'block' }} />
         <div className="bg-[var(--color-beige)] py-8 md:py-12 px-4 text-center">
           <h1 className={styles.heroTitle}>ZEN SPA</h1>
-          <p className={styles.heroSubtitle}>
-            A sanctuary of serenity where wellness meets artistry
-          </p>
+          
         </div>
       </section>
 
@@ -50,14 +48,9 @@ export default function SpaPage() {
         <div className={styles.container}>
           <div className={styles.description}>
             <p>
-              At ZEN Spa, we believe that wellness is an art form. Our expertly trained therapists combine traditional
-              techniques with modern innovations to create personalized experiences that restore balance, rejuvenate
-              the body, and calm the mind.
+              Retreat into serenity at our signature spa — a haven where wellness and artistry unite. Indulge in rejuvenating massages, bespoke facials, and holistic therapies crafted to restore balance and calm. Here, every treatment is a gentle brushstroke of renewal, inviting you to unwind, recharge, and embrace the beauty of stillness.
             </p>
-            <p>
-              Every treatment is designed with intention, using premium, natural products and performed in serene
-              spaces that reflect our artistic ethos. Allow yourself to unwind, refresh, and reconnect with your inner peace.
-            </p>
+          
           </div>
         </div>
       </section>
