@@ -8,7 +8,6 @@ import HotelRoomCard from '@/components/room/hotel-room-card';
 
 export default function RoomsPage() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isScrolled, setIsScrolled] = useState(false);
   const [activeFilters, setActiveFilters] = useState<FilterState>({
     dateRange: { checkIn: null, checkOut: null },
     roomType: 'all',
@@ -95,14 +94,7 @@ export default function RoomsPage() {
     return () => clearInterval(timer);
   }, [heroImages.length]);
 
-  // Parallax scroll effect
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  // Removed unused isScrolled scroll listener (was not referenced in UI)
 
 
   return (
@@ -187,19 +179,13 @@ export default function RoomsPage() {
                 {/* Spacer for extra gap before buttons */}
                 <div className="h-4"></div>
 
-                {/* CTA Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4 opacity-0 animate-fade-in-delay-1200 mb-6">
+                {/* Single Centered CTA Button */}
+                <div className="flex justify-center opacity-0 animate-fade-in-delay-1200 mb-6">
                   <a
                     href="#rooms-showcase"
-                    className="inline-block bg-[var(--color-gold)] text-white px-8 py-3 sm:px-10 sm:py-4 rounded-sm font-semibold hover:bg-[var(--color-gold)]/90 transition-all duration-300 transform hover:scale-105 shadow-2xl uppercase tracking-wider text-sm"
+                    className="inline-block bg-[var(--color-gold)] text-white px-10 py-4 rounded-sm font-semibold hover:bg-[var(--color-gold)]/90 transition-all duration-300 transform hover:scale-105 shadow-2xl uppercase tracking-wider text-sm"
                   >
                     Explore Our Rooms
-                  </a>
-                  <a
-                    href="/booking"
-                    className="inline-block bg-transparent border-2 border-white text-white px-8 py-3 sm:px-10 sm:py-4 rounded-sm font-semibold hover:bg-white hover:text-[var(--color-text)] transition-all duration-300 uppercase tracking-wider text-sm"
-                  >
-                    Book Now
                   </a>
                 </div>
                 {/* Scroll Indicator - centered at bottom inside blurred box */}
