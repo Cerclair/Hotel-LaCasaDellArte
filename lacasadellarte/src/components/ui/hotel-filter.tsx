@@ -151,7 +151,7 @@ export function HotelFilter({ onChange }: { onChange?: (filters: FilterState) =>
           </div>
 
           {/* Filter Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-10 divide-x-0 lg:divide-x lg:divide-border bg-[var(--color-beige)] shadow-md p-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-10 divide-x-0 lg:divide-x lg:divide-border bg-[var(--color-beige)] shadow-md p-4 border-2 border-[var(--color-gold)]">
             {/* Date Range Picker */}
             <div className="lg:col-span-2 relative p-2">
               <label className="block text-xs font-semibold text-foreground/70 uppercase tracking-wider mb-3">
