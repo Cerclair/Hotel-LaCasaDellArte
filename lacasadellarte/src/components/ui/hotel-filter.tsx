@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { Calendar, Users, Building2, BedDouble } from "lucide-react"
+import { StylishSelect } from "@/components/ui/stylish-select"
 import { Card } from "@/components/ui/card"
 
 export interface DateRange {
@@ -280,52 +281,27 @@ export function HotelFilter({ onChange }: { onChange?: (filters: FilterState) =>
             </div>
 
             {/* Room Type */}
-            <div className="p-2 group">
-              <label className="text-xs font-semibold text-foreground/70 uppercase tracking-wider mb-3 transition-colors duration-200 group-hover:text-[#8B7355] group-focus-within:text-[#8B7355]">
-                Room Type
-              </label>
-              <div className="relative group/select">
-                <Building2 className="w-4 h-4 text-[#8B7355] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none transition-all duration-300 group-hover/select:scale-110 group-focus-within/select:scale-110 z-10" />
-                {/* Chevron Indicator */}
-                <svg aria-hidden="true" className="w-4 h-4 text-[#8B7355] absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none transition-transform duration-300 group-hover/select:translate-y-[2px] z-10" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M6 8l4 4 4-4" />
-                </svg>
-                <select
-                  value={filters.roomType}
-                  onChange={(e) => setFilters((prev) => ({ ...prev, roomType: e.target.value }))}
-                  className="w-full pl-10 pr-10 py-3 rounded-xl text-sm font-medium text-foreground cursor-pointer appearance-none transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[var(--color-gold)] bg-gradient-to-r from-[var(--color-beige-light)] to-[var(--color-beige)] shadow-[inset_0_1px_0_rgba(255,255,255,0.6),0_1px_2px_rgba(0,0,0,0.06)] border border-[var(--color-beige)] hover:shadow-md hover:border-[var(--color-gold)] group-hover/select:border-[var(--color-gold)]"
-                >
-                  {roomTypes.map((type) => (
-                    <option key={type.value} value={type.value}>
-                      {type.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
+            <div className="p-2">
+              <StylishSelect
+                label="Room Type"
+                value={filters.roomType}
+                onChange={(value) => setFilters((prev) => ({ ...prev, roomType: value }))}
+                options={roomTypes}
+                placeholder="All Rooms"
+                icon={Building2}
+              />
             </div>
 
             {/* Bed Type */}
-            <div className="p-2 group">
-              <label className="text-xs font-semibold text-foreground/70 uppercase tracking-wider mb-3 transition-colors duration-200 group-hover:text-[#8B7355] group-focus-within:text-[#8B7355]">
-                Bed Type
-              </label>
-              <div className="relative group/select">
-                <BedDouble className="w-4 h-4 text-[#8B7355] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none transition-all duration-300 group-hover/select:scale-110 group-focus-within/select:scale-110 z-10" />
-                <svg aria-hidden="true" className="w-4 h-4 text-[#8B7355] absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none transition-transform duration-300 group-hover/select:translate-y-[2px] z-10" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M6 8l4 4 4-4" />
-                </svg>
-                <select
-                  value={filters.bedType}
-                  onChange={(e) => setFilters((prev) => ({ ...prev, bedType: e.target.value }))}
-                  className="w-full pl-10 pr-10 py-3 rounded-xl text-sm font-medium text-foreground cursor-pointer appearance-none transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[var(--color-gold)] bg-gradient-to-r from-[var(--color-beige-light)] to-[var(--color-beige)] shadow-[inset_0_1px_0_rgba(255,255,255,0.6),0_1px_2px_rgba(0,0,0,0.06)] border border-[var(--color-beige)] hover:shadow-md hover:border-[var(--color-gold)] group-hover/select:border-[var(--color-gold)]"
-                >
-                  {bedTypes.map((type) => (
-                    <option key={type.value} value={type.value}>
-                      {type.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
+            <div className="p-2">
+              <StylishSelect
+                label="Bed Type"
+                value={filters.bedType}
+                onChange={(value) => setFilters((prev) => ({ ...prev, bedType: value }))}
+                options={bedTypes}
+                placeholder="All Beds"
+                icon={BedDouble}
+              />
             </div>
 
             {/* Guest Selector */}
