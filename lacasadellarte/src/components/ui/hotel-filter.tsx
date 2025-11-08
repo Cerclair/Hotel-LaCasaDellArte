@@ -279,11 +279,11 @@ export function HotelFilter({ onChange }: { onChange?: (filters: FilterState) =>
                 Room Type
               </label>
               <div className="relative">
-                <Building2 className="w-4 h-4 text-primary absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none transition-transform duration-200 group-hover:scale-110 group-focus-within:scale-110" />
+                <Building2 className="w-4 h-4 text-primary absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none transition-transform duration-200 group-hover:scale-110 group-focus-within:scale-110 z-10" />
                 <select
                   value={filters.roomType}
                   onChange={(e) => setFilters((prev) => ({ ...prev, roomType: e.target.value }))}
-                  className="w-full pl-10 pr-4 py-3 bg-[var(--color-beige)] border border-border rounded-lg text-sm font-medium text-foreground appearance-none cursor-pointer hover:bg-[var(--color-beige)]/90 transition-all duration-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-gold)] group-hover:shadow group-hover:-translate-y-[1px]"
+                  className="w-full pl-10 pr-4 py-3 bg-[var(--color-beige)] border border-border rounded-lg text-sm font-medium text-foreground appearance-none cursor-pointer hover:bg-[var(--color-beige)]/90 transition-all duration-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-gold)] group-hover:shadow"
                 >
                   {roomTypes.map((type) => (
                     <option key={type.value} value={type.value}>
@@ -300,11 +300,11 @@ export function HotelFilter({ onChange }: { onChange?: (filters: FilterState) =>
                 Bed Type
               </label>
               <div className="relative">
-                <BedDouble className="w-4 h-4 text-primary absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none transition-transform duration-200 group-hover:scale-110 group-focus-within:scale-110" />
+                <BedDouble className="w-4 h-4 text-primary absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none transition-transform duration-200 group-hover:scale-110 group-focus-within:scale-110 z-10" />
                 <select
                   value={filters.bedType}
                   onChange={(e) => setFilters((prev) => ({ ...prev, bedType: e.target.value }))}
-                  className="w-full pl-10 pr-4 py-3 bg-[var(--color-beige)] border border-border rounded-lg text-sm font-medium text-foreground appearance-none cursor-pointer hover:bg-[var(--color-beige)]/90 transition-all duration-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-gold)] group-hover:shadow group-hover:-translate-y-[1px]"
+                  className="w-full pl-10 pr-4 py-3 bg-[var(--color-beige)] border border-border rounded-lg text-sm font-medium text-foreground appearance-none cursor-pointer hover:bg-[var(--color-beige)]/90 transition-all duration-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-gold)] group-hover:shadow"
                 >
                   {bedTypes.map((type) => (
                     <option key={type.value} value={type.value}>
