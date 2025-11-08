@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Calendar, Users } from "lucide-react"
+import { Calendar, Users, Building2, BedDouble } from "lucide-react"
 import { Card } from "@/components/ui/card"
 
 export interface DateRange {
@@ -275,38 +275,44 @@ export function HotelFilter({ onChange }: { onChange?: (filters: FilterState) =>
 
             {/* Room Type */}
             <div className="p-2">
-              <label className="block text-xs font-semibold text-foreground/70 uppercase tracking-wider mb-3">
+              <label className="text-xs font-semibold text-foreground/70 uppercase tracking-wider mb-3">
                 Room Type
               </label>
-              <select
-                value={filters.roomType}
-                onChange={(e) => setFilters((prev) => ({ ...prev, roomType: e.target.value }))}
-                className="w-full px-4 py-3 bg-[var(--color-beige)] border border-border rounded-lg text-sm font-medium text-foreground appearance-none cursor-pointer hover:bg-[var(--color-beige)]/90 transition-colors"
-              >
-                {roomTypes.map((type) => (
-                  <option key={type.value} value={type.value}>
-                    {type.label}
-                  </option>
-                ))}
-              </select>
+              <div className="relative">
+                <Building2 className="w-4 h-4 text-primary absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <select
+                  value={filters.roomType}
+                  onChange={(e) => setFilters((prev) => ({ ...prev, roomType: e.target.value }))}
+                  className="w-full pl-10 pr-4 py-3 bg-[var(--color-beige)] border border-border rounded-lg text-sm font-medium text-foreground appearance-none cursor-pointer hover:bg-[var(--color-beige)]/90 transition-colors"
+                >
+                  {roomTypes.map((type) => (
+                    <option key={type.value} value={type.value}>
+                      {type.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
 
             {/* Bed Type */}
             <div className="p-2">
-              <label className="block text-xs font-semibold text-foreground/70 uppercase tracking-wider mb-3">
+              <label className="text-xs font-semibold text-foreground/70 uppercase tracking-wider mb-3">
                 Bed Type
               </label>
-              <select
-                value={filters.bedType}
-                onChange={(e) => setFilters((prev) => ({ ...prev, bedType: e.target.value }))}
-                className="w-full px-4 py-3 bg-[var(--color-beige)] border border-border rounded-lg text-sm font-medium text-foreground appearance-none cursor-pointer hover:bg-[var(--color-beige)]/90 transition-colors"
-              >
-                {bedTypes.map((type) => (
-                  <option key={type.value} value={type.value}>
-                    {type.label}
-                  </option>
-                ))}
-              </select>
+              <div className="relative">
+                <BedDouble className="w-4 h-4 text-primary absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <select
+                  value={filters.bedType}
+                  onChange={(e) => setFilters((prev) => ({ ...prev, bedType: e.target.value }))}
+                  className="w-full pl-10 pr-4 py-3 bg-[var(--color-beige)] border border-border rounded-lg text-sm font-medium text-foreground appearance-none cursor-pointer hover:bg-[var(--color-beige)]/90 transition-colors"
+                >
+                  {bedTypes.map((type) => (
+                    <option key={type.value} value={type.value}>
+                      {type.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
 
             {/* Guest Selector */}
