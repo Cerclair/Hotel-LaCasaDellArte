@@ -1,2 +1,4 @@
 .claude/
 context/
+config.bat
+node_modules

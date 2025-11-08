@@ -149,6 +149,14 @@ export function HotelFilter({ onChange }: { onChange?: (filters: FilterState) =>
     setShowGuestPicker(false)
   }
 
+  const isDefaultFilters =
+    filters.roomType === "all" &&
+    filters.bedType === "all" &&
+    !filters.dateRange.checkIn &&
+    !filters.dateRange.checkOut &&
+    filters.guests.adults === 1 &&
+    filters.guests.children === 0
+
   return (
     // Full-width section wrapper (previously constrained with container/max-w)
     <div className="w-full px-4 sm:px-8 py-8">
@@ -408,15 +416,17 @@ export function HotelFilter({ onChange }: { onChange?: (filters: FilterState) =>
           </div>
 
           {/* Reset Filters */}
-          <div className="flex justify-end mb-4">
-            <button
-              type="button"
-              onClick={handleResetFilters}
-              className="w-full md:w-auto px-6 py-3 border border-[var(--color-gold)] rounded-lg font-semibold text-[var(--color-text)] hover:bg-[var(--color-gold)]/10 hover:shadow-md transition-colors"
-            >
-              Reset Filters
-            </button>
-          </div>
+          {!isDefaultFilters && (
+            <div className="flex justify-center mb-4">
+              <button
+                type="button"
+                onClick={handleResetFilters}
+                className="px-8 py-3 border border-[var(--color-gold)] rounded-lg font-semibold text-[var(--color-text)] hover:bg-[var(--color-gold)]/10 hover:shadow-md transition-colors"
+              >
+                Reset Filters
+              </button>
+            </div>
+          )}
 
 
           {/* Filter Summary */}
