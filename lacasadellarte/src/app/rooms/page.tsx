@@ -268,7 +268,7 @@ export default function RoomsPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-12 lg:gap-16">
           {filteredRooms.length > 0 ? (
             filteredRooms.map((room) => (
               <HotelRoomCard
