@@ -33,12 +33,25 @@ export function StylishSelect({
   className,
   panelClassName,
 }: StylishSelectProps) {
+  // NOTE: We intentionally allow focus to leave the trigger after selection for fluid page scrolling.
+  // This slightly reduces keyboard continuity (user must tab again to re-enter) but matches requested UX.
+
   return (
     <div className={clsx("flex flex-col gap-3 group", className)}>
       <label className="text-xs font-semibold text-foreground/70 uppercase tracking-wider transition-colors duration-200 group-hover:text-[#8B7355] group-focus-within:text-[#8B7355]">
         {label}
       </label>
-      <Select.Root value={value} onValueChange={onChange}>
+      <Select.Root
+        value={value}
+        onValueChange={(val) => {
+          onChange(val)
+          // Blur after selection to avoid keeping focus (requested fluid scroll behavior)
+          setTimeout(() => {
+            const active = document.activeElement as HTMLElement | null
+            if (active && active.blur) active.blur()
+          }, 0)
+        }}
+      >
         <div className="relative group/select">
           <Select.Trigger
             className={clsx(
@@ -65,7 +78,7 @@ export function StylishSelect({
             position="popper"
             sideOffset={6}
             className={clsx(
-              "z-[1000] rounded-xl overflow-hidden",
+              "z-[1000] rounded-xl overflow-hidden pointer-events-none",
               "bg-gradient-to-br from-[var(--color-beige)] to-[var(--color-beige-light)]",
               "border border-[var(--color-gold)] shadow-2xl",
               // Subtle open/close animation using opacity + scale with data-state
@@ -74,9 +87,17 @@ export function StylishSelect({
               "max-h-[18rem] w-[var(--radix-select-trigger-width)]",
               panelClassName
             )}
+            // If viewport cannot scroll, bubble wheel to page to avoid feeling stuck
+            onWheel={(e) => {
+              const viewport = (e.currentTarget.querySelector('[data-radix-select-viewport]') as HTMLElement | null)
+              if (viewport && viewport.scrollHeight <= viewport.clientHeight) {
+                // Allow page scroll
+                window.scrollBy({ top: e.deltaY, behavior: 'auto' })
+              }
+            }}
           >
-            <Select.ScrollUpButton className="flex items-center justify-center py-1 bg-[var(--color-beige-light)] text-[#8B7355] text-xs">▲</Select.ScrollUpButton>
-            <Select.Viewport className="p-1">
+            <Select.ScrollUpButton className="pointer-events-auto flex items-center justify-center py-1 bg-[var(--color-beige-light)] text-[#8B7355] text-xs">▲</Select.ScrollUpButton>
+            <Select.Viewport className="pointer-events-auto p-1">
               {options.map((opt) => (
                 <Select.Item
                   key={opt.value}
@@ -105,7 +126,7 @@ export function StylishSelect({
                 </Select.Item>
               ))}
             </Select.Viewport>
-            <Select.ScrollDownButton className="flex items-center justify-center py-1 bg-[var(--color-beige-light)] text-[#8B7355] text-xs">▼</Select.ScrollDownButton>
+            <Select.ScrollDownButton className="pointer-events-auto flex items-center justify-center py-1 bg-[var(--color-beige-light)] text-[#8B7355] text-xs">▼</Select.ScrollDownButton>
           </Select.Content>
         </Select.Portal>
       </Select.Root>
