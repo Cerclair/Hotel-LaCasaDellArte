@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, Suspense } from 'react';
+import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 
 function BookingContent() {
@@ -26,6 +27,7 @@ function BookingContent() {
   const price = Number(searchParams.get('price')) || 0;
   const adults = Number(searchParams.get('adults')) || 2;
   const children = Number(searchParams.get('children')) || 0;
+  const roomImage = searchParams.get('image') || '';
   const checkIn = searchParams.get('checkIn') ? new Date(searchParams.get('checkIn')!) : new Date();
   const checkOut = searchParams.get('checkOut') ? new Date(searchParams.get('checkOut')!) : new Date();
 
@@ -258,6 +260,17 @@ function BookingContent() {
               <h2 className="text-2xl font-bold mb-6 text-[var(--color-text)]" style={{ fontFamily: 'var(--font-display)' }}>
                 Booking Summary
               </h2>
+              {roomImage && (
+                <div className="mb-4">
+                  <Image
+                    src={roomImage}
+                    alt={roomName || 'Selected room'}
+                    width={420}
+                    height={220}
+                    className="w-full h-44 object-cover rounded-md"
+                  />
+                </div>
+              )}
 
               <div className="space-y-4 mb-6">
                 <div>
@@ -322,6 +335,7 @@ function BookingContent() {
                   See our full terms and conditions for details.
                 </p>
               </div>
+              
             </div>
           </div>
         </div>

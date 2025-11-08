@@ -9,6 +9,7 @@ import { CarouselIndicators } from '@/components/ui/carousel-indicators';
 import { HotelFilter } from '@/components/ui/hotel-filter';
 import type { FilterState } from '@/components/ui/hotel-filter';
 import HotelRoomCard from '@/components/room/hotel-room-card';
+import { useRouter } from 'next/navigation';
 import {
   Car,
   Wifi,
@@ -96,6 +97,28 @@ export default function RoomsPage() {
     const byGuests = totalGuestsRequested <= room.maxGuests;
     return byType && byBed && byGuests;
   });
+
+  const router = useRouter();
+
+  const handleBook = (room: Room) => {
+    const params = new URLSearchParams();
+    params.set('roomName', room.title);
+    params.set('roomType', room.roomTypeLabel);
+    params.set('price', String(room.price));
+    // include image path so booking summary can show the selected image
+    params.set('image', room.image);
+    params.set('adults', String(activeFilters.guests.adults));
+    params.set('children', String(activeFilters.guests.children));
+    if (activeFilters.dateRange.checkIn) {
+      params.set('checkIn', activeFilters.dateRange.checkIn.toISOString());
+    }
+    if (activeFilters.dateRange.checkOut) {
+      params.set('checkOut', activeFilters.dateRange.checkOut.toISOString());
+    }
+
+    const url = `/booking?${params.toString()}`;
+    router.push(url);
+  };
 
   // Background images for the hero slider (URL encoded for spaces)
   const heroImages = [
@@ -257,7 +280,7 @@ export default function RoomsPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-12 lg:gap-16">
-          {filteredRooms.length > 0 ? (
+            {filteredRooms.length > 0 ? (
             filteredRooms.map((room) => (
               <HotelRoomCard
                 key={room.id}
@@ -270,7 +293,7 @@ export default function RoomsPage() {
                 amenities={room.amenities}
                 guests={room.maxGuests}
                 size={room.guestsLabel}
-                onBook={() => (window.location.href = '/booking')}
+                onBook={() => handleBook(room)}
               />
             ))
           ) : (
