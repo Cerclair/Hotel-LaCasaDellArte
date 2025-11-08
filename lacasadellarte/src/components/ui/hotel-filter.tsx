@@ -136,6 +136,19 @@ export function HotelFilter({ onChange }: { onChange?: (filters: FilterState) =>
     )
   }
 
+  const handleResetFilters = () => {
+    const defaults: FilterState = {
+      dateRange: { checkIn: null, checkOut: null },
+      roomType: "all",
+      bedType: "all",
+      guests: { adults: 1, children: 0 },
+    }
+    setFilters(defaults)
+    setActiveCalendar("checkIn")
+    setShowDatePicker(false)
+    setShowGuestPicker(false)
+  }
+
   return (
     // Full-width section wrapper (previously constrained with container/max-w)
     <div className="w-full px-4 sm:px-8 py-8">
@@ -150,7 +163,7 @@ export function HotelFilter({ onChange }: { onChange?: (filters: FilterState) =>
           </div>
 
           {/* Filter Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-10 divide-x-0 lg:divide-x lg:divide-border bg-[var(--color-beige)] shadow-md p-4 border-2 border-[var(--color-gold)]">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-6 divide-x-0 lg:divide-x lg:divide-border bg-[var(--color-beige)] shadow-md p-4 border-2 border-[var(--color-gold)]">
             {/* Date Range Picker */}
             <div className="lg:col-span-2 relative p-2">
               <label className="block text-xs font-semibold text-foreground/70 uppercase tracking-wider mb-3">
@@ -392,6 +405,17 @@ export function HotelFilter({ onChange }: { onChange?: (filters: FilterState) =>
                 </div>
               )}
             </div>
+          </div>
+
+          {/* Reset Filters */}
+          <div className="flex justify-end mb-4">
+            <button
+              type="button"
+              onClick={handleResetFilters}
+              className="w-full md:w-auto px-6 py-3 border border-[var(--color-gold)] rounded-lg font-semibold text-[var(--color-text)] hover:bg-[var(--color-gold)]/10 hover:shadow-md transition-colors"
+            >
+              Reset Filters
+            </button>
           </div>
 
 
