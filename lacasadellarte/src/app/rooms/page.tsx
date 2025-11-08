@@ -2,6 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+// Tiny transparent PNG as a lightweight blurDataURL placeholder for the first hero slide
+const HERO_BLUR_DATA_URL =
+  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/xcAAn8B9l2nC0QAAAAASUVORK5CYII=';
 import { CarouselIndicators } from '@/components/ui/carousel-indicators';
 import { HotelFilter } from '@/components/ui/hotel-filter';
 import type { FilterState } from '@/components/ui/hotel-filter';
@@ -119,6 +122,8 @@ export default function RoomsPage() {
                 priority={index === 0}
                 sizes="100vw"
                 className="object-cover"
+                placeholder={index === 0 ? 'blur' : 'empty'}
+                blurDataURL={index === 0 ? HERO_BLUR_DATA_URL : undefined}
               />
             </div>
           ))}
