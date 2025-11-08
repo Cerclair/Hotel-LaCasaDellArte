@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { SmoothScrollHero } from '@/components/ui/modern-hero';
 import { CarouselIndicators } from '@/components/ui/carousel-indicators';
 import { HotelFilter } from '@/components/ui/hotel-filter';
 import type { FilterState } from '@/components/ui/hotel-filter';
@@ -10,7 +9,6 @@ import HotelRoomCard from '@/components/room/hotel-room-card';
 export default function RoomsPage() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [useModernHero, setUseModernHero] = useState(false); // Toggle between hero versions
   const [activeFilters, setActiveFilters] = useState<FilterState>({
     dateRange: { checkIn: null, checkOut: null },
     roomType: 'all',
@@ -106,31 +104,9 @@ export default function RoomsPage() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // If modern hero is enabled, render it
-  if (useModernHero) {
-    return (
-      <div className="relative">
-        {/* Toggle Button */}
-        <button
-          onClick={() => setUseModernHero(false)}
-          className="fixed top-20 right-4 z-[var(--z-modal)] bg-[var(--color-gold)] text-white px-4 py-2 rounded-lg shadow-lg hover:bg-[var(--color-accent)] transition-colors text-sm font-semibold"
-        >
-          Switch to Classic Hero
-        </button>
-        <SmoothScrollHero />
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-[var(--color-beige)] pb-20">
-      {/* Toggle Button */}
-      <button
-        onClick={() => setUseModernHero(true)}
-        className="fixed top-20 right-4 z-[var(--z-controls)] bg-[var(--color-gold)] text-white px-4 py-2 rounded-lg shadow-lg hover:bg-[var(--color-accent)] transition-colors text-sm font-semibold"
-      >
-        Try Modern Hero
-      </button>
 
   {/* Enhanced Hero Section */}
   <section className="relative min-h-[85vh] md:min-h-[92vh] lg:min-h-screen xl:min-h-[100svh] flex items-center justify-center">
