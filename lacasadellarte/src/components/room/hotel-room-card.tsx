@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { Heart, Users, Wind } from "lucide-react"
+import Image from "next/image"
 
 interface HotelRoomCardProps {
   image: string
@@ -46,12 +47,16 @@ export default function HotelRoomCard({
       >
         {/* Image Container */}
         <div className="relative h-80 overflow-hidden bg-gray-100">
-          <img
+          {/* Optimized Image */}
+          <Image
             src={image || "/placeholder.svg"}
             alt={title}
-            className={`w-full h-full object-cover transition-transform duration-700 ${
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
+            className={`object-cover transition-transform duration-700 ${
               isHovered ? "scale-110" : "scale-100"
             }`}
+            priority={false}
           />
 
           {/* Overlay Gradient */}
