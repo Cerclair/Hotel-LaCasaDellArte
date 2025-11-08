@@ -9,6 +9,20 @@ import { CarouselIndicators } from '@/components/ui/carousel-indicators';
 import { HotelFilter } from '@/components/ui/hotel-filter';
 import type { FilterState } from '@/components/ui/hotel-filter';
 import HotelRoomCard from '@/components/room/hotel-room-card';
+import {
+  Car,
+  Wifi,
+  Bell,
+  Sparkles,
+  Umbrella,
+  Utensils,
+  Droplets,
+  Sun,
+  Dumbbell,
+  Phone,
+  Users as UsersIcon,
+  Accessibility,
+} from 'lucide-react';
 
 export default function RoomsPage() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -263,6 +277,46 @@ export default function RoomsPage() {
             </div>
           )}
         </div>
+
+        {/* Separator between rooms and amenities */}
+        <div className="mt-16 mb-12 h-1 w-full bg-[var(--color-gold)] rounded-full" />
+
+        {/* Amenities Section */}
+        <div className="text-center mb-10">
+          <h3
+            className="text-3xl font-bold text-[var(--color-text)]"
+            style={{ fontFamily: 'var(--font-display)' }}
+          >
+            Amenities & Facilities
+          </h3>
+        </div>
+
+        {(() => {
+          const amenities: { label: string; Icon: React.ComponentType<React.SVGProps<SVGSVGElement>> }[] = [
+            { label: 'Free Parking', Icon: Car },
+            { label: 'Free WiFi', Icon: Wifi },
+            { label: 'Concierge', Icon: Bell },
+            { label: 'Spa', Icon: Sparkles },
+            { label: 'Beach', Icon: Umbrella },
+            { label: 'On-site Restaurant', Icon: Utensils },
+            { label: 'Indoor Pool', Icon: Droplets },
+            { label: 'Outdoor Pool', Icon: Sun },
+            { label: 'Fitness Center', Icon: Dumbbell },
+            { label: 'Room Service', Icon: Phone },
+            { label: 'Meeting Rooms', Icon: UsersIcon },
+            { label: 'Wheelchair Access', Icon: Accessibility },
+          ];
+          return (
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-10 md:gap-12">
+              {amenities.map(({ label, Icon }, idx) => (
+                <div key={idx} className="flex flex-col items-center justify-center text-center">
+                  <Icon className="w-10 h-10 text-[var(--color-gold)] mb-2" aria-hidden="true" />
+                  <span className="text-sm font-medium text-[var(--color-text)]">{label}</span>
+                </div>
+              ))}
+            </div>
+          );
+        })()}
       </section>
     </div>
   );
