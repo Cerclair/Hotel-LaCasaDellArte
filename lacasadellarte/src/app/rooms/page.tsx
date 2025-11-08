@@ -312,11 +312,11 @@ export default function RoomsPage() {
             className="text-3xl font-bold text-[var(--color-text)]"
             style={{ fontFamily: 'var(--font-display)' }}
           >
-            Amenities & Facilities
+            Amenities
           </h3>
         </div>
 
-        <div className="bg-[var(--color-beige-light)] rounded-xl shadow-md px-8 py-10">
+        <div className="bg-[var(--color-beige)] rounded-xl px-8 py-10">
         {(() => {
           const amenities: { label: string; Icon: React.ComponentType<React.SVGProps<SVGSVGElement>> }[] = [
             { label: 'Free Parking', Icon: Car },
