@@ -1,5 +1,6 @@
 import { restaurants } from '@/lib/data';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function VetroPage() {
   const restaurant = restaurants.find(r => r.slug === 'vetro')!;
@@ -8,9 +9,11 @@ export default function VetroPage() {
     <div style={{ minHeight: '100vh', background: 'var(--color-beige)' }}>
       {/* Hero Image Section */}
       <section style={{ width: '100%', margin: 0, padding: 0, overflow: 'hidden' }}>
-        <img
+        <Image
           src="/assets/dining&drinks/vetro/vetro.png"
           alt="Vetro"
+          width={1920}
+          height={1080}
           style={{ width: '100%', height: '60vh', objectFit: 'cover', display: 'block' }}
         />
       </section>
@@ -114,10 +117,12 @@ export default function VetroPage() {
                 alignItems: 'center'
               }}>
                 {[1, 2, 3, 4, 5, 6, 7, 8].map((pageNum) => (
-                  <img
+                  <Image
                     key={pageNum}
                     src={`/assets/dining&drinks/vetro/vetromenu_${pageNum}.jpg`}
                     alt={`Vetro Menu Page ${pageNum}`}
+                    width={880}
+                    height={1200}
                     style={{
                       width: '100%',
                       height: 'auto',

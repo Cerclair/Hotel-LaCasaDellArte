@@ -1,5 +1,6 @@
 import { Restaurant } from '@/types';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface RestaurantCardProps {
   restaurant: Restaurant;
@@ -11,9 +12,11 @@ export default function RestaurantCard({ restaurant }: RestaurantCardProps) {
       <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:scale-105 h-full">
         {/* Restaurant Image */}
         <div style={{ position: 'relative', height: '256px', overflow: 'hidden', background: 'var(--color-beige-dark)' }}>
-          <img
+          <Image
             src={restaurant.image}
             alt={restaurant.name}
+            width={800}
+            height={256}
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           />
         </div>

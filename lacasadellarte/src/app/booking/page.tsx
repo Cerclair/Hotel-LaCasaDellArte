@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, Suspense } from 'react';
+import { useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 function BookingContent() {
@@ -21,7 +21,6 @@ function BookingContent() {
   });
 
   // Get booking details from URL params
-  const roomId = searchParams.get('roomId') || '';
   const roomName = searchParams.get('roomName') || '';
   const roomType = searchParams.get('roomType') || '';
   const price = Number(searchParams.get('price')) || 0;

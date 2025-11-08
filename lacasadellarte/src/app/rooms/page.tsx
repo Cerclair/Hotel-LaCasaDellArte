@@ -1,8 +1,5 @@
 'use client';
 
-import { rooms } from '@/lib/data';
-import RoomCard from '@/components/RoomCard';
-
 export default function RoomsPage() {
   return (
     <div className="min-h-screen bg-[var(--color-beige)]">

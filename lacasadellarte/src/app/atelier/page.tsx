@@ -28,17 +28,19 @@ export default function AtelierPage() {
       {/* Hero Section */}
     <section className={styles.heroSection}>
   {/* Full-width image */}
-  <img 
-    src="/assets/atelier/atelier.png" 
-    alt="Art gallery" 
-    className={styles.heroImage} 
+  <Image
+    src="/assets/atelier/atelier.png"
+    alt="Art gallery"
+    width={1920}
+    height={1080}
+    className={styles.heroImage}
     style={{ width: '100%', height: '60vh', minHeight: '400px', objectFit: 'cover', display: 'block' }}
   />
 
   {/* Text block below the image */}
   <div className="bg-[var(--color-beige)] py-8 md:py-12 px-4 text-center">
     <h1 className={styles.heroTitle}>Atelier - Art Gallery</h1>
-    
+
   </div>
 </section>
 

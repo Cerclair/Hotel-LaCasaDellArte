@@ -1,5 +1,6 @@
 import { restaurants } from '@/lib/data';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function InRoomDiningPage() {
   const restaurant = restaurants.find(r => r.slug === 'in-room')!;
@@ -8,9 +9,11 @@ export default function InRoomDiningPage() {
     <div style={{ minHeight: '100vh', background: 'var(--color-beige)' }}>
       {/* Hero Image Section */}
       <section style={{ width: '100%', margin: 0, padding: 0, overflow: 'hidden' }}>
-        <img
+        <Image
           src="/assets/dining&drinks/lumiere/lumiere.png"
           alt="In-Room Dining"
+          width={1920}
+          height={1080}
           style={{ width: '100%', height: '60vh', objectFit: 'cover', display: 'block' }}
         />
       </section>
@@ -114,10 +117,12 @@ export default function InRoomDiningPage() {
                 alignItems: 'center'
               }}>
                 {[1, 2].map((pageNum) => (
-                  <img
+                  <Image
                     key={pageNum}
                     src={`/assets/dining&drinks/in-room-dining/in-room-diningmenu_${pageNum}.jpg`}
                     alt={`In-Room Dining Menu Page ${pageNum}`}
+                    width={880}
+                    height={1200}
                     style={{
                       width: '100%',
                       height: 'auto',

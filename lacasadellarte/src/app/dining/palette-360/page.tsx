@@ -1,5 +1,6 @@
 import { restaurants } from '@/lib/data';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Palette360Page() {
   const restaurant = restaurants.find(r => r.slug === 'palette-360')!;
@@ -8,9 +9,11 @@ export default function Palette360Page() {
     <div style={{ minHeight: '100vh', background: 'var(--color-beige)' }}>
       {/* Hero Image Section */}
       <section style={{ width: '100%', margin: 0, padding: 0, overflow: 'hidden' }}>
-        <img
+        <Image
           src="/assets/dining&drinks/palette360/palette-360.png"
           alt="Palette 360"
+          width={1920}
+          height={1080}
           style={{ width: '100%', height: '60vh', minHeight: '400px', objectFit: 'cover', display: 'block' }}
         />
       </section>

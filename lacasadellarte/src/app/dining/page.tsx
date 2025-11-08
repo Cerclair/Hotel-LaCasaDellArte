@@ -1,14 +1,17 @@
 import { restaurants } from '@/lib/data';
 import RestaurantCard from '@/components/RestaurantCard';
+import Image from 'next/image';
 
 export default function DiningPage() {
   return (
     <div className="min-h-screen bg-[var(--color-beige)]">
       {/* Hero Image Section */}
       <section style={{ width: '100%', margin: 0, padding: 0, overflow: 'hidden' }}>
-        <img
+        <Image
           src="/assets/dining&drinks/dining.png"
           alt="Dining"
+          width={1920}
+          height={1080}
           style={{ width: '100%', height: '60vh', minHeight: '400px', objectFit: 'cover', display: 'block' }}
         />
       </section>

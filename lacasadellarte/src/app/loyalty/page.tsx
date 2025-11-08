@@ -47,7 +47,7 @@ export default function LoyaltyPage() {
         setSubmitStatus('idle');
         setFormData({ name: '', email: '', phone: '' });
       }, 2000);
-    } catch (error) {
+    } catch {
       setSubmitStatus('error');
       setIsSubmitting(false);
     }

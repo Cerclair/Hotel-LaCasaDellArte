@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 export default function Home() {
   return (
     <div>
@@ -17,24 +19,23 @@ export default function Home() {
         }}
       >
         {/* Background Image */}
-        <img
+        <Image
           src="/assets/home/home.png"
           alt="La Casa Dell'Arte Background"
+          fill
+          priority
           style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
             objectFit: "cover",
             zIndex: 1,
           }}
         />
 
         {/* Logo - Positioned at Top */}
-        <img
+        <Image
           src="/logo/logo-removebg-white.png"
           alt="La Casa Dell'Arte Logo"
+          width={350}
+          height={350}
           className="absolute top-[1px] left-1/2 -translate-x-1/2 z-[3] drop-shadow-lg"
           style={{
             width: "clamp(350px, 50vw, 350px)",
@@ -175,11 +176,12 @@ export default function Home() {
                 breathed, and experienced
               </p>
             </div>
-            <div className="h-96 rounded-lg shadow-xl overflow-hidden">
-              <img
+            <div className="h-96 rounded-lg shadow-xl overflow-hidden relative">
+              <Image
                 src="/assets/home/inspiration.jpg"
                 alt="Chihuly Garden and Glass Inspired Art Display"
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
               />
             </div>
           </div>
