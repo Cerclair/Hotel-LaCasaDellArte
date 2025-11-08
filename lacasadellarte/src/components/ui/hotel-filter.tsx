@@ -1,8 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Calendar, Users, Home } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Calendar, Users } from "lucide-react"
 import { Card } from "@/components/ui/card"
 
 export interface DateRange {
@@ -395,11 +394,6 @@ export function HotelFilter({ onChange }: { onChange?: (filters: FilterState) =>
             </div>
           </div>
 
-          {/* Search Button */}
-          <Button onClick={() => onChange?.(filters)} className="w-full md:w-auto px-8 py-4 bg-[var(--color-gold)] hover:bg-[var(--color-gold)]/90 text-white font-bold rounded-lg shadow-lg text-lg uppercase tracking-wider transition-all flex items-center justify-center">
-            <Home className="w-5 h-5 mr-2" />
-            Search Rooms
-          </Button>
 
           {/* Filter Summary */}
           {(filters.dateRange.checkIn || filters.roomType !== "all" || filters.bedType !== "all") && (
