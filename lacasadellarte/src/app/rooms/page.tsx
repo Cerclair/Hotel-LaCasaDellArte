@@ -340,10 +340,10 @@ export default function RoomsPage() {
                   className="group flex flex-col items-center justify-center text-center p-2 rounded-lg transition-all duration-300 hover:bg-white/30 focus-within:bg-white/30 hover:shadow-md"
                 >
                   <Icon
-                    className="w-10 h-10 text-[var(--color-gold)] mb-2 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3 group-focus-within:scale-110 group-focus-within:rotate-3"
+                    className="w-10 h-10 text-[#8B7355] mb-2 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3 group-focus-within:scale-110 group-focus-within:rotate-3"
                     aria-hidden="true"
                   />
-                  <span className="text-sm font-medium text-[var(--color-text)] transition-colors duration-300 group-hover:text-[var(--color-gold)] group-focus-within:text-[var(--color-gold)]">
+                  <span className="text-sm font-medium text-[var(--color-text)] transition-colors duration-300 group-hover:text-[#8B7355] group-focus-within:text-[#8B7355]">
                     {label}
                   </span>
                 </div>
