@@ -41,7 +41,7 @@ export default function HotelRoomCard({
     >
       {/* Card Container */}
       <div
-        className="bg-white rounded-lg overflow-hidden shadow-lg transition-all duration-500 hover:shadow-2xl h-full flex flex-col"
+        className="group bg-[var(--color-beige-light)] rounded-lg overflow-hidden shadow-lg transition-all duration-500 hover:shadow-2xl h-full flex flex-col"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
@@ -63,8 +63,8 @@ export default function HotelRoomCard({
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
 
           {/* Room Type Badge */}
-          <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-full">
-            <p className="text-xs font-semibold tracking-widest uppercase" style={{ color: "#1e3a8a" }}>
+          <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-full transition-all duration-300 group-hover:shadow-lg group-hover:bg-white group-hover:scale-105">
+            <p className="text-xs font-semibold tracking-widest uppercase transition-colors duration-300 group-hover:text-[var(--color-gold)]" style={{ color: "#1e3a8a" }}>
               {roomType}
             </p>
           </div>
@@ -84,7 +84,7 @@ export default function HotelRoomCard({
           </button>
 
           {/* Price Tag */}
-          <div className="absolute bottom-4 right-4 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-lg">
+          <div className="absolute bottom-4 right-4 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-lg transition-transform duration-300 group-hover:-translate-y-1 group-hover:shadow-lg">
             <p className="text-xs text-gray-500 font-medium">Per Night</p>
             <p className="text-2xl font-bold" style={{ color: "#D4AF37" }}>
               {currency}
@@ -94,7 +94,7 @@ export default function HotelRoomCard({
         </div>
 
         {/* Content Container */}
-        <div className="p-6 space-y-4 flex-1 flex flex-col">
+        <div className="p-7 space-y-5 flex-1 flex flex-col">
           {/* Title */}
           <div>
             <h3
@@ -107,11 +107,14 @@ export default function HotelRoomCard({
           </div>
 
           {/* Amenities - flex-grow to push buttons to bottom */}
-          <div className="space-y-2 pt-2 flex-grow">
+          <div className="space-y-2 pt-3 flex-grow">
             <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Amenities</p>
             <div className="flex flex-wrap gap-2">
               {amenities.map((amenity, index) => (
-                <span key={index} className="text-xs px-3 py-1.5 rounded-full bg-gray-100 text-gray-700 font-medium">
+                <span
+                  key={index}
+                  className="text-xs px-3 py-1.5 rounded-full bg-gray-100 text-gray-700 font-medium transition-all duration-300 hover:bg-[var(--color-gold)]/15 hover:text-[var(--color-text)] hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-gold)]"
+                >
                   {amenity}
                 </span>
               ))}

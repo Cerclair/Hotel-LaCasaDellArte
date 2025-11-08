@@ -160,10 +160,10 @@ export function HotelFilter({ onChange }: { onChange?: (filters: FilterState) =>
   return (
     // Full-width section wrapper (previously constrained with container/max-w)
     <div className="w-full px-4 sm:px-8 py-8">
-      <Card className="border-0 shadow-2xl bg-[var(--color-beige)] relative">
+      <Card className="border-0 shadow-2xl bg-[var(--color-beige-light)] relative">
         {/* Gold accent bar */}
         <div className="absolute top-0 left-0 w-full h-2 bg-[var(--color-gold)]" />
-        <div className="p-10">
+  <div className="p-10 bg-[var(--color-beige-light)]">
           {/* Header */}
           <div className="mb-8 text-center">
             <h2 className="text-4xl font-bold tracking-tight text-foreground mb-2 inline-block border-b-4 border-[var(--color-gold)] pb-2 rounded-md">Find Your Perfect Room</h2>
@@ -171,18 +171,18 @@ export function HotelFilter({ onChange }: { onChange?: (filters: FilterState) =>
           </div>
 
           {/* Filter Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-6 divide-x-0 lg:divide-x lg:divide-border bg-[var(--color-beige)] shadow-md p-4 border-2 border-[var(--color-gold)]">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8 divide-x-0 lg:divide-x lg:divide-border bg-[var(--color-beige-light)] shadow-md p-5 border-2 border-[var(--color-gold)]">
             {/* Date Range Picker */}
-            <div className="lg:col-span-2 relative p-2">
-              <label className="block text-xs font-semibold text-foreground/70 uppercase tracking-wider mb-3">
+            <div className="lg:col-span-2 relative p-2 group">
+              <label className="block text-xs font-semibold text-foreground/70 uppercase tracking-wider mb-3 transition-colors duration-200 group-hover:text-[var(--color-gold)] group-focus-within:text-[var(--color-gold)]">
                 Check-in / Check-out
               </label>
               <button
                 onClick={() => setShowDatePicker(!showDatePicker)}
-                className="w-full px-4 py-3 bg-[var(--color-beige)] border border-border rounded-lg text-left text-sm font-medium text-foreground hover:bg-[var(--color-beige)]/90 transition-colors flex items-center justify-between"
+                className="w-full px-4 py-3 bg-[var(--color-beige)] border border-border rounded-lg text-left text-sm font-medium text-foreground hover:bg-[var(--color-beige)]/90 transition-all duration-200 flex items-center justify-between shadow-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-gold)] group-hover:shadow group-hover:-translate-y-[1px]"
               >
                 <span className="flex items-center gap-2">
-                  <Calendar className="w-4 h-4 text-primary" />
+                  <Calendar className="w-4 h-4 text-primary transition-transform duration-200 group-hover:scale-110 group-focus-within:scale-110" />
                   <span>
                     {filters.dateRange.checkIn ? formatDate(filters.dateRange.checkIn) : "Check-in"} →{" "}
                     {filters.dateRange.checkOut ? formatDate(filters.dateRange.checkOut) : "Check-out"}
@@ -274,16 +274,16 @@ export function HotelFilter({ onChange }: { onChange?: (filters: FilterState) =>
             </div>
 
             {/* Room Type */}
-            <div className="p-2">
-              <label className="text-xs font-semibold text-foreground/70 uppercase tracking-wider mb-3">
+            <div className="p-2 group">
+              <label className="text-xs font-semibold text-foreground/70 uppercase tracking-wider mb-3 transition-colors duration-200 group-hover:text-[var(--color-gold)] group-focus-within:text-[var(--color-gold)]">
                 Room Type
               </label>
               <div className="relative">
-                <Building2 className="w-4 h-4 text-primary absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <Building2 className="w-4 h-4 text-primary absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none transition-transform duration-200 group-hover:scale-110 group-focus-within:scale-110" />
                 <select
                   value={filters.roomType}
                   onChange={(e) => setFilters((prev) => ({ ...prev, roomType: e.target.value }))}
-                  className="w-full pl-10 pr-4 py-3 bg-[var(--color-beige)] border border-border rounded-lg text-sm font-medium text-foreground appearance-none cursor-pointer hover:bg-[var(--color-beige)]/90 transition-colors"
+                  className="w-full pl-10 pr-4 py-3 bg-[var(--color-beige)] border border-border rounded-lg text-sm font-medium text-foreground appearance-none cursor-pointer hover:bg-[var(--color-beige)]/90 transition-all duration-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-gold)] group-hover:shadow group-hover:-translate-y-[1px]"
                 >
                   {roomTypes.map((type) => (
                     <option key={type.value} value={type.value}>
@@ -295,16 +295,16 @@ export function HotelFilter({ onChange }: { onChange?: (filters: FilterState) =>
             </div>
 
             {/* Bed Type */}
-            <div className="p-2">
-              <label className="text-xs font-semibold text-foreground/70 uppercase tracking-wider mb-3">
+            <div className="p-2 group">
+              <label className="text-xs font-semibold text-foreground/70 uppercase tracking-wider mb-3 transition-colors duration-200 group-hover:text-[var(--color-gold)] group-focus-within:text-[var(--color-gold)]">
                 Bed Type
               </label>
               <div className="relative">
-                <BedDouble className="w-4 h-4 text-primary absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <BedDouble className="w-4 h-4 text-primary absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none transition-transform duration-200 group-hover:scale-110 group-focus-within:scale-110" />
                 <select
                   value={filters.bedType}
                   onChange={(e) => setFilters((prev) => ({ ...prev, bedType: e.target.value }))}
-                  className="w-full pl-10 pr-4 py-3 bg-[var(--color-beige)] border border-border rounded-lg text-sm font-medium text-foreground appearance-none cursor-pointer hover:bg-[var(--color-beige)]/90 transition-colors"
+                  className="w-full pl-10 pr-4 py-3 bg-[var(--color-beige)] border border-border rounded-lg text-sm font-medium text-foreground appearance-none cursor-pointer hover:bg-[var(--color-beige)]/90 transition-all duration-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-gold)] group-hover:shadow group-hover:-translate-y-[1px]"
                 >
                   {bedTypes.map((type) => (
                     <option key={type.value} value={type.value}>
@@ -316,16 +316,16 @@ export function HotelFilter({ onChange }: { onChange?: (filters: FilterState) =>
             </div>
 
             {/* Guest Selector */}
-            <div className="relative p-2">
-              <label className="block text-xs font-semibold text-foreground/70 uppercase tracking-wider mb-3">
+            <div className="relative p-2 group">
+              <label className="block text-xs font-semibold text-foreground/70 uppercase tracking-wider mb-3 transition-colors duration-200 group-hover:text-[var(--color-gold)] group-focus-within:text-[var(--color-gold)]">
                 Guests
               </label>
               <button
                 onClick={() => setShowGuestPicker(!showGuestPicker)}
-                className="w-full px-4 py-3 bg-[var(--color-beige)] border border-border rounded-lg text-left text-sm font-medium text-foreground hover:bg-[var(--color-beige)]/90 transition-colors flex items-center justify-between"
+                className="w-full px-4 py-3 bg-[var(--color-beige)] border border-border rounded-lg text-left text-sm font-medium text-foreground hover:bg-[var(--color-beige)]/90 transition-all duration-200 flex items-center justify-between shadow-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-gold)] group-hover:shadow group-hover:-translate-y-[1px]"
               >
                 <span className="flex items-center gap-2">
-                  <Users className="w-4 h-4 text-primary" />
+                  <Users className="w-4 h-4 text-primary transition-transform duration-200 group-hover:scale-110 group-focus-within:scale-110" />
                   <span>
                     {filters.guests.adults} {filters.guests.adults === 1 ? "Adult" : "Adults"}
                     {filters.guests.children > 0 &&
