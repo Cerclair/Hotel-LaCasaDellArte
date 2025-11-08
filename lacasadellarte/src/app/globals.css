@@ -120,6 +120,30 @@ button {
   animation: fadeIn 0.4s ease-out;
 }
 
+/* Helper animations used by Rooms classic hero (delayed fade-ins and bounce) */
+@keyframes bounceSlow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+/* Delayed fade-in utilities (keep elements visible after animation) */
+.animate-fade-in-delay-200 { animation: fadeIn 0.6s ease-out 0.2s both; }
+.animate-fade-in-delay-400 { animation: fadeIn 0.6s ease-out 0.4s both; }
+.animate-fade-in-delay-600 { animation: fadeIn 0.6s ease-out 0.6s both; }
+.animate-fade-in-delay-800 { animation: fadeIn 0.6s ease-out 0.8s both; }
+.animate-fade-in-delay-1000 { animation: fadeIn 0.6s ease-out 1s both; }
+.animate-fade-in-delay-1200 { animation: fadeIn 0.6s ease-out 1.2s both; }
+
+/* Combined fade-in and slow bounce after delay for the scroll indicator */
+.animate-bounce-slow-delay-1500 {
+  animation-name: fadeIn, bounceSlow;
+  animation-duration: 0.6s, 2.5s;
+  animation-timing-function: ease-out, ease-in-out;
+  animation-delay: 1.5s, 1.5s;
+  animation-fill-mode: both, none;
+  animation-iteration-count: 1, infinite;
+}
+
 /* Responsive Typography */
 @media (max-width: 768px) {
   h1 {
