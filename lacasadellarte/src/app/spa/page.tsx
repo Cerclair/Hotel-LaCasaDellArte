@@ -38,7 +38,7 @@ export default function SpaPage() {
       <section className={styles.hero}>
         <img src="/assets/spa/spa.png" alt="Spa" className={styles.heroImage} />
         <div className={styles.heroContent}>
-          <h1 className={styles.heroTitle}>ZEN Spa</h1>
+          <h1 className={styles.heroTitle}>ZEN SPA</h1>
           <p className={styles.heroSubtitle}>
             A sanctuary of serenity where wellness meets artistry
           </p>
@@ -62,28 +62,44 @@ export default function SpaPage() {
         </div>
       </section>
 
-      {/* Spa Menu Section */}
-      <section className={`${styles.section} ${styles.sectionBeige}`}>
-        <div className={styles.container}>
-          <h2 className={styles.sectionTitle}>Spa Menu</h2>
-          <div className={styles.menuScrollContainer}>
-            <div className={styles.menuWrapper}>
-              {treatments.map((category) => (
-                <div key={category.id} className={styles.menuCategory}>
-                  <h3 className={styles.menuCategoryTitle}>{category.category}</h3>
-                  <div className={styles.menuList}>
-                    {category.services.map((service, index) => (
-                      <div key={index} className={styles.menuItem}>
-                        <div className={styles.menuText}>
-                          <h4>{service.name}</h4>
-                          <p>{service.description}</p>
-                        </div>
-                        <span className={styles.menuDuration}>{service.duration}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
+      {/* Menu Section */}
+      <section className="bg-[var(--color-beige)] py-12 md:py-20">
+        <div className="max-w-7xl mx-auto px-4">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-8 md:mb-12 text-[var(--color-text)]" style={{ fontFamily: 'var(--font-display)' }}>
+            SPA Menu
+          </h2>
+          <div style={{
+            maxHeight: '37rem',
+            overflowY: 'auto',
+            overflowX: 'hidden',
+            scrollbarWidth: 'thin',
+            scrollbarColor: '#8B7355 #FAFAEF',
+            borderRadius: '0.75rem',
+            paddingRight: '0.5rem'
+          }}>
+            <div style={{
+              maxWidth: '55rem',
+              margin: '0 auto'
+            }}>
+              <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '24px',
+                alignItems: 'center'
+              }}>
+                {[1, 2, 3].map((pageNum) => (
+                  <img
+                    key={pageNum}
+                    src={`/assets/spa/SPA Menu_${pageNum}.jpg`}
+                    alt={`SPA Menu Page ${pageNum}`}
+                    style={{
+                      width: '100%',
+                      height: 'auto',
+                      display: 'block'
+                    }}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>

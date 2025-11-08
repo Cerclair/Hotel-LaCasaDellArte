@@ -13,11 +13,17 @@
   color: white;
 }
 
-
+/* Remove background image */
+ /* background-image: url('/assets/spa.png'); */
+ /* background-size: cover; */
+ /* background-position: center; */
+ /* background-repeat: no-repeat; */
+ /* height: 50vh; */
 
 .heroImage {
   width: 100%;
   height: 60vh;
+  min-height: 400px;
   object-fit: cover;
   display: block;
 }
@@ -25,29 +31,77 @@
 .heroContent {
   max-width: 70rem;
   width: 100%;
-  padding: 4rem 1rem;
-  background-color: var(--color-primary); 
+  padding: 2rem 1rem;
+  background-color: var(--color-primary); /* your color, e.g. navy or dark blue */
   position: relative;
   z-index: 1;
 }
 
+@media (min-width: 768px) {
+  .heroContent {
+    padding: 3rem 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .heroContent {
+    padding: 4rem 1rem;
+  }
+}
+
 .heroTitle {
-  font-size: 3rem;
+  font-size: 1.875rem;
   font-weight: 700;
   color: var(--color-text);
-  margin-bottom: 1rem;
-  font-family: var(--font-display);
+  margin-bottom: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .heroTitle {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .heroTitle {
+    font-size: 3rem;
+  }
 }
 
 .heroSubtitle {
-  font-size: 1.25rem;
+  font-size: 1rem;
   color: var(--color-gray);
+}
+
+@media (min-width: 768px) {
+  .heroSubtitle {
+    font-size: 1.125rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .heroSubtitle {
+    font-size: 1.25rem;
+  }
 }
 
 
 /* Sections */
 .section {
-  padding: 5rem 0;
+  padding: 2rem 0;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: 3.5rem 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding: 5rem 0;
+  }
 }
 
 .sectionBeige {
@@ -59,11 +113,24 @@
 }
 
 .sectionTitle {
-  font-size: 1.875rem;
+  font-size: 1.5rem;
   font-weight: 700;
   text-align: center;
-  margin-bottom: 3rem;
-  font-family: var(--font-display);
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+  .sectionTitle {
+    font-size: 1.875rem;
+    margin-bottom: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .sectionTitle {
+    font-size: 2.25rem;
+    margin-bottom: 3rem;
+  }
 }
 
 .container {
@@ -80,10 +147,22 @@
 }
 
 .description p {
-  font-size: 1.125rem;
+  font-size: 1rem;
   color: var(--color-gray);
   line-height: 1.75;
   margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .description p {
+    font-size: 1.125rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .description p {
+    font-size: 1.25rem;
+  }
 }
 
 /* Menu Section (Scrollable) */
@@ -119,31 +198,74 @@
   background-color: white;
   border-radius: 0.75rem;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  padding: 2rem;
-  margin-bottom: 2rem;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .menuCategory {
+    padding: 1.5rem;
+    margin-bottom: 1.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .menuCategory {
+    padding: 2rem;
+    margin-bottom: 2rem;
+  }
 }
 
 .menuCategoryTitle {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 700;
   color: var(--color-text);
   border-bottom: 2px solid var(--color-accent);
-  padding-bottom: 0.75rem;
-  margin-bottom: 1.5rem;
+  padding-bottom: 0.625rem;
+  margin-bottom: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .menuCategoryTitle {
+    font-size: 1.375rem;
+    padding-bottom: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .menuCategoryTitle {
+    font-size: 1.5rem;
+  }
 }
 
 .menuList {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .menuList {
+    gap: 1.5rem;
+  }
 }
 
 .menuItem {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  flex-direction: column;
+  gap: 0.5rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid var(--color-beige-dark);
+}
+
+@media (min-width: 640px) {
+  .menuItem {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0;
+  }
 }
 
 .menuItem:last-child {
@@ -151,20 +273,44 @@
 }
 
 .menuText h4 {
-  font-size: 1.125rem;
+  font-size: 1rem;
   font-weight: 600;
   color: var(--color-text);
   margin-bottom: 0.5rem;
 }
 
+@media (min-width: 768px) {
+  .menuText h4 {
+    font-size: 1.125rem;
+  }
+}
+
 .menuText p {
   color: var(--color-gray);
-  font-size: 0.875rem;
+  font-size: 0.813rem;
+}
+
+@media (min-width: 768px) {
+  .menuText p {
+    font-size: 0.875rem;
+  }
 }
 
 .menuDuration {
   color: var(--color-accent);
   font-weight: 600;
   white-space: nowrap;
-  margin-left: 1rem;
+  font-size: 0.875rem;
+}
+
+@media (min-width: 640px) {
+  .menuDuration {
+    margin-left: 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .menuDuration {
+    font-size: 1rem;
+  }
 }

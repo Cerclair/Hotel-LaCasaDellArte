@@ -12,6 +12,7 @@
 .heroImage {
   width: 100%;
   height: 60vh; /* Adjust for desired height */
+  min-height: 400px;
   object-fit: cover;
   display: block;
 }
@@ -20,46 +21,79 @@
 .heroContent {
   color: #fff; /* text color */
   text-align: center;
-  padding: 4rem 2rem;
+  padding: 2rem 1rem;
+}
+
+@media (min-width: 768px) {
+  .heroContent {
+    padding: 3rem 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .heroContent {
+    padding: 4rem 2rem;
+  }
 }
 
 /* Title */
 .heroTitle {
-  font-size: 2.25rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  line-height: 1.25;
-  font-family: var(--font-display);
+  font-size: 1.875rem;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.5px;
 }
-
-/* Description */
-.heroText {
-  font-family: 'Open Sans', sans-serif; /* or your font */
-  font-size: 1.125rem;
-  line-height: 1.6;
-  max-width: 800px;
-  margin: 0 auto;
-  color: #f0f0f0;
-}
-
 
 @media (min-width: 768px) {
+  .heroTitle {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
   .heroTitle {
     font-size: 3rem;
   }
 }
 
+/* Description */
 .heroText {
-  font-size: 1.25rem;
-  color: var(--color-gray);
-  max-width: 48rem;
-  margin: 0 auto;
+  font-family: 'Open Sans', sans-serif; /* or your font */
+  font-size: 1rem;
   line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+  color: #f0f0f0;
+  padding: 0 1rem;
+}
+
+@media (min-width: 768px) {
+  .heroText {
+    font-size: 1.125rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .heroText {
+    font-size: 1.25rem;
+  }
 }
 
 /* Description Section */
 .section {
-  padding: 4rem 1rem;
+  padding: 2rem 1rem;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: 3rem 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding: 4rem 1rem;
+  }
 }
 
 .sectionLight {
@@ -83,6 +117,20 @@
 .textGray {
   color: var(--color-gray);
   margin-bottom: 1rem;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+@media (min-width: 768px) {
+  .textGray {
+    font-size: 1.125rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .textGray {
+    font-size: 1.25rem;
+  }
 }
 
 .badge {
@@ -91,46 +139,95 @@
   gap: 0.5rem;
   background-color: var(--color-accent);
   color: white;
-  padding: 0.75rem 1.5rem;
+  padding: 0.625rem 1rem;
   border-radius: 0.5rem;
   font-weight: 600;
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .badge {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+  }
 }
 
 /* Gallery Section */
 .galleryTitle {
-  font-size: 1.875rem;
+  font-size: 1.5rem;
   font-weight: 700;
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   color: var(--color-text);
-  font-family: var(--font-display);
+  /*font-family: var(--font-display);*/
+}
+
+@media (min-width: 768px) {
+  .galleryTitle {
+    font-size: 1.875rem;
+    margin-bottom: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .galleryTitle {
+    font-size: 2.25rem;
+    margin-bottom: 3rem;
+  }
 }
 
 .galleryGrid {
   display: grid;
-  gap: 2rem;
+  gap: 1.5rem;
   grid-template-columns: 1fr;
   max-width: 72rem;
   margin: 0 auto;
 }
 
+@media (min-width: 768px) {
+  .galleryGrid {
+    gap: 2rem;
+  }
+}
+
 /* Container for the artwork text content */
 .artContent {
-  padding: 0.5rem;
-  background-color: var(--color-text);
+  padding: 1rem;
+  background-color: white;
+}
+
+@media (min-width: 768px) {
+  .artContent {
+    padding: 1.5rem;
+  }
 }
 
 /* Artwork title styling */
 .artTitle {
   font-size: 1rem;
   font-weight: 700;
-  color: var(--color-gold);
+  color: var(--color-text);
   margin-bottom: 0.5rem;
   transition: color 0.3s ease;
   text-align: center;
 }
 
+@media (min-width: 768px) {
+  .artTitle {
+    font-size: 1.125rem;
+  }
+}
 
+@media (min-width: 1024px) {
+  .artTitle {
+    font-size: 1.25rem;
+  }
+}
+
+.artCard:hover .artTitle {
+  color: var(--color-accent);
+}
 
 
 @media (min-width: 768px) {
@@ -146,7 +243,7 @@
 }
 
 .artCard {
-  
+  background: white;
   border-radius: 0.75rem;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   overflow: hidden;
@@ -160,7 +257,7 @@
 .artImage {
   position: relative;
   width: 100%;
-  height: 400px;
+  height: 300px;
   overflow: hidden;
   background-color: var(--color-beige-dark);
   display: flex;
@@ -179,14 +276,6 @@
   transform: scale(1.05);
 }
 
-/*.artTitle {
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  color: var(--color-text);
-  /*font-family: var(--font-display);*/
-/*}*/
-
 .artArtist {
   color: var(--color-accent);
   font-weight: 500;
@@ -194,17 +283,36 @@
 
 /* Experience Section */
 .expTitle {
-  font-size: 1.875rem;
+  font-size: 1.5rem;
   font-weight: 700;
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   color: var(--color-text);
  /*font-family: var(--font-display);*/
 }
 
+@media (min-width: 768px) {
+  .expTitle {
+    font-size: 1.875rem;
+    margin-bottom: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .expTitle {
+    font-size: 2.25rem;
+  }
+}
+
 .expGrid {
   display: grid;
-  gap: 2rem;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .expGrid {
+    gap: 2rem;
+  }
 }
 
 @media (min-width: 768px) {
@@ -215,9 +323,15 @@
 
 .expCard {
   background: white;
-  padding: 1.5rem;
+  padding: 1rem;
   border-radius: 0.75rem;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+@media (min-width: 768px) {
+  .expCard {
+    padding: 1.5rem;
+  }
 }
 
 .expIcon {
@@ -239,13 +353,26 @@
 }
 
 .expHeading {
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   font-weight: 700;
   margin-bottom: 0.75rem;
   color: var(--color-text);
 }
 
+@media (min-width: 768px) {
+  .expHeading {
+    font-size: 1.25rem;
+  }
+}
+
 .expText {
   color: var(--color-gray);
   line-height: 1.6;
+  font-size: 0.875rem;
+}
+
+@media (min-width: 768px) {
+  .expText {
+    font-size: 1rem;
+  }
 }

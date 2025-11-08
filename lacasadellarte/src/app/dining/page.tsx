@@ -9,31 +9,16 @@ export default function DiningPage() {
         <img
           src="/assets/dining&drinks/dining.png"
           alt="Dining"
-          style={{ width: '100%', height: '60vh', objectFit: 'cover', display: 'block' }}
+          style={{ width: '100%', height: '60vh', minHeight: '400px', objectFit: 'cover', display: 'block' }}
         />
       </section>
 
       {/* Title Section */}
-      <section style={{
-        background: 'var(--color-beige)',
-        padding: '48px 16px',
-        textAlign: 'center'
-      }}>
-        <h1 style={{
-          fontSize: '48px',
-          fontWeight: 'bold',
-          color: 'var(--color-text)',
-          marginBottom: '16px',
-          fontFamily: 'var(--font-display)'
-        }}>
+      <section className="bg-[var(--color-beige)] py-8 md:py-12 px-4 text-center">
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--color-text)] mb-4" style={{ fontFamily: 'var(--font-display)' }}>
           Dining & Drinks
         </h1>
-        <p style={{
-          fontSize: '20px',
-          color: 'var(--color-gray)',
-          maxWidth: '800px',
-          margin: '0 auto'
-        }}>
+        <p className="text-base md:text-lg lg:text-xl text-[var(--color-gray)] max-w-3xl mx-auto">
           Embark on a culinary journey through our art-inspired dining experiences
         </p>
       </section>
@@ -57,23 +42,12 @@ export default function DiningPage() {
       {/* Restaurants Grid */}
       <section className="section">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12 text-[var(--color-text)]" style={{ fontFamily: 'var(--font-display)' }}>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-8 md:mb-12 text-[var(--color-text)]" style={{ fontFamily: 'var(--font-display)' }}>
             Our Dining Venues
           </h2>
-          <div style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: '32px',
-            justifyContent: 'center',
-            maxWidth: '1200px',
-            margin: '0 auto'
-          }}>
+          <div className="flex flex-wrap gap-6 md:gap-8 justify-center max-w-7xl mx-auto">
             {restaurants.map((restaurant) => (
-              <div key={restaurant.id} style={{
-                width: '100%',
-                maxWidth: '350px',
-                minWidth: '280px'
-              }}>
+              <div key={restaurant.id} className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-21.333px)] max-w-[400px]">
                 <RestaurantCard restaurant={restaurant} />
               </div>
             ))}

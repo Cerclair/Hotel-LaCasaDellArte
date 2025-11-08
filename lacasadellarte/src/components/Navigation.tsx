@@ -79,11 +79,11 @@ export default function Navigation() {
       <nav className={`sticky top-0 z-50 bg-[#E8E4D8] shadow-md backdrop-blur-sm transition-transform duration-500 ease-in-out ${
         isVisible ? 'translate-y-0' : '-translate-y-full'
       }`}>
-      <div className="container mx-auto px-6 lg:px-8">
-        <div className="flex items-center justify-between h-24">
+      <div className="container mx-auto px-4 md:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-20 md:h-24">
           {/* Logo and Brand Name */}
-          <Link href="/" className="flex items-center gap-4 transition-all duration-300 group">
-            <div className="relative w-16 h-16 rounded-full overflow-hidden shadow-lg nav-logo-ring" style={{ borderRadius: '50%', width: '64px', height: '64px', minWidth: '64px', minHeight: '64px' }}>
+          <Link href="/" className="flex items-center gap-2 md:gap-4 transition-all duration-300 group">
+            <div className="relative w-12 h-12 md:w-16 md:h-16 rounded-full overflow-hidden shadow-lg nav-logo-ring" style={{ borderRadius: '50%' }}>
               <Image
                 src="/logo/logo.png"
                 alt="La Casa Dell'Arte Logo"
@@ -93,10 +93,10 @@ export default function Navigation() {
               />
             </div>
             <div className="flex flex-col">
-              <span className="text-2xl lg:text-3xl font-bold text-[var(--color-text)] tracking-tight" style={{ fontFamily: "'Brittany Signature', cursive", fontSize: '1.8rem', lineHeight: '1.5' }}>
+              <span className="text-lg md:text-2xl lg:text-3xl font-bold text-[var(--color-text)] tracking-tight" style={{ fontFamily: "'Brittany Signature', cursive", lineHeight: '1.5' }}>
                 La Casa Dell&apos;Arte
               </span>
-              <span className="text-xs text-[var(--color-accent)] font-light tracking-widest uppercase">
+              <span className="text-[10px] md:text-xs text-[var(--color-accent)] font-light tracking-widest uppercase">
                 Artistic Hospitality
               </span>
             </div>
