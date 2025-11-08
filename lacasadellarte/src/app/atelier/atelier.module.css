@@ -114,7 +114,16 @@
   text-align: center;
 }
 
-
+/* Description Section */
+.textGray {
+  max-width: 48rem;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 1.125rem;
+  color: var(--color-gray);
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+}
 
 .badge {
   display: inline-flex;
