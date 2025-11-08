@@ -174,26 +174,32 @@ export function HotelFilter({ onChange }: { onChange?: (filters: FilterState) =>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8 divide-x-0 lg:divide-x lg:divide-border bg-[var(--color-beige-light)] shadow-md p-5 border-2 border-[var(--color-gold)]">
             {/* Date Range Picker */}
             <div className="lg:col-span-2 relative p-2 group">
-              <label className="block text-xs font-semibold text-foreground/70 uppercase tracking-wider mb-3 transition-colors duration-200 group-hover:text-[var(--color-gold)] group-focus-within:text-[var(--color-gold)]">
+              <label className="block text-xs font-semibold text-foreground/70 uppercase tracking-wider mb-3 transition-colors duration-200 group-hover:text-[#8B7355] group-focus-within:text-[#8B7355]">
                 Check-in / Check-out
               </label>
-              <button
-                onClick={() => setShowDatePicker(!showDatePicker)}
-                className="w-full px-4 py-3 bg-[var(--color-beige)] border border-border rounded-lg text-left text-sm font-medium text-foreground hover:bg-[var(--color-beige)]/90 transition-all duration-200 flex items-center justify-between shadow-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-gold)] group-hover:shadow group-hover:-translate-y-[1px]"
-              >
-                <span className="flex items-center gap-2">
-                  <Calendar className="w-4 h-4 text-primary transition-transform duration-200 group-hover:scale-110 group-focus-within:scale-110" />
-                  <span>
-                    {filters.dateRange.checkIn ? formatDate(filters.dateRange.checkIn) : "Check-in"} →{" "}
-                    {filters.dateRange.checkOut ? formatDate(filters.dateRange.checkOut) : "Check-out"}
+              <div className="relative group/date">
+                {/* Icon */}
+                <Calendar className="w-4 h-4 text-[#8B7355] absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none transition-all duration-300 group-hover/date:scale-110 group-focus-within/date:scale-110" />
+                {/* Chevron */}
+                <svg aria-hidden="true" className="w-4 h-4 text-[#8B7355] absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none transition-transform duration-300 group-hover/date:translate-y-[2px]" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M6 8l4 4 4-4" />
+                </svg>
+                <button
+                  onClick={() => setShowDatePicker(!showDatePicker)}
+                  className="w-full pl-12 pr-10 py-3 rounded-xl text-sm font-medium text-foreground text-left cursor-pointer appearance-none transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[var(--color-gold)] bg-gradient-to-r from-[var(--color-beige-light)] to-[var(--color-beige)] shadow-[inset_0_1px_0_rgba(255,255,255,0.6),0_1px_2px_rgba(0,0,0,0.06)] border border-[var(--color-beige)] hover:shadow-md hover:border-[var(--color-gold)] group-hover/date:border-[var(--color-gold)] flex items-center justify-between"
+                >
+                  <span className="flex items-center gap-2">
+                    <span>
+                      {filters.dateRange.checkIn ? formatDate(filters.dateRange.checkIn) : "Check-in"} → {filters.dateRange.checkOut ? formatDate(filters.dateRange.checkOut) : "Check-out"}
+                    </span>
                   </span>
-                </span>
-                {getDurationDays() > 0 && (
-                  <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded">
-                    {getDurationDays()} nights
-                  </span>
-                )}
-              </button>
+                  {getDurationDays() > 0 && (
+                    <span className="text-xs bg-[#8B7355]/10 text-[#8B7355] px-2 py-1 rounded">
+                      {getDurationDays()} nights
+                    </span>
+                  )}
+                </button>
+              </div>
 
               {/* Date Picker Dropdown */}
               {showDatePicker && (
@@ -275,15 +281,19 @@ export function HotelFilter({ onChange }: { onChange?: (filters: FilterState) =>
 
             {/* Room Type */}
             <div className="p-2 group">
-              <label className="text-xs font-semibold text-foreground/70 uppercase tracking-wider mb-3 transition-colors duration-200 group-hover:text-[var(--color-gold)] group-focus-within:text-[var(--color-gold)]">
+              <label className="text-xs font-semibold text-foreground/70 uppercase tracking-wider mb-3 transition-colors duration-200 group-hover:text-[#8B7355] group-focus-within:text-[#8B7355]">
                 Room Type
               </label>
-              <div className="relative">
-                <Building2 className="w-4 h-4 text-primary absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none transition-transform duration-200 group-hover:scale-110 group-focus-within:scale-110 z-10" />
+              <div className="relative group/select">
+                <Building2 className="w-4 h-4 text-[#8B7355] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none transition-all duration-300 group-hover/select:scale-110 group-focus-within/select:scale-110 z-10" />
+                {/* Chevron Indicator */}
+                <svg aria-hidden="true" className="w-4 h-4 text-[#8B7355] absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none transition-transform duration-300 group-hover/select:translate-y-[2px] z-10" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M6 8l4 4 4-4" />
+                </svg>
                 <select
                   value={filters.roomType}
                   onChange={(e) => setFilters((prev) => ({ ...prev, roomType: e.target.value }))}
-                  className="w-full pl-10 pr-4 py-3 bg-[var(--color-beige)] border border-border rounded-lg text-sm font-medium text-foreground appearance-none cursor-pointer hover:bg-[var(--color-beige)]/90 transition-all duration-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-gold)] group-hover:shadow"
+                  className="w-full pl-10 pr-10 py-3 rounded-xl text-sm font-medium text-foreground cursor-pointer appearance-none transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[var(--color-gold)] bg-gradient-to-r from-[var(--color-beige-light)] to-[var(--color-beige)] shadow-[inset_0_1px_0_rgba(255,255,255,0.6),0_1px_2px_rgba(0,0,0,0.06)] border border-[var(--color-beige)] hover:shadow-md hover:border-[var(--color-gold)] group-hover/select:border-[var(--color-gold)]"
                 >
                   {roomTypes.map((type) => (
                     <option key={type.value} value={type.value}>
@@ -296,15 +306,18 @@ export function HotelFilter({ onChange }: { onChange?: (filters: FilterState) =>
 
             {/* Bed Type */}
             <div className="p-2 group">
-              <label className="text-xs font-semibold text-foreground/70 uppercase tracking-wider mb-3 transition-colors duration-200 group-hover:text-[var(--color-gold)] group-focus-within:text-[var(--color-gold)]">
+              <label className="text-xs font-semibold text-foreground/70 uppercase tracking-wider mb-3 transition-colors duration-200 group-hover:text-[#8B7355] group-focus-within:text-[#8B7355]">
                 Bed Type
               </label>
-              <div className="relative">
-                <BedDouble className="w-4 h-4 text-primary absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none transition-transform duration-200 group-hover:scale-110 group-focus-within:scale-110 z-10" />
+              <div className="relative group/select">
+                <BedDouble className="w-4 h-4 text-[#8B7355] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none transition-all duration-300 group-hover/select:scale-110 group-focus-within/select:scale-110 z-10" />
+                <svg aria-hidden="true" className="w-4 h-4 text-[#8B7355] absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none transition-transform duration-300 group-hover/select:translate-y-[2px] z-10" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M6 8l4 4 4-4" />
+                </svg>
                 <select
                   value={filters.bedType}
                   onChange={(e) => setFilters((prev) => ({ ...prev, bedType: e.target.value }))}
-                  className="w-full pl-10 pr-4 py-3 bg-[var(--color-beige)] border border-border rounded-lg text-sm font-medium text-foreground appearance-none cursor-pointer hover:bg-[var(--color-beige)]/90 transition-all duration-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-gold)] group-hover:shadow"
+                  className="w-full pl-10 pr-10 py-3 rounded-xl text-sm font-medium text-foreground cursor-pointer appearance-none transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[var(--color-gold)] bg-gradient-to-r from-[var(--color-beige-light)] to-[var(--color-beige)] shadow-[inset_0_1px_0_rgba(255,255,255,0.6),0_1px_2px_rgba(0,0,0,0.06)] border border-[var(--color-beige)] hover:shadow-md hover:border-[var(--color-gold)] group-hover/select:border-[var(--color-gold)]"
                 >
                   {bedTypes.map((type) => (
                     <option key={type.value} value={type.value}>
@@ -317,22 +330,24 @@ export function HotelFilter({ onChange }: { onChange?: (filters: FilterState) =>
 
             {/* Guest Selector */}
             <div className="relative p-2 group">
-              <label className="block text-xs font-semibold text-foreground/70 uppercase tracking-wider mb-3 transition-colors duration-200 group-hover:text-[var(--color-gold)] group-focus-within:text-[var(--color-gold)]">
+              <label className="block text-xs font-semibold text-foreground/70 uppercase tracking-wider mb-3 transition-colors duration-200 group-hover:text-[#8B7355] group-focus-within:text-[#8B7355]">
                 Guests
               </label>
-              <button
-                onClick={() => setShowGuestPicker(!showGuestPicker)}
-                className="w-full px-4 py-3 bg-[var(--color-beige)] border border-border rounded-lg text-left text-sm font-medium text-foreground hover:bg-[var(--color-beige)]/90 transition-all duration-200 flex items-center justify-between shadow-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-gold)] group-hover:shadow group-hover:-translate-y-[1px]"
-              >
-                <span className="flex items-center gap-2">
-                  <Users className="w-4 h-4 text-primary transition-transform duration-200 group-hover:scale-110 group-focus-within:scale-110" />
+              <div className="relative group/guests">
+                <Users className="w-4 h-4 text-[#8B7355] absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none transition-all duration-300 group-hover/guests:scale-110 group-focus-within/guests:scale-110" />
+                <svg aria-hidden="true" className="w-4 h-4 text-[#8B7355] absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none transition-transform duration-300 group-hover/guests:translate-y-[2px]" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M6 8l4 4 4-4" />
+                </svg>
+                <button
+                  onClick={() => setShowGuestPicker(!showGuestPicker)}
+                  className="w-full pl-12 pr-10 py-3 rounded-xl text-sm font-medium text-foreground text-left cursor-pointer appearance-none transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[var(--color-gold)] bg-gradient-to-r from-[var(--color-beige-light)] to-[var(--color-beige)] shadow-[inset_0_1px_0_rgba(255,255,255,0.6),0_1px_2px_rgba(0,0,0,0.06)] border border-[var(--color-beige)] hover:shadow-md hover:border-[var(--color-gold)] group-hover/guests:border-[var(--color-gold)] flex items-center justify-between"
+                >
                   <span>
                     {filters.guests.adults} {filters.guests.adults === 1 ? "Adult" : "Adults"}
-                    {filters.guests.children > 0 &&
-                      `, ${filters.guests.children} ${filters.guests.children === 1 ? "Child" : "Children"}`}
+                    {filters.guests.children > 0 && `, ${filters.guests.children} ${filters.guests.children === 1 ? "Child" : "Children"}`}
                   </span>
-                </span>
-              </button>
+                </button>
+              </div>
 
               {/* Guest Picker Dropdown */}
               {showGuestPicker && (
