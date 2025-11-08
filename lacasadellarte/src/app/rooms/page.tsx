@@ -166,7 +166,7 @@ export default function RoomsPage() {
                     letterSpacing: '0.15em'
                   }}
                 >
-                  La Casa Dell'Arte
+                  La Casa Dell&apos;Arte
                 </h2>
 
                 {/* Decorative Divider */}
