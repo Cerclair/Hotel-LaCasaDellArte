@@ -6,6 +6,8 @@ import { useSearchParams } from 'next/navigation';
 
 function BookingContent() {
   const searchParams = useSearchParams();
+  // Payment option state: 'now' (default) or 'counter'
+  const [paymentOption, setPaymentOption] = useState<'now' | 'counter'>('now');
   const [formData, setFormData] = useState({
     // Guest Details
     firstName: '',
@@ -59,7 +61,11 @@ function BookingContent() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Here you would typically send the data to a backend
-    alert('Booking submitted! This is a demo - no actual payment is processed.');
+    if (paymentOption === 'now') {
+      alert('Booking submitted with Pay Now! This is a demo - no actual payment is processed.');
+    } else {
+      alert('Booking submitted with Pay at Counter! This is a demo - no actual payment is processed.');
+    }
   };
 
   return (
@@ -166,84 +172,117 @@ function BookingContent() {
               </form>
             </div>
 
-            {/* Payment Details Section */}
+            {/* Payment Method Selector */}
             <div className="bg-white rounded-lg shadow-lg p-6">
               <h2 className="text-2xl font-bold mb-6 text-[var(--color-text)]" style={{ fontFamily: 'var(--font-display)' }}>
-                Payment Information
+                Payment Method
               </h2>
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-[var(--color-text)] mb-2">
-                    Card Number *
-                  </label>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <label className="flex items-center gap-3 cursor-pointer">
                   <input
-                    type="text"
-                    name="cardNumber"
-                    value={formData.cardNumber}
-                    onChange={handleChange}
-                    required
-                    placeholder="1234 5678 9012 3456"
-                    maxLength={19}
-                    className="w-full px-4 py-2 border border-[var(--color-beige-dark)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] bg-white text-[var(--color-text)]"
+                    type="radio"
+                    name="paymentOption"
+                    value="now"
+                    checked={paymentOption === 'now'}
+                    onChange={() => setPaymentOption('now')}
+                    className="h-4 w-4 text-[var(--color-accent)] focus:ring-[var(--color-accent)]"
                   />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-[var(--color-text)] mb-2">
-                    Cardholder Name *
-                  </label>
+                  <span className="text-[var(--color-text)]">Pay Now</span>
+                </label>
+                <label className="flex items-center gap-3 cursor-pointer">
                   <input
-                    type="text"
-                    name="cardHolder"
-                    value={formData.cardHolder}
-                    onChange={handleChange}
-                    required
-                    placeholder="Name as shown on card"
-                    className="w-full px-4 py-2 border border-[var(--color-beige-dark)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] bg-white text-[var(--color-text)]"
+                    type="radio"
+                    name="paymentOption"
+                    value="counter"
+                    checked={paymentOption === 'counter'}
+                    onChange={() => setPaymentOption('counter')}
+                    className="h-4 w-4 text-[var(--color-accent)] focus:ring-[var(--color-accent)]"
                   />
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-[var(--color-text)] mb-2">
-                      Expiry Date *
-                    </label>
-                    <input
-                      type="text"
-                      name="expiryDate"
-                      value={formData.expiryDate}
-                      onChange={handleChange}
-                      required
-                      placeholder="MM/YY"
-                      maxLength={5}
-                      className="w-full px-4 py-2 border border-[var(--color-beige-dark)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] bg-white text-[var(--color-text)]"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-[var(--color-text)] mb-2">
-                      CVV *
-                    </label>
-                    <input
-                      type="text"
-                      name="cvv"
-                      value={formData.cvv}
-                      onChange={handleChange}
-                      required
-                      placeholder="123"
-                      maxLength={4}
-                      className="w-full px-4 py-2 border border-[var(--color-beige-dark)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] bg-white text-[var(--color-text)]"
-                    />
-                  </div>
-                </div>
-
-                <div className="bg-[var(--color-beige-light)] p-4 rounded-lg">
-                  <p className="text-sm text-[var(--color-gray)]">
-                    <strong>Note:</strong> This is a demo website. No actual payment will be processed.
-                    Your card information is not stored or transmitted.
-                  </p>
-                </div>
+                  <span className="text-[var(--color-text)]">Pay at Counter</span>
+                </label>
               </div>
             </div>
+
+            {/* Payment Details Section */}
+            {paymentOption === 'now' && (
+              <div className="bg-white rounded-lg shadow-lg p-6">
+                <h2 className="text-2xl font-bold mb-6 text-[var(--color-text)]" style={{ fontFamily: 'var(--font-display)' }}>
+                  Payment Information
+                </h2>
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-[var(--color-text)] mb-2">
+                      Card Number *
+                    </label>
+                    <input
+                      type="text"
+                      name="cardNumber"
+                      value={formData.cardNumber}
+                      onChange={handleChange}
+                      required={paymentOption === 'now'}
+                      placeholder="1234 5678 9012 3456"
+                      maxLength={19}
+                      className="w-full px-4 py-2 border border-[var(--color-beige-dark)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] bg-white text-[var(--color-text)]"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-[var(--color-text)] mb-2">
+                      Cardholder Name *
+                    </label>
+                    <input
+                      type="text"
+                      name="cardHolder"
+                      value={formData.cardHolder}
+                      onChange={handleChange}
+                      required={paymentOption === 'now'}
+                      placeholder="Name as shown on card"
+                      className="w-full px-4 py-2 border border-[var(--color-beige-dark)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] bg-white text-[var(--color-text)]"
+                    />
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-[var(--color-text)] mb-2">
+                        Expiry Date *
+                      </label>
+                      <input
+                        type="text"
+                        name="expiryDate"
+                        value={formData.expiryDate}
+                        onChange={handleChange}
+                        required={paymentOption === 'now'}
+                        placeholder="MM/YY"
+                        maxLength={5}
+                        className="w-full px-4 py-2 border border-[var(--color-beige-dark)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] bg-white text-[var(--color-text)]"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-[var(--color-text)] mb-2">
+                        CVV *
+                      </label>
+                      <input
+                        type="text"
+                        name="cvv"
+                        value={formData.cvv}
+                        onChange={handleChange}
+                        required={paymentOption === 'now'}
+                        placeholder="123"
+                        maxLength={4}
+                        className="w-full px-4 py-2 border border-[var(--color-beige-dark)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] bg-white text-[var(--color-text)]"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="bg-[var(--color-beige-light)] p-4 rounded-lg">
+                    <p className="text-sm text-[var(--color-gray)]">
+                      <strong>Note:</strong> This is a demo website. No actual payment will be processed.
+                      Your card information is not stored or transmitted.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* Submit Button */}
             <button
