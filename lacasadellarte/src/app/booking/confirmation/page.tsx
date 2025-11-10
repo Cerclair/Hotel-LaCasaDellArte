@@ -22,6 +22,12 @@ export default function BookingConfirmationPage() {
   const checkIn = params.get('checkIn') ? new Date(params.get('checkIn') as string) : null;
   const checkOut = params.get('checkOut') ? new Date(params.get('checkOut') as string) : null;
 
+  // Avoid duplicate wording like "Deluxe Room Room" – append "Room" only if not already present.
+  const baseRoomType = roomType.trim();
+  const displayRoomType = baseRoomType
+    ? /\broom\b/i.test(baseRoomType) ? baseRoomType : `${baseRoomType} Room`
+    : 'Room';
+
   const formatPrice = (value: number) =>
     new Intl.NumberFormat('en-LK', { style: 'currency', currency: 'LKR', minimumFractionDigits: 0 }).format(value);
 
@@ -67,7 +73,7 @@ export default function BookingConfirmationPage() {
               ) : null}
               <div className={image ? 'md:col-span-2' : 'md:col-span-3'}>
                 <h2 className="text-xl font-semibold text-[var(--color-text)]">{roomName}</h2>
-                <p className="text-sm text-[var(--color-gray)]">{roomType} Room</p>
+                <p className="text-sm text-[var(--color-gray)]">{displayRoomType}</p>
 
                 <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                   <div className="flex items-center justify-between sm:justify-start sm:gap-3">
