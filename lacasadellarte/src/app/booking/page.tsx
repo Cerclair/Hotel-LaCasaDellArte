@@ -2,10 +2,11 @@
 
 import { useState, Suspense } from 'react';
 import Image from 'next/image';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 
 function BookingContent() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   // Payment option state: 'now' (default) or 'counter'
   const [paymentOption, setPaymentOption] = useState<'now' | 'counter'>('now');
   const [formData, setFormData] = useState({
@@ -22,6 +23,7 @@ function BookingContent() {
     expiryDate: '',
     cvv: ''
   });
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   // Get booking details from URL params
   const roomName = searchParams.get('roomName') || '';
@@ -56,16 +58,98 @@ function BookingContent() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    setErrors(prev => ({ ...prev, [name]: '' }));
+  };
+
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {};
+    // Guest validations
+    if (!formData.firstName.trim()) newErrors.firstName = 'First name is required';
+    if (!formData.lastName.trim()) newErrors.lastName = 'Last name is required';
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = 'Enter a valid email address';
+    }
+    if (!formData.phone.trim()) {
+      newErrors.phone = 'Phone number is required';
+    } else if (!/^\+?[0-9\s\-()]{7,20}$/.test(formData.phone)) {
+      newErrors.phone = 'Enter a valid phone number';
+    }
+    if (!formData.country.trim()) newErrors.country = 'Country is required';
+
+    // Date validation
+    if (isNaN(checkIn.getTime())) newErrors.checkIn = 'Invalid check-in date';
+    if (isNaN(checkOut.getTime())) newErrors.checkOut = 'Invalid check-out date';
+    if (!newErrors.checkIn && !newErrors.checkOut && checkOut <= checkIn) {
+      newErrors.checkOut = 'Check-out must be after check-in';
+    }
+
+    // Payment validations only if paying now
+    if (paymentOption === 'now') {
+      const digitsOnly = formData.cardNumber.replace(/\s+/g, '');
+      if (!digitsOnly) {
+        newErrors.cardNumber = 'Card number is required';
+      } else if (!/^\d{13,19}$/.test(digitsOnly)) {
+        newErrors.cardNumber = 'Enter a valid card number (13-19 digits)';
+      }
+      if (!formData.cardHolder.trim()) newErrors.cardHolder = 'Cardholder name is required';
+      if (!formData.expiryDate.trim()) {
+        newErrors.expiryDate = 'Expiry date is required';
+      } else if (!/^(0[1-9]|1[0-2])\/(\d{2})$/.test(formData.expiryDate)) {
+        newErrors.expiryDate = 'Use MM/YY format';
+      } else {
+        // Basic expiry check (not expired)
+        const [mm, yy] = formData.expiryDate.split('/');
+        const expMonth = parseInt(mm, 10);
+        const expYear = 2000 + parseInt(yy, 10);
+        const now = new Date();
+        const endOfMonth = new Date(expYear, expMonth, 0); // last day of expMonth
+        if (endOfMonth < now) {
+          newErrors.expiryDate = 'Card is expired';
+        }
+      }
+      if (!formData.cvv.trim()) {
+        newErrors.cvv = 'CVV is required';
+      } else if (!/^\d{3,4}$/.test(formData.cvv)) {
+        newErrors.cvv = 'CVV must be 3 or 4 digits';
+      }
+    }
+
+    setErrors(newErrors);
+    return newErrors;
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically send the data to a backend
-    if (paymentOption === 'now') {
-      alert('Booking submitted with Pay Now! This is a demo - no actual payment is processed.');
-    } else {
-      alert('Booking submitted with Pay at Counter! This is a demo - no actual payment is processed.');
+    const formErrors = validateForm();
+    if (Object.keys(formErrors).length > 0) {
+      const firstKey = Object.keys(formErrors)[0];
+      const el = document.querySelector<HTMLInputElement | HTMLTextAreaElement>(`[name="${firstKey}"]`);
+      el?.focus();
+      return;
     }
+    // Generate booking reference
+    const reference = `LCA-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
+    // Build params for confirmation page (never include card data)
+    const params = new URLSearchParams({
+      ref: reference,
+      roomName,
+      roomType,
+      price: String(price),
+      adults: String(adults),
+      children: String(children),
+      nights: String(nights),
+      total: String(totalPrice),
+      payment: paymentOption,
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email,
+    });
+    if (roomImage) params.set('image', roomImage);
+    if (checkIn) params.set('checkIn', checkIn.toISOString());
+    if (checkOut) params.set('checkOut', checkOut.toISOString());
+    router.push(`/booking/confirmation?${params.toString()}`);
   };
 
   return (
@@ -97,6 +181,7 @@ function BookingContent() {
                       required
                       className="w-full px-4 py-2 border border-[var(--color-beige-dark)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] bg-white text-[var(--color-text)]"
                     />
+                    {errors.firstName && <p className="text-xs text-red-600 mt-1" role="alert">{errors.firstName}</p>}
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-[var(--color-text)] mb-2">
@@ -110,6 +195,7 @@ function BookingContent() {
                       required
                       className="w-full px-4 py-2 border border-[var(--color-beige-dark)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] bg-white text-[var(--color-text)]"
                     />
+                    {errors.lastName && <p className="text-xs text-red-600 mt-1" role="alert">{errors.lastName}</p>}
                   </div>
                 </div>
 
@@ -125,6 +211,7 @@ function BookingContent() {
                     required
                     className="w-full px-4 py-2 border border-[var(--color-beige-dark)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] bg-white text-[var(--color-text)]"
                   />
+                  {errors.email && <p className="text-xs text-red-600 mt-1" role="alert">{errors.email}</p>}
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-4">
@@ -140,6 +227,7 @@ function BookingContent() {
                       required
                       className="w-full px-4 py-2 border border-[var(--color-beige-dark)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] bg-white text-[var(--color-text)]"
                     />
+                    {errors.phone && <p className="text-xs text-red-600 mt-1" role="alert">{errors.phone}</p>}
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-[var(--color-text)] mb-2">
@@ -153,6 +241,7 @@ function BookingContent() {
                       required
                       className="w-full px-4 py-2 border border-[var(--color-beige-dark)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] bg-white text-[var(--color-text)]"
                     />
+                    {errors.country && <p className="text-xs text-red-600 mt-1" role="alert">{errors.country}</p>}
                   </div>
                 </div>
 
@@ -224,6 +313,7 @@ function BookingContent() {
                       maxLength={19}
                       className="w-full px-4 py-2 border border-[var(--color-beige-dark)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] bg-white text-[var(--color-text)]"
                     />
+                    {errors.cardNumber && <p className="text-xs text-red-600 mt-1" role="alert">{errors.cardNumber}</p>}
                   </div>
 
                   <div>
@@ -239,6 +329,7 @@ function BookingContent() {
                       placeholder="Name as shown on card"
                       className="w-full px-4 py-2 border border-[var(--color-beige-dark)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] bg-white text-[var(--color-text)]"
                     />
+                    {errors.cardHolder && <p className="text-xs text-red-600 mt-1" role="alert">{errors.cardHolder}</p>}
                   </div>
 
                   <div className="grid md:grid-cols-2 gap-4">
@@ -256,6 +347,7 @@ function BookingContent() {
                         maxLength={5}
                         className="w-full px-4 py-2 border border-[var(--color-beige-dark)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] bg-white text-[var(--color-text)]"
                       />
+                      {errors.expiryDate && <p className="text-xs text-red-600 mt-1" role="alert">{errors.expiryDate}</p>}
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-[var(--color-text)] mb-2">
@@ -271,6 +363,7 @@ function BookingContent() {
                         maxLength={4}
                         className="w-full px-4 py-2 border border-[var(--color-beige-dark)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] bg-white text-[var(--color-text)]"
                       />
+                      {errors.cvv && <p className="text-xs text-red-600 mt-1" role="alert">{errors.cvv}</p>}
                     </div>
                   </div>
 
@@ -281,6 +374,17 @@ function BookingContent() {
                     </p>
                   </div>
                 </div>
+              </div>
+            )}
+
+            {/* Date Errors (if any) */}
+            {(errors.checkIn || errors.checkOut) && (
+              <div className="bg-red-50 border border-red-200 text-red-700 p-4 rounded">
+                <p className="font-medium">Please fix the date issue:</p>
+                <ul className="list-disc ml-5 text-sm">
+                  {errors.checkIn && <li>{errors.checkIn}</li>}
+                  {errors.checkOut && <li>{errors.checkOut}</li>}
+                </ul>
               </div>
             )}
 
