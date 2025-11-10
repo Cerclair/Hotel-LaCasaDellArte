@@ -33,6 +33,8 @@ export default function RoomsPage() {
     bedType: 'all',
     guests: { adults: 1, children: 0 },
   });
+  // Error state to prevent booking without dates
+  const [bookingError, setBookingError] = useState<string | null>(null);
 
   type Room = {
     id: string;
@@ -101,6 +103,14 @@ export default function RoomsPage() {
   const router = useRouter();
 
   const handleBook = (room: Room) => {
+    // Guard: require both check-in and check-out before proceeding
+    if (!activeFilters.dateRange.checkIn || !activeFilters.dateRange.checkOut) {
+      setBookingError('Please select both check-in and check-out dates before booking.');
+      // Scroll user to the filter section to pick dates
+      const el = document.getElementById('rooms-filter');
+      el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
     const params = new URLSearchParams();
     params.set('roomName', room.title);
     params.set('roomType', room.roomTypeLabel);
@@ -119,6 +129,13 @@ export default function RoomsPage() {
     const url = `/booking?${params.toString()}`;
     router.push(url);
   };
+
+  // Auto-clear error once both dates are selected
+  useEffect(() => {
+    if (activeFilters.dateRange.checkIn && activeFilters.dateRange.checkOut) {
+      setBookingError(null);
+    }
+  }, [activeFilters.dateRange.checkIn, activeFilters.dateRange.checkOut]);
 
   // Background images for the hero slider (URL encoded for spaces)
   const heroImages = [
@@ -264,6 +281,15 @@ export default function RoomsPage() {
       {/* Hotel Room Filter Section */}
       <section id="rooms-filter" className="relative mt-12 z-20">
         <HotelFilter onChange={setActiveFilters} />
+        {bookingError && (
+          <div
+            role="alert"
+            aria-live="polite"
+            className="mt-4 rounded-md border border-red-300 bg-red-50 text-red-800 px-4 py-3"
+          >
+            {bookingError}
+          </div>
+        )}
       </section>
 
   {/* Rooms Showcase Section */}
