@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
+import { generateInvoicePDF } from '@/lib/invoice';
 
 export default function BookingConfirmationPage() {
   const params = useSearchParams();
@@ -33,6 +34,25 @@ export default function BookingConfirmationPage() {
 
   const formatDate = (date: Date) =>
     date.toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
+
+  const handleDownloadInvoice = async () => {
+    await generateInvoicePDF({
+      reference: ref,
+      firstName,
+      lastName,
+      email,
+      roomName,
+      roomType: displayRoomType,
+      checkIn,
+      checkOut,
+      nights,
+      adults,
+      children,
+      rate: price,
+      total,
+      paymentMethod: payment === 'counter' ? 'counter' : 'now',
+    });
+  };
 
   return (
     <div className="min-h-screen bg-[var(--color-beige)] py-10">
@@ -120,6 +140,13 @@ export default function BookingConfirmationPage() {
               <Link href="/rooms" className="inline-block bg-white border border-[var(--color-beige-dark)] text-[var(--color-text)] px-6 py-3 rounded-sm font-semibold hover:bg-[var(--color-beige-light)] transition-colors">
                 Explore More Rooms
               </Link>
+              <button
+                type="button"
+                onClick={handleDownloadInvoice}
+                className="inline-block bg-[var(--color-beige-light)] border border-[var(--color-beige-dark)] text-[var(--color-text)] px-6 py-3 rounded-sm font-semibold hover:bg-[var(--color-accent)] hover:text-white transition-colors"
+              >
+                Download Invoice (PDF)
+              </button>
             </div>
           </div>
         </div>
