@@ -151,10 +151,9 @@ export default function HotelRoomCard({
           {/* Secondary Link */}
           <button
             onClick={onViewDetails}
-            className="w-full py-2 px-4 rounded-lg font-medium transition-all duration-300 border-2"
+            className="w-full py-2 px-4 rounded-lg font-medium text-white transition-all duration-300 hover:shadow-lg hover:scale-105 active:scale-95"
             style={{
-              borderColor: "#1e3a8a",
-              color: "#1e3a8a",
+              backgroundColor: "#D4AF37",
             }}
           >
             View Details
