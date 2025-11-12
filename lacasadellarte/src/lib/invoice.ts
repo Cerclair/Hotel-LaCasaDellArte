@@ -112,22 +112,46 @@ export async function generateInvoicePDF(data: BookingInvoiceData) {
   // Section: Booking Summary Table
   cursorY += 10;
   if (autoTableFn) {
+    // Combine room name and type with smart de-duplication
+    const roomLabel = (data.roomName || '').trim();
+    const typeLabel = (data.roomType || '').trim();
+    const normalize = (s: string) =>
+      s
+        .toLowerCase()
+        .replace(/[\u2013\u2014-]/g, ' ') // dashes to space
+        .replace(/\brooms?\b/g, '') // drop room/rooms word
+        .replace(/\s+/g, ' ') // collapse spaces
+        .trim();
+    let roomTypeCombined = '—';
+    if (roomLabel && typeLabel) {
+      const nRoom = normalize(roomLabel);
+      const nType = normalize(typeLabel);
+      const similar = nRoom === nType || nRoom.includes(nType) || nType.includes(nRoom);
+      if (similar) {
+        // Prefer the roomLabel when they are effectively the same
+        roomTypeCombined = roomLabel;
+      } else {
+        roomTypeCombined = `${roomLabel} — ${typeLabel}`;
+      }
+    } else {
+      roomTypeCombined = roomLabel || typeLabel || '—';
+    }
+
     autoTableFn(doc, {
-    startY: cursorY,
-    head: [[ 'Room', 'Type', 'Check-in', 'Check-out', 'Nights', 'Rate', 'Total' ]],
-    body: [[
-      data.roomName || '—',
-      data.roomType || '—',
-      formatDate(data.checkIn),
-      formatDate(data.checkOut),
-      String(data.nights || 1),
-      formatPrice(data.rate || 0),
-      formatPrice(data.total || 0),
-    ]],
-    styles: { font: 'helvetica', fontSize: 10 },
-    headStyles: { fillColor: [139, 115, 85] }, // warm brown tone
-    alternateRowStyles: { fillColor: [245, 241, 236] },
-    margin: { left: marginX, right: marginX },
+      startY: cursorY,
+      head: [[ 'Room Type', 'Check-in', 'Check-out', 'Nights', 'Rate', 'Total' ]],
+      body: [[
+        roomTypeCombined,
+        formatDate(data.checkIn),
+        formatDate(data.checkOut),
+        String(data.nights || 1),
+        formatPrice(data.rate || 0),
+        formatPrice(data.total || 0),
+      ]],
+      styles: { font: 'helvetica', fontSize: 10 },
+      headStyles: { fillColor: [139, 115, 85] }, // warm brown tone
+      alternateRowStyles: { fillColor: [245, 241, 236] },
+      margin: { left: marginX, right: marginX },
     } as AutoTableUserOptions);
   }
 
