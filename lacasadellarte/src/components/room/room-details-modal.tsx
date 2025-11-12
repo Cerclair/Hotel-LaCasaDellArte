@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import { X } from "lucide-react";
 
@@ -18,6 +18,16 @@ export interface RoomDetailsData {
   bedType?: string;
 }
 
+type ZoomApi = {
+  setTransform: (
+    x: number,
+    y: number,
+    scale: number,
+    animationTime?: number,
+    animationType?: string
+  ) => void;
+};
+
 interface RoomDetailsModalProps {
   open: boolean;
   onClose: () => void;
@@ -26,6 +36,17 @@ interface RoomDetailsModalProps {
 
 export default function RoomDetailsModal({ open, onClose, room }: RoomDetailsModalProps) {
   const backdropRef = useRef<HTMLDivElement | null>(null);
+  const imageContainerRef = useRef<HTMLDivElement | null>(null);
+  const imgRef = useRef<HTMLImageElement | null>(null);
+  const zoomRef = useRef<ZoomApi | null>(null);
+  const [imgReady, setImgReady] = useState(false);
+  const [minScale, setMinScale] = useState(0.1);
+
+  // Reset image readiness when switching rooms or reopening
+  useEffect(() => {
+    setImgReady(false);
+    setMinScale(0.1);
+  }, [room?.image, open]);
 
   // Lock body scroll when open
   useEffect(() => {
@@ -82,11 +103,14 @@ export default function RoomDetailsModal({ open, onClose, room }: RoomDetailsMod
         </button>
 
         {/* Upper: interactive image (50%). Force wrapper/content to fill the allocated area */}
-        <div className="h-1/2 w-full bg-black relative">
+        <div ref={imageContainerRef} className="h-1/2 w-full bg-black relative">
           <TransformWrapper
+            key={room.image}
+            onInit={(ref) => { zoomRef.current = ref as unknown as ZoomApi; }}
             initialScale={1}
-            minScale={1}
-            maxScale={4}
+            minScale={minScale}
+            maxScale={6}
+            limitToBounds
             wheel={{ step: 0.15 }}
             doubleClick={{ disabled: false, step: 1.2 }}
             pinch={{ step: 5 }}
@@ -94,14 +118,46 @@ export default function RoomDetailsModal({ open, onClose, room }: RoomDetailsMod
           >
             <TransformComponent
               wrapperStyle={{ width: '100%', height: '100%', display: 'block' }}
-              contentStyle={{ width: '100%', height: '100%', display: 'block' }}
             >
-              {/* Use plain img to simplify transforms and ensure full coverage */}
+              {/* Transform the image element itself; let it use natural dimensions */}
               <img
+                ref={imgRef}
                 src={room.image}
                 alt={room.title}
-                className="w-full h-full object-cover select-none"
+                className={`block select-none ${imgReady ? 'opacity-100' : 'opacity-0'}`}
+                style={{ maxWidth: 'none', maxHeight: 'none' }}
                 draggable={false}
+                onLoad={() => {
+                  const box = imageContainerRef.current?.getBoundingClientRect();
+                  const img = imgRef.current;
+                  const api = zoomRef.current;
+                  if (!box || !img || !api) { setImgReady(true); return; }
+
+                  const iw = img.naturalWidth || 1;
+                  const ih = img.naturalHeight || 1;
+                  const bw = box.width || 1;
+                  const bh = box.height || 1;
+
+                  // Compute scales
+                  const containScale = Math.min(bw / iw, bh / ih);
+                  const coverScale = Math.max(bw / iw, bh / ih);
+
+                  // Center the image within the container for the chosen scale
+                  const posX = (bw - iw * coverScale) / 2;
+                  const posY = (bh - ih * coverScale) / 2;
+
+                  // Set minScale so user can zoom out to see the whole image
+                  setMinScale(containScale);
+
+                  try {
+                    // Apply transform instantly (no visible animation)
+                    api.setTransform(posX, posY, coverScale, 0);
+                  } catch {
+                    // ignore
+                  }
+
+                  setImgReady(true);
+                }}
               />
             </TransformComponent>
           </TransformWrapper>
