@@ -15,6 +15,7 @@ interface HotelRoomCardProps {
   guests?: number
   size?: string
   onBook?: () => void
+  onViewDetails?: () => void
 }
 
 export default function HotelRoomCard({
@@ -28,6 +29,7 @@ export default function HotelRoomCard({
   guests = 2,
   size = "45 m²",
   onBook,
+  onViewDetails,
 }: HotelRoomCardProps) {
   const [isFavorite, setIsFavorite] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
@@ -148,6 +150,7 @@ export default function HotelRoomCard({
 
           {/* Secondary Link */}
           <button
+            onClick={onViewDetails}
             className="w-full py-2 px-4 rounded-lg font-medium transition-all duration-300 border-2"
             style={{
               borderColor: "#1e3a8a",

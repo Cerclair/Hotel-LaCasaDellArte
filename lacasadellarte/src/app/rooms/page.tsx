@@ -9,6 +9,8 @@ import { CarouselIndicators } from '@/components/ui/carousel-indicators';
 import { HotelFilter } from '@/components/ui/hotel-filter';
 import type { FilterState } from '@/components/ui/hotel-filter';
 import HotelRoomCard from '@/components/room/hotel-room-card';
+import RoomDetailsModal from '@/components/room/room-details-modal';
+import type { RoomDetailsData } from '@/components/room/room-details-modal';
 import { useRouter } from 'next/navigation';
 import {
   Car,
@@ -35,6 +37,9 @@ export default function RoomsPage() {
   });
   // Error state to prevent booking without dates
   const [bookingError, setBookingError] = useState<string | null>(null);
+  // Modal state for room details
+  const [detailsOpen, setDetailsOpen] = useState(false);
+  const [detailsRoom, setDetailsRoom] = useState<RoomDetailsData | null>(null);
 
   type Room = {
     id: string;
@@ -128,6 +133,23 @@ export default function RoomsPage() {
 
     const url = `/booking?${params.toString()}`;
     router.push(url);
+  };
+
+  const handleViewDetails = (room: Room) => {
+    const roomPayload: RoomDetailsData = {
+      image: room.image,
+      roomType: room.roomTypeLabel,
+      title: room.title,
+      description: room.description,
+      price: room.price,
+      currency: 'LKR ',
+      amenities: room.amenities,
+      guests: room.maxGuests,
+      size: room.guestsLabel,
+      bedType: room.bedType === 'king-sofa' ? 'King + Sofa Bed' : room.bedType === 'king' ? 'King Bed' : 'Queen Bed',
+    };
+    setDetailsRoom(roomPayload);
+    setDetailsOpen(true);
   };
 
   // Auto-clear error once both dates are selected
@@ -320,6 +342,7 @@ export default function RoomsPage() {
                 guests={room.maxGuests}
                 size={room.guestsLabel}
                 onBook={() => handleBook(room)}
+                onViewDetails={() => handleViewDetails(room)}
               />
             ))
           ) : (
@@ -379,6 +402,11 @@ export default function RoomsPage() {
         })()}
         </div>
       </section>
+      <RoomDetailsModal
+        open={detailsOpen}
+        onClose={() => setDetailsOpen(false)}
+        room={detailsRoom}
+      />
     </div>
   );
 }
