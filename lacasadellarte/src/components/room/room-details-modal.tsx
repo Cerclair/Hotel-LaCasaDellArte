@@ -142,16 +142,20 @@ export default function RoomDetailsModal({ open, onClose, room }: RoomDetailsMod
                   const containScale = Math.min(bw / iw, bh / ih);
                   const coverScale = Math.max(bw / iw, bh / ih);
 
+                  // Slight overscan to avoid 1px rounding gaps at edges
+                  const overscan = 1.02; // 2% extra zoom to fully cover
+                  const startScale = Math.min(coverScale * overscan, 6);
+
                   // Center the image within the container for the chosen scale
-                  const posX = (bw - iw * coverScale) / 2;
-                  const posY = (bh - ih * coverScale) / 2;
+                  const posX = (bw - iw * startScale) / 2;
+                  const posY = (bh - ih * startScale) / 2;
 
                   // Set minScale so user can zoom out to see the whole image
                   setMinScale(containScale);
 
                   try {
                     // Apply transform instantly (no visible animation)
-                    api.setTransform(posX, posY, coverScale, 0);
+                    api.setTransform(posX, posY, startScale, 0);
                   } catch {
                     // ignore
                   }
