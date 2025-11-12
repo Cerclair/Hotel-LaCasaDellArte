@@ -41,12 +41,88 @@ export default function RoomDetailsModal({ open, onClose, room }: RoomDetailsMod
   const zoomRef = useRef<ZoomApi | null>(null);
   const [imgReady, setImgReady] = useState(false);
   const [minScale, setMinScale] = useState(0.1);
+  const recenterTimerRef = useRef<number | null>(null);
+  const [intrinsic, setIntrinsic] = useState<{ w: number; h: number } | null>(null);
+  const [boxSize, setBoxSize] = useState<{ w: number; h: number } | null>(null);
+  const [initial, setInitial] = useState<{ x: number; y: number; scale: number } | null>(null);
+  const [openNonce, setOpenNonce] = useState(0);
 
   // Reset image readiness when switching rooms or reopening
   useEffect(() => {
     setImgReady(false);
     setMinScale(0.1);
+    // Clear any pending recenter timer when switching
+    if (recenterTimerRef.current) {
+      window.clearTimeout(recenterTimerRef.current);
+      recenterTimerRef.current = null;
+    }
+    setIntrinsic(null);
+    setBoxSize(null);
+    setInitial(null);
+    if (open) setOpenNonce((n) => n + 1);
   }, [room?.image, open]);
+
+  // Observe container size (content box, not affected by CSS transforms)
+  useEffect(() => {
+    if (!imageContainerRef.current) return;
+    const el = imageContainerRef.current;
+    const ro = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const cr = entry.contentRect;
+        setBoxSize({ w: cr.width, h: cr.height });
+      }
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  // Preload image off-DOM to get intrinsic size before mounting the wrapper
+  useEffect(() => {
+    if (!open || !room?.image) return;
+    let mounted = true;
+    const i = new Image();
+    i.src = room.image;
+    i.onload = () => {
+      if (!mounted) return;
+      setIntrinsic({ w: i.naturalWidth || 1, h: i.naturalHeight || 1 });
+      setImgReady(true);
+    };
+    return () => { mounted = false; };
+  }, [room?.image, open]);
+
+  // Ensure we have a non-zero container size quickly on open
+  useEffect(() => {
+    if (!open || !imageContainerRef.current) return;
+    const el = imageContainerRef.current;
+    const setNow = () => {
+      const w = el.clientWidth;
+      const h = el.clientHeight;
+      if (w && h) setBoxSize({ w, h });
+    };
+    setNow();
+    const raf = requestAnimationFrame(setNow);
+    const t = window.setTimeout(setNow, 340);
+    return () => {
+      cancelAnimationFrame(raf);
+      clearTimeout(t);
+    };
+  }, [open]);
+
+  // Compute the initial transform once both sizes are known
+  useEffect(() => {
+    if (!open || !intrinsic || !boxSize) return;
+    const { w: iw, h: ih } = intrinsic;
+    const { w: bw, h: bh } = boxSize;
+    if (!iw || !ih || !bw || !bh) return;
+    const contain = Math.min(bw / iw, bh / ih);
+    const cover = Math.max(bw / iw, bh / ih);
+    const overscan = 1.02;
+    const scale = Math.min(cover * overscan, 6);
+    const x = (bw - iw * scale) / 2;
+    const y = (bh - ih * scale) / 2;
+    setMinScale(contain);
+    setInitial({ x, y, scale });
+  }, [open, intrinsic, boxSize]);
 
   // Lock body scroll when open
   useEffect(() => {
@@ -104,67 +180,43 @@ export default function RoomDetailsModal({ open, onClose, room }: RoomDetailsMod
 
         {/* Upper: interactive image (50%). Force wrapper/content to fill the allocated area */}
         <div ref={imageContainerRef} className="h-1/2 w-full bg-black relative">
-          <TransformWrapper
-            key={room.image}
-            onInit={(ref) => { zoomRef.current = ref as unknown as ZoomApi; }}
-            initialScale={1}
-            minScale={minScale}
-            maxScale={6}
-            limitToBounds
-            wheel={{ step: 0.15 }}
-            doubleClick={{ disabled: false, step: 1.2 }}
-            pinch={{ step: 5 }}
-            panning={{ velocityDisabled: true }}
-          >
-            <TransformComponent
-              wrapperStyle={{ width: '100%', height: '100%', display: 'block' }}
+          {initial ? (
+            <TransformWrapper
+              key={`${room.image}-${boxSize?.w || 0}x${boxSize?.h || 0}-${openNonce}`}
+              onInit={(ref) => { zoomRef.current = ref as unknown as ZoomApi; }}
+              initialScale={initial.scale}
+              initialPositionX={initial.x}
+              initialPositionY={initial.y}
+              minScale={minScale}
+              maxScale={6}
+              limitToBounds
+              wheel={{ step: 0.15 }}
+              doubleClick={{ disabled: false, step: 1.2 }}
+              pinch={{ step: 5 }}
+              panning={{ velocityDisabled: true }}
             >
-              {/* Transform the image element itself; let it use natural dimensions */}
+              <TransformComponent wrapperStyle={{ width: '100%', height: '100%', display: 'block' }}>
+                <img
+                  ref={imgRef}
+                  src={room.image}
+                  alt={room.title}
+                  className={`block select-none ${imgReady ? 'opacity-100' : 'opacity-0'}`}
+                  style={{ maxWidth: 'none', maxHeight: 'none' }}
+                  draggable={false}
+                />
+              </TransformComponent>
+            </TransformWrapper>
+          ) : (
+            // Fallback: show a non-interactive cover image so the area isn't blank
+            imgReady ? (
               <img
-                ref={imgRef}
                 src={room.image}
                 alt={room.title}
-                className={`block select-none ${imgReady ? 'opacity-100' : 'opacity-0'}`}
-                style={{ maxWidth: 'none', maxHeight: 'none' }}
+                className="w-full h-full object-cover opacity-100"
                 draggable={false}
-                onLoad={() => {
-                  const box = imageContainerRef.current?.getBoundingClientRect();
-                  const img = imgRef.current;
-                  const api = zoomRef.current;
-                  if (!box || !img || !api) { setImgReady(true); return; }
-
-                  const iw = img.naturalWidth || 1;
-                  const ih = img.naturalHeight || 1;
-                  const bw = box.width || 1;
-                  const bh = box.height || 1;
-
-                  // Compute scales
-                  const containScale = Math.min(bw / iw, bh / ih);
-                  const coverScale = Math.max(bw / iw, bh / ih);
-
-                  // Slight overscan to avoid 1px rounding gaps at edges
-                  const overscan = 1.02; // 2% extra zoom to fully cover
-                  const startScale = Math.min(coverScale * overscan, 6);
-
-                  // Center the image within the container for the chosen scale
-                  const posX = (bw - iw * startScale) / 2;
-                  const posY = (bh - ih * startScale) / 2;
-
-                  // Set minScale so user can zoom out to see the whole image
-                  setMinScale(containScale);
-
-                  try {
-                    // Apply transform instantly (no visible animation)
-                    api.setTransform(posX, posY, startScale, 0);
-                  } catch {
-                    // ignore
-                  }
-
-                  setImgReady(true);
-                }}
               />
-            </TransformComponent>
-          </TransformWrapper>
+            ) : null
+          )}
         </div>
 
         {/* Lower: room info (50%) */}
