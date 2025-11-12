@@ -36,7 +36,17 @@ type JsPdfDoc = {
   save: (filename: string) => void;
   splitTextToSize: (text: string, maxSize: number) => string[];
   setTextColor: (r: number | string, g?: number, b?: number) => void;
+  addImage: (imageData: string | HTMLImageElement | HTMLCanvasElement | Uint8Array, format: string, x: number, y: number, width: number, height: number) => void;
+  setDrawColor: (r: number, g?: number, b?: number) => void;
+  setFillColor: (r: number, g?: number, b?: number) => void;
+  roundedRect?: (x: number, y: number, w: number, h: number, rx: number, ry: number, style?: 'S' | 'F' | 'FD' | 'DF') => void;
+  internal?: { pageSize?: { getWidth?: () => number; getHeight?: () => number } };
   lastAutoTable?: { finalY?: number };
+  // Optional advanced graphics state in jsPDF v2+
+  setGState?: (state: unknown) => void;
+  GState?: new (options: unknown) => unknown;
+  saveGraphicsState?: () => void;
+  restoreGraphicsState?: () => void;
 };
 type AutoTableFn = (doc: JsPdfDoc, options: AutoTableUserOptions) => unknown;
 
@@ -49,19 +59,125 @@ export async function generateInvoicePDF(data: BookingInvoiceData) {
   const doc = new jsPDF({ unit: 'pt', format: 'a4' }) as unknown as JsPdfDoc;
   const marginX = 40;
   let cursorY = 40;
+  // HEADER (no logo). Left: Invoice info. Right: Hotel name and contact.
+  const headerRightX = 400;
+  // Hotel name on the right
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(18);
+  doc.text("La Casa Dell'Arte", headerRightX, cursorY + 24);
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(10);
+  doc.text('Galle Road, Colombo 03, Sri Lanka', headerRightX, cursorY + 40);
+  doc.text('Tel: +94 718530994', headerRightX, cursorY + 54);
+  doc.text('Email: ladellaarte@gmail.com', headerRightX, cursorY + 68);
 
+  // Left side: Invoice title + generated + reference
   const title = 'Booking Invoice';
+  const generatedAt = data.generatedAt || new Date();
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(20);
-  doc.text(title, marginX, cursorY);
-
-  doc.setFontSize(10);
+  doc.text(title, marginX, cursorY + 24);
   doc.setFont('helvetica', 'normal');
-  const generatedAt = data.generatedAt || new Date();
-  cursorY += 18;
-  doc.text(`Generated: ${generatedAt.toLocaleString()}`, marginX, cursorY);
-  cursorY += 14;
-  doc.text(`Reference: ${data.reference}`, marginX, cursorY);
+  doc.setFontSize(10);
+  doc.text(`Generated: ${generatedAt.toLocaleString()}`, marginX, cursorY + 40);
+  doc.text(`Reference: ${data.reference}`, marginX, cursorY + 54);
+
+  cursorY += 80;
+
+  // Prepare for body content
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(10);
+
+  // PAID WATERMARK (if paid online) - draw supplied "paid" stamp image as a faint watermark
+  if (data.paymentMethod === 'now') {
+    try {
+      // Try common locations in /public
+      const candidates = ['/logo/paid-stamp.png', '/assets/paid-stamp.png', '/paid-stamp.png'];
+      let dataUrl: string | null = null;
+      for (const url of candidates) {
+        try {
+          const resp = await fetch(url);
+          if (resp.ok) {
+            const blob = await resp.blob();
+            dataUrl = await new Promise<string | null>((resolve) => {
+              const reader = new FileReader();
+              reader.onloadend = () => resolve(reader.result as string);
+              reader.onerror = () => resolve(null);
+              reader.readAsDataURL(blob);
+            });
+          }
+          if (dataUrl) break;
+        } catch {
+          // continue to next candidate
+        }
+      }
+
+      if (dataUrl) {
+        const pageW = doc.internal?.pageSize?.getWidth?.() ?? 595;
+        const pageH = doc.internal?.pageSize?.getHeight?.() ?? 842;
+
+        // Load to get intrinsic aspect ratio
+        const dims = await new Promise<{ w: number; h: number } | null>((resolve) => {
+          const img = new Image();
+          img.onload = () => resolve({ w: img.naturalWidth || img.width, h: img.naturalHeight || img.height });
+          img.onerror = () => resolve(null);
+          img.src = dataUrl!;
+        });
+
+        // Target size: up to 60% of page width, preserve aspect
+        const targetMaxW = Math.floor(pageW * 0.6);
+        const targetMaxH = Math.floor(pageH * 0.6);
+        let drawW = targetMaxW;
+        let drawH = targetMaxH;
+        if (dims && dims.w > 0 && dims.h > 0) {
+          const scale = Math.min(targetMaxW / dims.w, targetMaxH / dims.h);
+          drawW = Math.max(1, Math.round(dims.w * scale));
+          drawH = Math.max(1, Math.round(dims.h * scale));
+        }
+        const x = (pageW - drawW) / 2;
+        const y = (pageH - drawH) / 2;
+
+        // Lower the opacity if supported so content remains readable
+        const anyDoc = doc as unknown as {
+          setGState?: (state: unknown) => void;
+          GState?: new (options: unknown) => unknown;
+        };
+        const restoreOpacity = () => {
+          try {
+            if (anyDoc.setGState && anyDoc.GState) {
+              anyDoc.setGState(new anyDoc.GState({ opacity: 1 }));
+            }
+          } catch {
+            /* noop */
+          }
+        };
+        try {
+          if (anyDoc.setGState && anyDoc.GState) {
+            anyDoc.setGState(new anyDoc.GState({ opacity: 0.15 }));
+          }
+        } catch {
+          // If not supported, continue without opacity control
+        }
+
+        doc.addImage(dataUrl, 'PNG', x, y, drawW, drawH);
+        restoreOpacity();
+      } else {
+        // Fallback: simple text watermark
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor(200);
+        doc.setFontSize(80);
+        doc.text('PAID', 300, 450);
+        doc.setTextColor(0);
+      }
+    } catch {
+      // Safe fallback to text watermark on any unexpected error
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(200);
+      doc.setFontSize(80);
+      doc.text('PAID', 300, 450);
+      doc.setTextColor(0);
+    }
+  }
 
   // Section: Guest Details
   cursorY += 30;
@@ -120,7 +236,7 @@ export async function generateInvoicePDF(data: BookingInvoiceData) {
   const notes = [
     'Please present this invoice and a valid ID at check-in.',
     'Free cancellation up to 48 hours before check-in unless otherwise stated.',
-    'For questions, contact support at info@lacasadellarte.example.'
+    'For questions, contact support at ladellaarte@gmail.com.'
   ];
   const lineHeight = 14;
   notes.forEach(note => {
@@ -133,10 +249,54 @@ export async function generateInvoicePDF(data: BookingInvoiceData) {
   });
 
   // Footer
-  cursorY += 10;
+  // Draw a footer band with contact details and copyright
+  const pageWidth = doc.internal?.pageSize?.getWidth?.() ?? 595;
+  const pageHeight = doc.internal?.pageSize?.getHeight?.() ?? 842;
+  const footerBottomMargin = 40; // add space from bottom of the page
+  const pageFooterY = pageHeight - footerBottomMargin - 60; // place footer block above bottom
   doc.setFontSize(9);
   doc.setTextColor(130);
-  doc.text(`© ${new Date().getFullYear()} La Casa Dell'Arte – Generated electronically`, marginX, cursorY);
+  doc.text(`© ${new Date().getFullYear()} La Casa Dell'Arte`, marginX, pageFooterY);
+  doc.text('Galle Road, Colombo 03, Sri Lanka', marginX, pageFooterY + 14);
+  doc.text('Tel: +94 718530994 | Email: ladellaarte@gmail.com', marginX, pageFooterY + 28);
+  doc.text('Generated electronically', marginX, pageFooterY + 42);
+
+  // Footer logo on the right (PNG background-less logo) with preserved aspect ratio
+  try {
+    const maxLogoW = 140;
+    const maxLogoH = 60;
+    const resp = await fetch('/logo/logo-removebg.png');
+    if (resp.ok) {
+      const blob = await resp.blob();
+      const dataUrl: string | null = await new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result as string);
+        reader.onerror = () => resolve(null);
+        reader.readAsDataURL(blob);
+      });
+      if (dataUrl) {
+        // Measure intrinsic size to preserve aspect ratio
+        const dims = await new Promise<{ w: number; h: number } | null>((resolve) => {
+          const img = new Image();
+          img.onload = () => resolve({ w: img.naturalWidth || img.width, h: img.naturalHeight || img.height });
+          img.onerror = () => resolve(null);
+          img.src = dataUrl;
+        });
+        let drawW = maxLogoW;
+        let drawH = maxLogoH;
+        if (dims && dims.w > 0 && dims.h > 0) {
+          const scale = Math.min(maxLogoW / dims.w, maxLogoH / dims.h);
+          drawW = Math.max(1, Math.round(dims.w * scale));
+          drawH = Math.max(1, Math.round(dims.h * scale));
+        }
+        const x = pageWidth - marginX - drawW;
+        const y = pageFooterY - Math.max(0, Math.round((drawH - maxLogoH) / 2)) - 6; // align with text block
+        doc.addImage(dataUrl, 'PNG', x, y, drawW, drawH);
+      }
+    }
+  } catch {
+    // ignore if footer logo can't be loaded
+  }
 
   // File name convention: LCA-<reference>.pdf
   const safeRef = data.reference.replace(/[^A-Z0-9_-]/gi, '_');
