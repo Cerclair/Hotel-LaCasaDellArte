@@ -88,96 +88,7 @@ export async function generateInvoicePDF(data: BookingInvoiceData) {
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(10);
 
-  // PAID WATERMARK (if paid online) - draw supplied "paid" stamp image as a faint watermark
-  if (data.paymentMethod === 'now') {
-    try {
-      // Try common locations in /public
-      const candidates = ['/logo/paid-stamp.png', '/assets/paid-stamp.png', '/paid-stamp.png'];
-      let dataUrl: string | null = null;
-      for (const url of candidates) {
-        try {
-          const resp = await fetch(url);
-          if (resp.ok) {
-            const blob = await resp.blob();
-            dataUrl = await new Promise<string | null>((resolve) => {
-              const reader = new FileReader();
-              reader.onloadend = () => resolve(reader.result as string);
-              reader.onerror = () => resolve(null);
-              reader.readAsDataURL(blob);
-            });
-          }
-          if (dataUrl) break;
-        } catch {
-          // continue to next candidate
-        }
-      }
-
-      if (dataUrl) {
-        const pageW = doc.internal?.pageSize?.getWidth?.() ?? 595;
-        const pageH = doc.internal?.pageSize?.getHeight?.() ?? 842;
-
-        // Load to get intrinsic aspect ratio
-        const dims = await new Promise<{ w: number; h: number } | null>((resolve) => {
-          const img = new Image();
-          img.onload = () => resolve({ w: img.naturalWidth || img.width, h: img.naturalHeight || img.height });
-          img.onerror = () => resolve(null);
-          img.src = dataUrl!;
-        });
-
-        // Target size: up to 60% of page width, preserve aspect
-        const targetMaxW = Math.floor(pageW * 0.6);
-        const targetMaxH = Math.floor(pageH * 0.6);
-        let drawW = targetMaxW;
-        let drawH = targetMaxH;
-        if (dims && dims.w > 0 && dims.h > 0) {
-          const scale = Math.min(targetMaxW / dims.w, targetMaxH / dims.h);
-          drawW = Math.max(1, Math.round(dims.w * scale));
-          drawH = Math.max(1, Math.round(dims.h * scale));
-        }
-        const x = (pageW - drawW) / 2;
-        const y = (pageH - drawH) / 2;
-
-        // Lower the opacity if supported so content remains readable
-        const anyDoc = doc as unknown as {
-          setGState?: (state: unknown) => void;
-          GState?: new (options: unknown) => unknown;
-        };
-        const restoreOpacity = () => {
-          try {
-            if (anyDoc.setGState && anyDoc.GState) {
-              anyDoc.setGState(new anyDoc.GState({ opacity: 1 }));
-            }
-          } catch {
-            /* noop */
-          }
-        };
-        try {
-          if (anyDoc.setGState && anyDoc.GState) {
-            anyDoc.setGState(new anyDoc.GState({ opacity: 0.15 }));
-          }
-        } catch {
-          // If not supported, continue without opacity control
-        }
-
-        doc.addImage(dataUrl, 'PNG', x, y, drawW, drawH);
-        restoreOpacity();
-      } else {
-        // Fallback: simple text watermark
-        doc.setFont('helvetica', 'bold');
-        doc.setTextColor(200);
-        doc.setFontSize(80);
-        doc.text('PAID', 300, 450);
-        doc.setTextColor(0);
-      }
-    } catch {
-      // Safe fallback to text watermark on any unexpected error
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(200);
-      doc.setFontSize(80);
-      doc.text('PAID', 300, 450);
-      doc.setTextColor(0);
-    }
-  }
+  // (Moved watermark drawing below, after content, to position in the clear space above footer.)
 
   // Section: Guest Details
   cursorY += 30;
@@ -249,11 +160,117 @@ export async function generateInvoicePDF(data: BookingInvoiceData) {
   });
 
   // Footer
-  // Draw a footer band with contact details and copyright
+  // Compute page metrics and the footer top Y
   const pageWidth = doc.internal?.pageSize?.getWidth?.() ?? 595;
   const pageHeight = doc.internal?.pageSize?.getHeight?.() ?? 842;
   const footerBottomMargin = 40; // add space from bottom of the page
   const pageFooterY = pageHeight - footerBottomMargin - 60; // place footer block above bottom
+
+  // PAID WATERMARK (if paid online) — draw now to center within the gap between Notes and Footer
+  if (data.paymentMethod === 'now') {
+    try {
+      const candidates = ['/logo/paid-stamp.png', '/assets/paid-stamp.png', '/paid-stamp.png'];
+      let dataUrl: string | null = null;
+      for (const url of candidates) {
+        try {
+          const resp = await fetch(url);
+          if (resp.ok) {
+            const blob = await resp.blob();
+            dataUrl = await new Promise<string | null>((resolve) => {
+              const reader = new FileReader();
+              reader.onloadend = () => resolve(reader.result as string);
+              reader.onerror = () => resolve(null);
+              reader.readAsDataURL(blob);
+            });
+          }
+          if (dataUrl) break;
+        } catch {
+          // continue to next candidate
+        }
+      }
+
+      if (dataUrl) {
+        // Available vertical gap
+        const gapTop = cursorY + 8;
+        const gapBottom = pageFooterY - 10;
+        const availableH = Math.max(0, gapBottom - gapTop);
+
+        if (availableH > 30) {
+          // Load to get intrinsic aspect ratio
+          const dims = await new Promise<{ w: number; h: number } | null>((resolve) => {
+            const img = new Image();
+            img.onload = () => resolve({ w: img.naturalWidth || img.width, h: img.naturalHeight || img.height });
+            img.onerror = () => resolve(null);
+            img.src = dataUrl!;
+          });
+
+          // Target size: width up to 60% of page, height up to 80% of the gap
+          const targetMaxW = Math.floor(pageWidth * 0.6);
+          const targetMaxH = Math.floor(availableH * 0.8);
+          let drawW = targetMaxW;
+          let drawH = targetMaxH;
+          if (dims && dims.w > 0 && dims.h > 0) {
+            const scale = Math.min(targetMaxW / dims.w, targetMaxH / dims.h);
+            drawW = Math.max(1, Math.round(dims.w * scale));
+            drawH = Math.max(1, Math.round(dims.h * scale));
+          }
+          const x = (pageWidth - drawW) / 2;
+          const y = gapTop + Math.max(0, Math.floor((availableH - drawH) / 2));
+
+          // Lower the opacity if supported so content remains readable
+          const anyDoc = doc as unknown as {
+            setGState?: (state: unknown) => void;
+            GState?: new (options: unknown) => unknown;
+          };
+          const restoreOpacity = () => {
+            try {
+              if (anyDoc.setGState && anyDoc.GState) {
+                anyDoc.setGState(new anyDoc.GState({ opacity: 1 }));
+              }
+            } catch {
+              /* noop */
+            }
+          };
+          try {
+            if (anyDoc.setGState && anyDoc.GState) {
+              anyDoc.setGState(new anyDoc.GState({ opacity: 0.3 }));
+            }
+          } catch {
+            // If not supported, continue without opacity control
+          }
+
+          doc.addImage(dataUrl, 'PNG', x, y, drawW, drawH);
+          restoreOpacity();
+        }
+      } else {
+        // Fallback: simple text watermark in the center of the gap
+        const gapTop = cursorY + 8;
+        const gapBottom = pageFooterY - 10;
+        const availableH = Math.max(0, gapBottom - gapTop);
+        if (availableH > 30) {
+          doc.setFont('helvetica', 'bold');
+          doc.setTextColor(140);
+          doc.setFontSize(80);
+          const yMid = gapTop + Math.floor(availableH / 2);
+          doc.text('PAID', pageWidth / 2 - 40, yMid);
+          doc.setTextColor(0);
+        }
+      }
+    } catch {
+      // Safe fallback to text watermark
+      const gapTop = cursorY + 8;
+      const gapBottom = pageFooterY - 10;
+      const availableH = Math.max(0, gapBottom - gapTop);
+      if (availableH > 30) {
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor(140);
+        doc.setFontSize(80);
+        const yMid = gapTop + Math.floor(availableH / 2);
+        doc.text('PAID', pageWidth / 2 - 40, yMid);
+        doc.setTextColor(0);
+      }
+    }
+  }
   doc.setFontSize(9);
   doc.setTextColor(130);
   doc.text(`© ${new Date().getFullYear()} La Casa Dell'Arte`, marginX, pageFooterY);
