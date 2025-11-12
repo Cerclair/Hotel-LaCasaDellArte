@@ -47,6 +47,9 @@ type JsPdfDoc = {
   GState?: new (options: unknown) => unknown;
   saveGraphicsState?: () => void;
   restoreGraphicsState?: () => void;
+  // Optional font embedding APIs present in jsPDF
+  addFileToVFS?: (fileName: string, data: string) => void;
+  addFont?: (postScriptName: string, fontName: string, fontStyle: string) => void;
 };
 type AutoTableFn = (doc: JsPdfDoc, options: AutoTableUserOptions) => unknown;
 
@@ -61,15 +64,67 @@ export async function generateInvoicePDF(data: BookingInvoiceData) {
   let cursorY = 40;
   // HEADER (no logo). Left: Invoice info. Right: Hotel name and contact.
   const headerRightX = 400;
-  // Hotel name on the right
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(18);
+  
+  // Try to embed custom "Brittany Signature" font (requires placing the licensed TTF under /public)
+  // Expected paths to try: /fonts/BrittanySignature.ttf, /assets/fonts/BrittanySignature.ttf, /fonts/BrittanySignature-Regular.ttf
+  let hasBrittanySignature = false;
+  try {
+    const fontCandidates = [
+      '/fonts/BrittanySignature.ttf',
+      '/assets/fonts/BrittanySignature.ttf',
+      '/fonts/BrittanySignature-Regular.ttf',
+      '/assets/fonts/BrittanySignature-Regular.ttf',
+    ];
+    const toBase64 = (buffer: ArrayBuffer) => {
+      let binary = '';
+      const bytes = new Uint8Array(buffer);
+      const len = bytes.byteLength;
+      for (let i = 0; i < len; i++) binary += String.fromCharCode(bytes[i]);
+      return btoa(binary);
+    };
+    for (const url of fontCandidates) {
+      try {
+        const resp = await fetch(url);
+        if (!resp.ok) continue;
+        const buf = await resp.arrayBuffer();
+        const base64 = toBase64(buf);
+        if (doc.addFileToVFS && doc.addFont) {
+          // Use a stable VFS name; fontName used when calling setFont
+          const vfsName = 'BrittanySignature.ttf';
+          const fontName = 'Brittany Signature';
+          doc.addFileToVFS(vfsName, base64);
+          doc.addFont(vfsName, fontName, 'normal');
+          hasBrittanySignature = true;
+          break;
+        }
+      } catch {
+        // try next candidate
+      }
+    }
+  } catch {
+    // ignore font load errors, we'll fallback
+  }
+  // Hotel name on the right (script-like appearance using italic)
+  // Note: jsPDF supports only built-in fonts unless a custom font is embedded.
+  // Using 'times' italic to approximate a cursive look; weight normal, style italic as requested.
+  if (hasBrittanySignature) {
+    doc.setFont('Brittany Signature', 'normal');
+  } else {
+    doc.setFont('times', 'italic');
+  }
+  doc.setFontSize(22);
+  // Brand gold for hotel name (#D4AF37)
+  doc.setTextColor(212, 175, 55);
   doc.text("La Casa Dell'Arte", headerRightX, cursorY + 24);
+  // Reset text color to black for the address block
+  doc.setTextColor(0);
+  // Restore body font to helvetica normal for contact details
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(10);
-  doc.text('Galle Road, Colombo 03, Sri Lanka', headerRightX, cursorY + 40);
-  doc.text('Tel: +94 718530994', headerRightX, cursorY + 54);
-  doc.text('Email: ladellaarte@gmail.com', headerRightX, cursorY + 68);
+  // Increased spacing below the hotel name to avoid overlap with the address
+  doc.text('Galle Road, Colombo 03, Sri Lanka', headerRightX, cursorY + 52);
+  doc.text('Tel: +94 718530994', headerRightX, cursorY + 66);
+  doc.text('Email: ladellaarte@gmail.com', headerRightX, cursorY + 80);
 
   // Left side: Invoice title + generated + reference
   const title = 'Booking Invoice';
