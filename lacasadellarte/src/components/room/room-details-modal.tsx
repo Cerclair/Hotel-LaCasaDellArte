@@ -178,8 +178,8 @@ export default function RoomDetailsModal({ open, onClose, room }: RoomDetailsMod
           <X className="h-5 w-5 text-gray-700" />
         </button>
 
-        {/* Upper: interactive image (50%). Force wrapper/content to fill the allocated area */}
-        <div ref={imageContainerRef} className="h-1/2 w-full bg-black relative">
+  {/* Upper: interactive image (50%). Force wrapper/content to fill the allocated area */}
+  <div ref={imageContainerRef} className="h-1/2 w-full bg-[var(--color-beige)] relative">
           {initial ? (
             <TransformWrapper
               key={`${room.image}-${boxSize?.w || 0}x${boxSize?.h || 0}-${openNonce}`}
