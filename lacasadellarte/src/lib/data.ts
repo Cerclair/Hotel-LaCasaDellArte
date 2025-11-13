@@ -6,7 +6,7 @@ export const rooms: Room[] = [
     id: '1',
     name: 'Standard Room',
     type: 'standard',
-    price: 400000,
+  price: 50000,
     description: 'Elegant and comfortable rooms featuring artistic touches and modern amenities, perfect for a relaxing stay.',
     image: '/rooms/standard.jpg',
     amenities: [
@@ -31,7 +31,7 @@ export const rooms: Room[] = [
     id: '2',
     name: 'Deluxe Room',
     type: 'deluxe',
-    price: 5000000,
+  price: 80000,
     description: 'Spacious rooms with premium furnishings, enhanced artistic elements, and panoramic city views.',
     image: '/rooms/deluxe.jpg',
     amenities: [
@@ -59,7 +59,7 @@ export const rooms: Room[] = [
     id: '3',
     name: 'King Deluxe Suite',
     type: 'suite',
-    price: 7000000,
+  price: 100000,
     description: 'Our finest accommodation featuring separate living areas, exclusive artworks, and unparalleled luxury amenities.',
     image: '/rooms/suite.jpg',
     amenities: [
