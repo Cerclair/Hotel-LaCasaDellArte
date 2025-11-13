@@ -6,3 +6,5 @@ context/
 .cp-images/
 
 downgrade.txt
+config.bat
+node_modules
