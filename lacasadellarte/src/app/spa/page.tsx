@@ -26,6 +26,12 @@ export default function SpaPage() {
               Every treatment is designed with intention, using premium, natural products and performed in serene
               spaces that reflect our artistic ethos. Allow yourself to unwind, refresh, and reconnect with your inner peace.
             </p>
+            <div className="flex flex-col md:flex-row items-center justify-center text-[var(--color-text)] gap-2 md:gap-3" style={{ marginTop: '2rem' }}>
+              <svg className="w-6 h-6 md:w-6 md:h-6 text-[var(--color-accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span className="font-semibold text-sm md:text-base">Daily: 9:00 AM - 9:00 PM</span>
+            </div>
           </div>
         </div>
       </section>

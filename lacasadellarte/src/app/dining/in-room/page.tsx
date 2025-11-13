@@ -10,7 +10,7 @@ export default function InRoomDiningPage() {
       {/* Hero Image Section */}
       <section style={{ width: '100%', margin: 0, padding: 0, overflow: 'hidden' }}>
         <Image
-          src="/assets/dining&drinks/lumiere/lumiere.png"
+          src="/assets/dining&drinks/in-room-dining/in-room-dining.png"
           alt="In-Room Dining"
           width={1920}
           height={1080}

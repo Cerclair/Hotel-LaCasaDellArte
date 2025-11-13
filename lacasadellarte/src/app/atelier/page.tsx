@@ -60,11 +60,11 @@ export default function AtelierPage() {
               paintings, sculptures, digital art, and mixed media installations that change seasonally, ensuring
               each visit offers something new.
             </p>
-            <div className={styles.badge}>
-              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="flex flex-col md:flex-row items-center justify-center text-[var(--color-text)] gap-2 md:gap-3" style={{ marginTop: '2rem' }}>
+              <svg className="w-6 h-6 md:w-6 md:h-6 text-[var(--color-accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              Open Daily: 9:00 AM - 8:00 PM | Free Entry for Hotel Guests
+              <span className="font-semibold text-sm md:text-base">Daily: 9:00 AM - 8:00 PM | Free Entry for Hotel Guests</span>
             </div>
           </div>
         </div>

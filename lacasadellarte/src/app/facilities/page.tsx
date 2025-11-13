@@ -23,9 +23,10 @@ export default function FacilitiesPage() {
       name: 'Gym',
       subtitle: 'Fitness & Wellness',
       description:
-        'Stay active and inspired at The Studio, our fully equipped fitness centre designed for both movement and mindfulness. With state-of-the-art equipment, serene interiors, and panoramic views, it’s a sanctuary where wellness meets creativity. Whether it’s a morning cardio session or evening yoga, every workout here feels like a work of art.',
+        'Stay active and inspired at The Studio, our fully equipped fitness centre designed for both movement and mindfulness. With state-of-the-art equipment, serene interiors, and panoramic views, it\'s a sanctuary where wellness meets creativity. Whether it\'s a morning cardio session or evening yoga, every workout here feels like a work of art.',
       imageUrl: '/assets/facilities/gym.png',
       features: [
+        'Open daily from 9:00 AM to 9:00 PM',
         'Cardio machines with entertainment systems',
         'Free weights and strength training equipment',
         'Yoga and stretching area',

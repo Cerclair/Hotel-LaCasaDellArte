@@ -109,7 +109,7 @@ export const restaurants: Restaurant[] = [
     description: 'Experience the warmth of Italy at Dipinta, where handcrafted pastas, rustic flavours, and regional wines paint a picture of authentic Italian charm in every dish',
     image: '/assets/dining&drinks/dipinta/dipinta.png',
     ambiance: 'Intimate and romantic, with warm lighting and Italian-inspired décor that transports you to the streets of Rome.',
-    openingHours: 'Dinner: 6:00 PM - 11:00 PM'
+    openingHours: 'Dinner: 12:00 PM - 11:00 PM'
   },
   {
     id: 'lumiere',
