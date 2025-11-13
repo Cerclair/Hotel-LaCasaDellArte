@@ -3,9 +3,18 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 import { generateInvoicePDF } from '@/lib/invoice';
 
 export default function BookingConfirmationPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[var(--color-beige)] py-10"><div className="container mx-auto px-4"><div className="max-w-3xl mx-auto"><div className="bg-white rounded-lg shadow-lg p-8">Loading confirmation…</div></div></div></div>}>
+      <BookingConfirmationContent />
+    </Suspense>
+  );
+}
+
+function BookingConfirmationContent() {
   const params = useSearchParams();
   const ref = params.get('ref') || '';
   const roomName = params.get('roomName') || '';
