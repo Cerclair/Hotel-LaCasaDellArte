@@ -9,6 +9,7 @@ export interface StylishSelectOption {
   value: string;
   label: string;
   icon?: ComponentType<{ className?: string }>;
+  disabled?: boolean;
 }
 
 interface StylishSelectProps {
@@ -102,20 +103,23 @@ export function StylishSelect({
                 <Select.Item
                   key={opt.value}
                   value={opt.value}
+                  disabled={!!opt.disabled}
                   className={clsx(
                     // Layout and grouping
-                    "relative group/item flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium cursor-pointer",
+                    "relative group/item flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium",
                     // Base text color and outline behavior
                     "text-[var(--color-text)] data-[highlighted]:outline-none",
                     // Animated background + text color on hover/highlight
-                    "hover:bg-[var(--color-gold)]/15 data-[highlighted]:bg-[var(--color-gold)]/20",
-                    "hover:text-[#8B7355] data-[highlighted]:text-[#8B7355]",
+                    !opt.disabled && "hover:bg-[var(--color-gold)]/15 data-[highlighted]:bg-[var(--color-gold)]/20",
+                    !opt.disabled && "hover:text-[#8B7355] data-[highlighted]:text-[#8B7355]",
                     // Subtle motion and accent bar
                     "transition-[color,background-color,transform] duration-200 ease-out",
-                    "hover:translate-x-[2px] data-[highlighted]:translate-x-[2px]",
+                    !opt.disabled && "hover:translate-x-[2px] data-[highlighted]:translate-x-[2px]",
                     "before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:bg-[var(--color-gold)] before:opacity-0 data-[highlighted]:before:opacity-100",
                     // Checked background hint
                     "data-[state=checked]:bg-[#8B7355]/15",
+                    // Disabled styling
+                    opt.disabled && "opacity-50 cursor-not-allowed pointer-events-none"
                   )}
                 >
                   {opt.icon && <opt.icon className="w-4 h-4 text-current" />}

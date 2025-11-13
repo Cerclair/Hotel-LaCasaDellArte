@@ -22,6 +22,18 @@ export interface FilterState {
   guests: GuestCount
 }
 
+// Compatibility map between room types and bed types based on available inventory
+const ROOM_TO_BEDS: Record<string, string[]> = {
+  standard: ["queen"],
+  deluxe: ["king"],
+  "king-deluxe": ["king-sofa"],
+}
+const BED_TO_ROOMS: Record<string, string[]> = {
+  queen: ["standard"],
+  king: ["deluxe"],
+  "king-sofa": ["king-deluxe"],
+}
+
 export function HotelFilter({ onChange }: { onChange?: (filters: FilterState) => void }) {
   const [filters, setFilters] = useState<FilterState>({
     dateRange: { checkIn: null, checkOut: null },
@@ -52,6 +64,40 @@ export function HotelFilter({ onChange }: { onChange?: (filters: FilterState) =>
     { value: "king", label: "King Bed" },
     { value: "king-sofa", label: "King + Sofa Bed" },
   ]
+
+  // If a selection becomes incompatible after changing the other dropdown, reset it to "all"
+  useEffect(() => {
+    if (filters.roomType !== "all" && filters.bedType !== "all") {
+      const allowedBeds = ROOM_TO_BEDS[filters.roomType] || [];
+      if (!allowedBeds.includes(filters.bedType)) {
+        setFilters((prev) => ({ ...prev, bedType: "all" }));
+      }
+    }
+  }, [filters.roomType, filters.bedType]);
+
+  useEffect(() => {
+    if (filters.bedType !== "all" && filters.roomType !== "all") {
+      const allowedRooms = BED_TO_ROOMS[filters.bedType] || [];
+      if (!allowedRooms.includes(filters.roomType)) {
+        setFilters((prev) => ({ ...prev, roomType: "all" }));
+      }
+    }
+  }, [filters.bedType, filters.roomType]);
+
+  // Derive disabled flags for options based on the current counterpart selection
+  const roomTypeOptions = roomTypes.map((opt) => {
+    if (opt.value === "all") return opt; // never disable 'All'
+    if (filters.bedType === "all") return opt; // when bed is 'all', all rooms are selectable
+    const allowedRooms = BED_TO_ROOMS[filters.bedType] || [];
+    return { ...opt, disabled: !allowedRooms.includes(opt.value) };
+  });
+
+  const bedTypeOptions = bedTypes.map((opt) => {
+    if (opt.value === "all") return opt; // never disable 'All'
+    if (filters.roomType === "all") return opt; // when room is 'all', all beds are selectable
+    const allowedBeds = ROOM_TO_BEDS[filters.roomType] || [];
+    return { ...opt, disabled: !allowedBeds.includes(opt.value) };
+  });
 
   const getDurationDays = () => {
     if (filters.dateRange.checkIn && filters.dateRange.checkOut) {
@@ -286,7 +332,7 @@ export function HotelFilter({ onChange }: { onChange?: (filters: FilterState) =>
                 label="Room Type"
                 value={filters.roomType}
                 onChange={(value) => setFilters((prev) => ({ ...prev, roomType: value }))}
-                options={roomTypes}
+                options={roomTypeOptions}
                 placeholder="All Rooms"
                 icon={Building2}
               />
@@ -298,7 +344,7 @@ export function HotelFilter({ onChange }: { onChange?: (filters: FilterState) =>
                 label="Bed Type"
                 value={filters.bedType}
                 onChange={(value) => setFilters((prev) => ({ ...prev, bedType: value }))}
-                options={bedTypes}
+                options={bedTypeOptions}
                 placeholder="All Beds"
                 icon={BedDouble}
               />
