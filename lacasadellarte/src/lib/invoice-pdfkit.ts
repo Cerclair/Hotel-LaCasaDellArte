@@ -3,7 +3,7 @@
 // Used for both email attachments and download button (via API)
 
 import PDFDocument from 'pdfkit';
-import { readFileSync, existsSync } from 'fs';
+import { existsSync } from 'fs';
 import { join } from 'path';
 
 export interface BookingInvoiceData {
@@ -75,7 +75,7 @@ export async function generateInvoicePDFBuffer(data: BookingInvoiceData): Promis
             console.log('[PDFKit] Custom font loaded from:', fontPath);
             break;
           } catch (err) {
-            console.warn('[PDFKit] Failed to load font from:', fontPath);
+            console.warn('[PDFKit] Failed to load font from:', fontPath, err);
           }
         }
       }
@@ -245,7 +245,10 @@ export async function generateInvoicePDFBuffer(data: BookingInvoiceData): Promis
                 const targetMaxH = Math.floor(availableH * 0.8);
                 const x = (pageWidth - targetMaxW) / 2;
                 const y = gapTop + Math.max(0, Math.floor((availableH - targetMaxH) / 2));
-                doc.image(imgPath, x, y, { width: targetMaxW, height: targetMaxH, opacity: 0.3 });
+                doc.save();
+                doc.opacity(0.3);
+                doc.image(imgPath, x, y, { width: targetMaxW, height: targetMaxH });
+                doc.restore();
                 imageAdded = true;
                 console.log('[PDFKit] PAID stamp image added');
                 break;
@@ -290,22 +293,10 @@ export async function generateInvoicePDFBuffer(data: BookingInvoiceData): Promis
             const maxLogoW = 140;
             const maxLogoH = 60;
 
-            // Read image to get dimensions
-            const imageBuffer = readFileSync(logoPath);
-            const img = doc.openImage(imageBuffer);
-
-            // Calculate aspect ratio
-            let drawW = maxLogoW;
-            let drawH = maxLogoH;
-            if (img.width > 0 && img.height > 0) {
-              const scale = Math.min(maxLogoW / img.width, maxLogoH / img.height);
-              drawW = Math.max(1, Math.round(img.width * scale));
-              drawH = Math.max(1, Math.round(img.height * scale));
-            }
-
-            const x = pageWidth - marginX - drawW;
-            const y = pageFooterY - Math.max(0, Math.round((drawH - maxLogoH) / 2)) - 6;
-            doc.image(logoPath, x, y, { width: drawW, height: drawH });
+            // PDFKit automatically maintains aspect ratio with 'fit' option
+            const x = pageWidth - marginX - maxLogoW;
+            const y = pageFooterY - 6;
+            doc.image(logoPath, x, y, { fit: [maxLogoW, maxLogoH], align: 'right', valign: 'center' });
             console.log('[PDFKit] Footer logo added');
             break;
           } catch (err) {

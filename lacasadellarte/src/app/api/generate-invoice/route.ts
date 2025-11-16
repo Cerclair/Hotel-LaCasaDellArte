@@ -18,7 +18,8 @@ export async function POST(request: Request) {
     const pdfBuffer = await generateInvoicePDFBuffer(body);
 
     // Return PDF as downloadable file
-    return new NextResponse(pdfBuffer, {
+    // Convert Buffer to Uint8Array for NextResponse compatibility
+    return new NextResponse(new Uint8Array(pdfBuffer), {
       status: 200,
       headers: {
         'Content-Type': 'application/pdf',

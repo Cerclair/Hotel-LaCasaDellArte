@@ -100,7 +100,7 @@ export async function POST(request: Request) {
           console.log('[Email API] Logo loaded from:', logoPath);
           break;
         } catch (err) {
-          console.warn('[Email API] Failed to load logo from:', logoPath);
+          console.warn('[Email API] Failed to load logo from:', logoPath, err);
         }
       }
     }
@@ -118,7 +118,7 @@ export async function POST(request: Request) {
             console.log('[Email API] PAID stamp loaded from:', stampPath);
             break;
           } catch (err) {
-            console.warn('[Email API] Failed to load PAID stamp from:', stampPath);
+            console.warn('[Email API] Failed to load PAID stamp from:', stampPath, err);
           }
         }
       }

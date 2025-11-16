@@ -31,7 +31,7 @@ export async function POST(request: Request) {
           console.log('[Loyalty Email] Logo loaded from:', logoPath);
           break;
         } catch (err) {
-          console.warn('[Loyalty Email] Failed to load logo from:', logoPath);
+          console.warn('[Loyalty Email] Failed to load logo from:', logoPath, err);
         }
       }
     }
