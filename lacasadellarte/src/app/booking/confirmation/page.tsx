@@ -4,7 +4,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
-import { generateInvoicePDF } from '@/lib/invoice';
 
 export default function BookingConfirmationPage() {
   return (
@@ -45,22 +44,34 @@ function BookingConfirmationContent() {
     date.toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
 
   const handleDownloadInvoice = async () => {
-    await generateInvoicePDF({
-      reference: ref,
-      firstName,
-      lastName,
-      email,
-      roomName,
-      roomType: displayRoomType,
-      checkIn,
-      checkOut,
-      nights,
-      adults,
-      children,
-      rate: price,
-      total,
-      paymentMethod: payment === 'counter' ? 'counter' : 'now',
-    });
+    try {
+      // Dynamic import to use client-side PDF generator
+      const { generateInvoicePDF } = await import('@/lib/invoice');
+
+      // Prepare invoice data from URL params
+      const invoiceData = {
+        reference: ref,
+        firstName,
+        lastName,
+        email,
+        roomName,
+        roomType: displayRoomType,
+        checkIn,
+        checkOut,
+        nights,
+        adults,
+        children,
+        rate: price,
+        total,
+        paymentMethod: payment === 'counter' ? 'counter' : 'now' as 'counter' | 'now',
+      };
+
+      // Generate and download PDF using client-side library
+      await generateInvoicePDF(invoiceData);
+    } catch (error) {
+      console.error('Error downloading invoice:', error);
+      alert('Failed to download invoice. Please try again.');
+    }
   };
 
   return (

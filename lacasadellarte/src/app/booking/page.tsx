@@ -120,7 +120,7 @@ function BookingContent() {
     return newErrors;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const formErrors = validateForm();
     if (Object.keys(formErrors).length > 0) {
@@ -129,8 +129,46 @@ function BookingContent() {
       el?.focus();
       return;
     }
+
     // Generate booking reference
     const reference = `LCA-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
+
+    try {
+      // Send booking email via API
+      const response = await fetch('/api/send-booking-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          phone: formData.phone,
+          country: formData.country,
+          specialRequests: formData.specialRequests,
+          roomName,
+          roomType,
+          checkIn: checkIn.toISOString(),
+          checkOut: checkOut.toISOString(),
+          adults,
+          children,
+          nights,
+          price,
+          totalPrice,
+          paymentOption,
+          bookingReference: reference,
+        }),
+      });
+
+      if (!response.ok) {
+        console.error('Failed to send booking email, but continuing to confirmation');
+      }
+    } catch (error) {
+      console.error('Error sending booking email:', error);
+      // Continue to confirmation page even if email fails
+    }
+
     // Build params for confirmation page (never include card data)
     const params = new URLSearchParams({
       ref: reference,

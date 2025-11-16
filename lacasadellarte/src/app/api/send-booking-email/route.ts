@@ -388,12 +388,12 @@ export async function POST(request: Request) {
       });
     }
 
-    // Add hotel logo for CID embedding
+    // Add hotel logo for CID embedding (must be base64 string with camelCase contentId)
     if (logoBuffer) {
       attachments.push({
         filename: 'logo.png',
-        content: logoBuffer,
-        content_id: 'hotel-logo',
+        content: logoBuffer.toString('base64'),
+        contentId: 'hotel-logo',
       });
     }
 
@@ -401,8 +401,8 @@ export async function POST(request: Request) {
     if (paidStampBuffer && paymentOption === 'now') {
       attachments.push({
         filename: 'paid-stamp.png',
-        content: paidStampBuffer,
-        content_id: 'paid-stamp',
+        content: paidStampBuffer.toString('base64'),
+        contentId: 'paid-stamp',
       });
     }
 
