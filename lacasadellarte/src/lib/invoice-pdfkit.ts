@@ -42,7 +42,6 @@ export async function generateInvoicePDFBuffer(data: BookingInvoiceData): Promis
       console.log('[PDFKit] Starting PDF generation for:', data.reference);
 
       const doc = new PDFDocument({ size: 'A4', margin: 40 });
-      doc.font('Times-Roman'); // Set default font immediately to avoid Helvetica.afm error
       const chunks: Buffer[] = [];
 
       doc.on('data', (chunk) => chunks.push(chunk));
@@ -96,25 +95,26 @@ export async function generateInvoicePDFBuffer(data: BookingInvoiceData): Promis
       doc.restore();
 
       // Hotel contact details
-      doc.font('Times-Roman').fontSize(10).fillColor('#000000');
+      doc.font('Helvetica').fontSize(10).fillColor('#000000');
       doc.text('Galle Road, Colombo 03, Sri Lanka', headerRightX, cursorY + 52);
       doc.text('Tel: +94 718530994', headerRightX, cursorY + 66);
       doc.text('Email: ladellaarte@gmail.com', headerRightX, cursorY + 80);
 
       // Left side: Invoice title
       const generatedAt = data.generatedAt || new Date();
-      doc.font('Times-Bold').fontSize(20).fillColor('#000000');
+      doc.font('Helvetica-Bold').fontSize(20).fillColor('#000000');
       doc.text('Booking Invoice', marginX, cursorY + 24);
-      doc.font('Times-Roman').fontSize(10);
+      doc.font('Helvetica').fontSize(10);
       doc.text(`Generated: ${generatedAt.toLocaleString()}`, marginX, cursorY + 40);
       doc.text(`Reference: ${data.reference}`, marginX, cursorY + 54);
 
-      cursorY += 110;
+      cursorY += 80;
 
       // Guest Details Section
-      doc.fontSize(14).font('Times-Bold');
+      cursorY += 30;
+      doc.fontSize(14).font('Helvetica-Bold');
       doc.text('Guest Details', marginX, cursorY);
-      doc.fontSize(11).font('Times-Roman');
+      doc.fontSize(11).font('Helvetica');
       cursorY += 18;
 
       const guestLines = [
@@ -134,7 +134,7 @@ export async function generateInvoicePDFBuffer(data: BookingInvoiceData): Promis
       cursorY += 10;
 
       // Booking Summary Table
-      doc.fontSize(14).font('Times-Bold');
+      doc.fontSize(14).font('Helvetica-Bold');
       doc.text('Booking Summary', marginX, cursorY);
       cursorY += 20;
 
@@ -173,7 +173,7 @@ export async function generateInvoicePDFBuffer(data: BookingInvoiceData): Promis
       const col6X = 500;
 
       doc.rect(marginX, tableTop, pageWidth - 2 * marginX, 24).fillAndStroke('#8B7355', '#8B7355');
-      doc.fontSize(10).font('Times-Bold').fillColor('#FFFFFF');
+      doc.fontSize(10).font('Helvetica-Bold').fillColor('#FFFFFF');
       doc.text('Room Type', col1X + 5, tableTop + 8, { width: 145, continued: false });
       doc.text('Check-in', col2X, tableTop + 8, { width: 80 });
       doc.text('Check-out', col3X, tableTop + 8, { width: 80 });
@@ -184,7 +184,7 @@ export async function generateInvoicePDFBuffer(data: BookingInvoiceData): Promis
       // Table row
       const rowTop = tableTop + 25;
       doc.rect(marginX, rowTop, pageWidth - 2 * marginX, 24).fillAndStroke('#FAFAEF', '#8B7355');
-      doc.fontSize(10).font('Times-Roman').fillColor('#000000');
+      doc.fontSize(10).font('Helvetica').fillColor('#000000');
       doc.text(roomTypeCombined, col1X + 5, rowTop + 8, { width: 145 });
       doc.text(formatDate(data.checkIn), col2X, rowTop + 8, { width: 80 });
       doc.text(formatDate(data.checkOut), col3X, rowTop + 8, { width: 80 });
@@ -196,18 +196,18 @@ export async function generateInvoicePDFBuffer(data: BookingInvoiceData): Promis
 
       // Special Requests
       if (data.specialRequests && data.specialRequests.trim()) {
-        doc.fontSize(12).font('Times-Bold');
+        doc.fontSize(12).font('Helvetica-Bold');
         doc.text('Special Requests', marginX, cursorY);
-        doc.fontSize(10).font('Times-Roman');
+        doc.fontSize(10).font('Helvetica');
         cursorY += 16;
         doc.text(data.specialRequests, marginX, cursorY, { width: 515 });
         cursorY = doc.y + 10;
       }
 
       // Notes & Policies
-      doc.fontSize(12).font('Times-Bold');
+      doc.fontSize(12).font('Helvetica-Bold');
       doc.text('Notes', marginX, cursorY);
-      doc.fontSize(10).font('Times-Roman');
+      doc.fontSize(10).font('Helvetica');
       cursorY += 16;
       const notes = [
         'Please present this invoice and a valid ID at check-in.',
@@ -262,7 +262,7 @@ export async function generateInvoicePDFBuffer(data: BookingInvoiceData): Promis
           const gapBottom = pageFooterY - 10;
           const availableH = Math.max(0, gapBottom - gapTop);
           if (availableH > 30) {
-            doc.fontSize(80).font('Times-Bold').fillColor('#8C8C8C').opacity(0.3);
+            doc.fontSize(80).font('Helvetica-Bold').fillColor('#8C8C8C').opacity(0.3);
             const yMid = gapTop + Math.floor(availableH / 2);
             doc.text('PAID', pageWidth / 2 - 80, yMid);
             doc.opacity(1).fillColor('#000000');
@@ -278,7 +278,7 @@ export async function generateInvoicePDFBuffer(data: BookingInvoiceData): Promis
       doc.text('Tel: +94 718530994 | Email: ladellaarte@gmail.com', marginX, pageFooterY + 28);
       doc.text('Generated electronically', marginX, pageFooterY + 42);
 
-      // Footer logo
+      // Footer logo with aspect ratio preservation
       const logoPaths = [
         join(process.cwd(), 'lacasadellarte', 'public', 'logo', 'logo-removebg.png'),
         join(process.cwd(), 'public', 'logo', 'logo-removebg.png'),
@@ -289,9 +289,23 @@ export async function generateInvoicePDFBuffer(data: BookingInvoiceData): Promis
           try {
             const maxLogoW = 140;
             const maxLogoH = 60;
-            const x = pageWidth - marginX - maxLogoW;
-            const y = pageFooterY - 6;
-            doc.image(logoPath, x, y, { width: maxLogoW, height: maxLogoH });
+
+            // Read image to get dimensions
+            const imageBuffer = readFileSync(logoPath);
+            const img = doc.openImage(imageBuffer);
+
+            // Calculate aspect ratio
+            let drawW = maxLogoW;
+            let drawH = maxLogoH;
+            if (img.width > 0 && img.height > 0) {
+              const scale = Math.min(maxLogoW / img.width, maxLogoH / img.height);
+              drawW = Math.max(1, Math.round(img.width * scale));
+              drawH = Math.max(1, Math.round(img.height * scale));
+            }
+
+            const x = pageWidth - marginX - drawW;
+            const y = pageFooterY - Math.max(0, Math.round((drawH - maxLogoH) / 2)) - 6;
+            doc.image(logoPath, x, y, { width: drawW, height: drawH });
             console.log('[PDFKit] Footer logo added');
             break;
           } catch (err) {

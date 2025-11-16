@@ -24,20 +24,28 @@ export default function LoyaltyPage() {
     setIsSubmitting(true);
 
     try {
-      // Simulate sending email to hotel
-      // In production, this would be an API call to send the email
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-
       // Get the tier name
       const tierProgram = loyaltyPrograms.find(p => p.tier === selectedTier);
       const tierName = tierProgram?.name || '';
 
-      // Simulate email content
-      console.log('Sending membership request email to: ladellaarte@gmail.com');
-      console.log('Customer Details:', formData);
-      console.log('Requested Tier:', tierName);
+      // Send email via API
+      const response = await fetch('/api/send-loyalty-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          tierName,
+        }),
+      });
 
-      // For demo purposes, assume success
+      if (!response.ok) {
+        throw new Error('Failed to send email');
+      }
+
       setSubmitStatus('success');
       setIsSubmitting(false);
 
@@ -47,7 +55,8 @@ export default function LoyaltyPage() {
         setSubmitStatus('idle');
         setFormData({ name: '', email: '', phone: '' });
       }, 2000);
-    } catch {
+    } catch (error) {
+      console.error('Error submitting form:', error);
       setSubmitStatus('error');
       setIsSubmitting(false);
     }
