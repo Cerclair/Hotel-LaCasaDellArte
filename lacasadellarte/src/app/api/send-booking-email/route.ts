@@ -274,6 +274,19 @@ export async function POST(request: Request) {
               margin-top: 60px;
               font-size: 9px;
               color: #828282;
+              display: table;
+              width: 100%;
+            }
+            .footer-content {
+              display: table-cell;
+              vertical-align: bottom;
+              width: 60%;
+            }
+            .footer-logo {
+              display: table-cell;
+              vertical-align: bottom;
+              width: 40%;
+              text-align: right;
             }
             .footer p {
               margin: 4px 0;
@@ -281,7 +294,6 @@ export async function POST(request: Request) {
             .logo-image {
               max-width: 140px;
               max-height: 60px;
-              margin-top: 10px;
             }
             .paid-stamp-image {
               max-width: 60%;
@@ -306,7 +318,6 @@ export async function POST(request: Request) {
                 <p>Galle Road, Colombo 03, Sri Lanka</p>
                 <p>Tel: +94 718530994</p>
                 <p>Email: ladellaarte@gmail.com</p>
-                ${logoBuffer ? '<img src="cid:hotel-logo" alt="La Casa Dell\'Arte" class="logo-image" />' : ''}
               </div>
             </div>
 
@@ -367,10 +378,15 @@ export async function POST(request: Request) {
 
             <!-- Footer -->
             <div class="footer">
-              <p>© ${new Date().getFullYear()} La Casa Dell'Arte</p>
-              <p>Galle Road, Colombo 03, Sri Lanka</p>
-              <p>Tel: +94 718530994 | Email: ladellaarte@gmail.com</p>
-              <p>Generated electronically</p>
+              <div class="footer-content">
+                <p>© ${new Date().getFullYear()} La Casa Dell'Arte</p>
+                <p>Galle Road, Colombo 03, Sri Lanka</p>
+                <p>Tel: +94 718530994 | Email: ladellaarte@gmail.com</p>
+                <p>Generated electronically</p>
+              </div>
+              <div class="footer-logo">
+                ${logoBuffer ? '<img src="cid:hotel-logo" alt="La Casa Dell\'Arte" class="logo-image" />' : ''}
+              </div>
             </div>
           </div>
         </body>
