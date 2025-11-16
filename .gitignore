@@ -6,3 +6,7 @@ context/
 .cp-images/
 
 downgrade.txt
+
+EMAIL_SETUP.md
+INVOICE_PDF.md
+RESEND_TEST_MODE.md
