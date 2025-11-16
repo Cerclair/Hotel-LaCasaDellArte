@@ -425,7 +425,7 @@ export async function POST(request: Request) {
     // Send email to hotel with attachments
     const { data, error } = await resend.emails.send({
       from: 'La Casa DellArte <onboarding@resend.dev>',
-      to: ['tharanabope30@gmail.com'], // Test mode
+      to: ['ladellaarte@gmail.com'], // Test mode
       replyTo: email,
       subject: `New Booking - ${bookingReference} - ${firstName} ${lastName}`,
       html: invoiceEmailHTML,
@@ -443,7 +443,7 @@ export async function POST(request: Request) {
     // Send confirmation email to guest with same attachments
     await resend.emails.send({
       from: 'La Casa DellArte <onboarding@resend.dev>',
-      to: ['tharanabope30@gmail.com'], // Test mode
+      to: ['ladellaarte@gmail.com'], // Test mode
       subject: `Booking Confirmation - ${bookingReference}`,
       html: invoiceEmailHTML,
       attachments: attachments.length > 0 ? attachments : undefined,

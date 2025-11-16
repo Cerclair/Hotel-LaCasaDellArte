@@ -49,11 +49,11 @@ export async function POST(request: Request) {
     }
 
     // Send email to hotel
-    // Note: In test mode, Resend only allows sending to the verified email (tharanabope30@gmail.com)
+    // Note: In test mode, Resend only allows sending to the verified email (ladellaarte@gmail.com)
     // Once you verify a domain, you can send to any email address
     const { data, error } = await resend.emails.send({
       from: 'La Casa DellArte <onboarding@resend.dev>', // Use your verified domain in production
-      to: ['tharanabope30@gmail.com'], // Resend test mode: can only send to your verified email
+      to: ['ladellaarte@gmail.com'], // Resend test mode: can only send to your verified email
       replyTo: email, // Guest email will be in reply-to
       subject: `New Loyalty Program Member - ${tierName}`,
       html: `
