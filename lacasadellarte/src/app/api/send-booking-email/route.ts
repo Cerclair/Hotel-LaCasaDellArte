@@ -1,6 +1,6 @@
 import { Resend } from 'resend';
 import { NextResponse } from 'next/server';
-import { generateInvoicePDFBuffer } from '@/lib/invoice-pdfkit';
+import { generateInvoicePDFBuffer } from '@/lib/invoice-server';
 import { readFileSync, existsSync } from 'fs';
 import { join } from 'path';
 
@@ -55,10 +55,10 @@ export async function POST(request: Request) {
       });
     };
 
-    // Generate PDF invoice using PDFKit (same template as download button)
+    // Generate PDF invoice using invoice-server.tsx (jsPDF server-side)
     let pdfBuffer: Buffer | null = null;
     try {
-      console.log('[Email API] Starting PDF generation with PDFKit...');
+      console.log('[Email API] Starting PDF generation with invoice-server...');
       pdfBuffer = await generateInvoicePDFBuffer({
         reference: bookingReference,
         firstName,
@@ -78,7 +78,7 @@ export async function POST(request: Request) {
         paymentMethod: paymentOption,
         specialRequests,
       });
-      console.log('[Email API] PDF generated successfully with PDFKit');
+      console.log('[Email API] PDF generated successfully with invoice-server');
     } catch (pdfError) {
       console.error('[Email API] PDF generation error:', pdfError);
       // Continue without PDF attachment if generation fails
