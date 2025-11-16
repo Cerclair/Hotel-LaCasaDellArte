@@ -137,7 +137,7 @@ export const restaurants: Restaurant[] = [
     slug: 'in-room',
     cuisine: 'Personalized Service',
     description: 'Indulge in the comfort of your private sanctuary with La Casa Dell’Arte’s in-room dining. From global favourites to signature creations, enjoy gourmet experiences delivered right to your door 24/7',
-    image: '/assets/dining&drinks/lumiere/lumiere.png',
+    image: '/assets/dining&drinks/in-room-dining/in-room-dining.png',
     ambiance: 'Experience fine dining in the privacy of your own space, with impeccable service and artistic presentation.',
     openingHours: '24 Hours'
   }
