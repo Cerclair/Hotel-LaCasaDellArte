@@ -161,9 +161,9 @@ export default function RoomsPage() {
 
   // Background images for the hero slider (URL encoded for spaces)
   const heroImages = [
-    '/assets/rooms/King-Delux-Rooms/King-Deluxe-Suite-Room-no1.jpg',
-    '/assets/rooms/King-Delux-Rooms/King-Deluxe-Suite-Room-no2.jpg',
-    '/assets/rooms/King-Delux-Rooms/king-deluxe-suite.png',
+    '/assets/rooms/changing-pic1.png',
+    '/assets/rooms/changing-pic2.png',
+    '/assets/rooms/changing-pic3.png',
   ];
 
   // Auto-slide effect
