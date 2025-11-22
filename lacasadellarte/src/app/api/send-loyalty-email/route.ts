@@ -1,7 +1,7 @@
-import { Resend } from 'resend';
-import { NextResponse } from 'next/server';
-import { readFileSync, existsSync } from 'fs';
-import { join } from 'path';
+import { Resend } from "resend";
+import { NextResponse } from "next/server";
+import { readFileSync, existsSync } from "fs";
+import { join } from "path";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -13,7 +13,7 @@ export async function POST(request: Request) {
     // Validate required fields
     if (!name || !email || !phone || !tierName) {
       return NextResponse.json(
-        { error: 'Missing required fields' },
+        { error: "Missing required fields" },
         { status: 400 }
       );
     }
@@ -21,17 +21,27 @@ export async function POST(request: Request) {
     // Load hotel logo for email
     let logoBuffer: Buffer | null = null;
     const logoPaths = [
-      join(process.cwd(), 'lacasadellarte', 'public', 'logo', 'logo-removebg.png'),
-      join(process.cwd(), 'public', 'logo', 'logo-removebg.png'),
+      join(
+        process.cwd(),
+        "lacasadellarte",
+        "public",
+        "logo",
+        "logo-removebg.png"
+      ),
+      join(process.cwd(), "public", "logo", "logo-removebg.png"),
     ];
     for (const logoPath of logoPaths) {
       if (existsSync(logoPath)) {
         try {
           logoBuffer = readFileSync(logoPath);
-          console.log('[Loyalty Email] Logo loaded from:', logoPath);
+          console.log("[Loyalty Email] Logo loaded from:", logoPath);
           break;
         } catch (err) {
-          console.warn('[Loyalty Email] Failed to load logo from:', logoPath, err);
+          console.warn(
+            "[Loyalty Email] Failed to load logo from:",
+            logoPath,
+            err
+          );
         }
       }
     }
@@ -42,18 +52,17 @@ export async function POST(request: Request) {
     // Add hotel logo for CID embedding (must be base64 string with contentId)
     if (logoBuffer) {
       attachments.push({
-        filename: 'logo.png',
-        content: logoBuffer.toString('base64'),
-        contentId: 'hotel-logo',
+        filename: "logo.png",
+        content: logoBuffer.toString("base64"),
+        contentId: "hotel-logo",
       });
     }
 
     // Send email to hotel
-    // Note: In test mode, Resend only allows sending to the verified email (ladellaarte@gmail.com)
-    // Once you verify a domain, you can send to any email address
+    // Production mode: Domain verified, can send to any email address
     const { data, error } = await resend.emails.send({
-      from: 'La Casa DellArte <onboarding@resend.dev>', // Use your verified domain in production
-      to: ['ladellaarte@gmail.com'], // Resend test mode: can only send to your verified email
+      from: "La Casa DellArte <loyalty@lacasadellarte.space>", // Verified domain email
+      to: ["ladellaarte@gmail.com"], // Production: hotel email
       replyTo: email, // Guest email will be in reply-to
       subject: `New Loyalty Program Member - ${tierName}`,
       html: `
@@ -225,7 +234,11 @@ export async function POST(request: Request) {
                   <p>Where Hospitality and Artistry Unite</p>
                 </div>
                 <div class="footer-logo">
-                  ${logoBuffer ? '<img src="cid:hotel-logo" alt="La Casa Dell\'Arte" class="logo-image" />' : ''}
+                  ${
+                    logoBuffer
+                      ? '<img src="cid:hotel-logo" alt="La Casa Dell\'Arte" class="logo-image" />'
+                      : ""
+                  }
                 </div>
               </div>
             </div>
@@ -236,21 +249,21 @@ export async function POST(request: Request) {
     });
 
     if (error) {
-      console.error('Resend error:', error);
+      console.error("Resend error:", error);
       return NextResponse.json(
-        { error: 'Failed to send email' },
+        { error: "Failed to send email" },
         { status: 500 }
       );
     }
 
     return NextResponse.json(
-      { message: 'Email sent successfully', data },
+      { message: "Email sent successfully", data },
       { status: 200 }
     );
   } catch (error) {
-    console.error('Server error:', error);
+    console.error("Server error:", error);
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: "Internal server error" },
       { status: 500 }
     );
   }

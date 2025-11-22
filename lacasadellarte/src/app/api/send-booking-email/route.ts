@@ -1,8 +1,8 @@
-import { Resend } from 'resend';
-import { NextResponse } from 'next/server';
-import { generateInvoicePDFBuffer } from '@/lib/invoice-server';
-import { readFileSync, existsSync } from 'fs';
-import { join } from 'path';
+import { Resend } from "resend";
+import { NextResponse } from "next/server";
+import { generateInvoicePDFBuffer } from "@/lib/invoice-server";
+import { readFileSync, existsSync } from "fs";
+import { join } from "path";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -30,35 +30,42 @@ export async function POST(request: Request) {
     } = body;
 
     // Validate required fields
-    if (!firstName || !lastName || !email || !roomName || !checkIn || !checkOut) {
+    if (
+      !firstName ||
+      !lastName ||
+      !email ||
+      !roomName ||
+      !checkIn ||
+      !checkOut
+    ) {
       return NextResponse.json(
-        { error: 'Missing required fields' },
+        { error: "Missing required fields" },
         { status: 400 }
       );
     }
 
     // Format helpers
     const formatPrice = (value: number) =>
-      new Intl.NumberFormat('en-LK', {
-        style: 'currency',
-        currency: 'LKR',
+      new Intl.NumberFormat("en-LK", {
+        style: "currency",
+        currency: "LKR",
         minimumFractionDigits: 0,
       }).format(value);
 
     const formatDate = (dateString: string) => {
       const date = new Date(dateString);
-      return date.toLocaleDateString('en-US', {
-        weekday: 'short',
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
+      return date.toLocaleDateString("en-US", {
+        weekday: "short",
+        year: "numeric",
+        month: "short",
+        day: "numeric",
       });
     };
 
     // Generate PDF invoice using invoice-server.tsx (jsPDF server-side)
     let pdfBuffer: Buffer | null = null;
     try {
-      console.log('[Email API] Starting PDF generation with invoice-server...');
+      console.log("[Email API] Starting PDF generation with invoice-server...");
       pdfBuffer = await generateInvoicePDFBuffer({
         reference: bookingReference,
         firstName,
@@ -78,9 +85,9 @@ export async function POST(request: Request) {
         paymentMethod: paymentOption,
         specialRequests,
       });
-      console.log('[Email API] PDF generated successfully with invoice-server');
+      console.log("[Email API] PDF generated successfully with invoice-server");
     } catch (pdfError) {
-      console.error('[Email API] PDF generation error:', pdfError);
+      console.error("[Email API] PDF generation error:", pdfError);
       // Continue without PDF attachment if generation fails
     }
 
@@ -90,63 +97,80 @@ export async function POST(request: Request) {
 
     // Try to load hotel logo
     const logoPaths = [
-      join(process.cwd(), 'lacasadellarte', 'public', 'logo', 'logo-removebg.png'),
-      join(process.cwd(), 'public', 'logo', 'logo-removebg.png'),
+      join(
+        process.cwd(),
+        "lacasadellarte",
+        "public",
+        "logo",
+        "logo-removebg.png"
+      ),
+      join(process.cwd(), "public", "logo", "logo-removebg.png"),
     ];
     for (const logoPath of logoPaths) {
       if (existsSync(logoPath)) {
         try {
           logoBuffer = readFileSync(logoPath);
-          console.log('[Email API] Logo loaded from:', logoPath);
+          console.log("[Email API] Logo loaded from:", logoPath);
           break;
         } catch (err) {
-          console.warn('[Email API] Failed to load logo from:', logoPath, err);
+          console.warn("[Email API] Failed to load logo from:", logoPath, err);
         }
       }
     }
 
     // Try to load PAID stamp (only if payment is online)
-    if (paymentOption === 'now') {
+    if (paymentOption === "now") {
       const paidStampPaths = [
-        join(process.cwd(), 'lacasadellarte', 'public', 'logo', 'paid-stamp.png'),
-        join(process.cwd(), 'public', 'logo', 'paid-stamp.png'),
+        join(
+          process.cwd(),
+          "lacasadellarte",
+          "public",
+          "logo",
+          "paid-stamp.png"
+        ),
+        join(process.cwd(), "public", "logo", "paid-stamp.png"),
       ];
       for (const stampPath of paidStampPaths) {
         if (existsSync(stampPath)) {
           try {
             paidStampBuffer = readFileSync(stampPath);
-            console.log('[Email API] PAID stamp loaded from:', stampPath);
+            console.log("[Email API] PAID stamp loaded from:", stampPath);
             break;
           } catch (err) {
-            console.warn('[Email API] Failed to load PAID stamp from:', stampPath, err);
+            console.warn(
+              "[Email API] Failed to load PAID stamp from:",
+              stampPath,
+              err
+            );
           }
         }
       }
     }
 
     // Smart room type combination (exact same logic as PDF)
-    const roomLabel = (roomName || '').trim();
-    const typeLabel = (roomType || '').trim();
+    const roomLabel = (roomName || "").trim();
+    const typeLabel = (roomType || "").trim();
     const normalize = (s: string) =>
       s
         .toLowerCase()
-        .replace(/[\u2013\u2014-]/g, ' ')
-        .replace(/\brooms?\b/g, '')
-        .replace(/\s+/g, ' ')
+        .replace(/[\u2013\u2014-]/g, " ")
+        .replace(/\brooms?\b/g, "")
+        .replace(/\s+/g, " ")
         .trim();
 
-    let roomTypeCombined = '—';
+    let roomTypeCombined = "—";
     if (roomLabel && typeLabel) {
       const nRoom = normalize(roomLabel);
       const nType = normalize(typeLabel);
-      const similar = nRoom === nType || nRoom.includes(nType) || nType.includes(nRoom);
+      const similar =
+        nRoom === nType || nRoom.includes(nType) || nType.includes(nRoom);
       if (similar) {
         roomTypeCombined = roomLabel;
       } else {
         roomTypeCombined = `${roomLabel} — ${typeLabel}`;
       }
     } else {
-      roomTypeCombined = roomLabel || typeLabel || '—';
+      roomTypeCombined = roomLabel || typeLabel || "—";
     }
 
     // Invoice-style HTML email template (matches PDF layout exactly)
@@ -326,10 +350,18 @@ export async function POST(request: Request) {
               <div class="section-title">Guest Details</div>
               <div class="info-row">Name: ${firstName} ${lastName}</div>
               <div class="info-row">Email: ${email}</div>
-              ${phone ? `<div class="info-row">Phone: ${phone}</div>` : ''}
-              ${country ? `<div class="info-row">Country: ${country}</div>` : ''}
-              <div class="info-row">Guests: ${adults} Adult${adults !== 1 ? 's' : ''}${children > 0 ? `, ${children} Child${children !== 1 ? 'ren' : ''}` : ''}</div>
-              <div class="info-row">Payment Method: ${paymentOption === 'counter' ? 'Pay at Counter' : 'Paid Online'}</div>
+              ${phone ? `<div class="info-row">Phone: ${phone}</div>` : ""}
+              ${
+                country ? `<div class="info-row">Country: ${country}</div>` : ""
+              }
+              <div class="info-row">Guests: ${adults} Adult${
+      adults !== 1 ? "s" : ""
+    }${
+      children > 0 ? `, ${children} Child${children !== 1 ? "ren" : ""}` : ""
+    }</div>
+              <div class="info-row">Payment Method: ${
+                paymentOption === "counter" ? "Pay at Counter" : "Paid Online"
+              }</div>
             </div>
 
             <!-- Booking Summary -->
@@ -359,12 +391,16 @@ export async function POST(request: Request) {
               </table>
             </div>
 
-            ${specialRequests && specialRequests.trim() ? `
+            ${
+              specialRequests && specialRequests.trim()
+                ? `
               <div class="section">
                 <div class="section-title">Special Requests</div>
                 <div class="info-row">${specialRequests}</div>
               </div>
-            ` : ''}
+            `
+                : ""
+            }
 
             <!-- Notes -->
             <div class="notes">
@@ -374,7 +410,13 @@ export async function POST(request: Request) {
               <p>For questions, contact support at ladellaarte@gmail.com.</p>
             </div>
 
-            ${paymentOption === 'now' ? (paidStampBuffer ? '<img src="cid:paid-stamp" alt="PAID" class="paid-stamp-image" />' : '<div class="watermark">PAID</div>') : ''}
+            ${
+              paymentOption === "now"
+                ? paidStampBuffer
+                  ? '<img src="cid:paid-stamp" alt="PAID" class="paid-stamp-image" />'
+                  : '<div class="watermark">PAID</div>'
+                : ""
+            }
 
             <!-- Footer -->
             <div class="footer">
@@ -385,7 +427,11 @@ export async function POST(request: Request) {
                 <p>Generated electronically</p>
               </div>
               <div class="footer-logo">
-                ${logoBuffer ? '<img src="cid:hotel-logo" alt="La Casa Dell\'Arte" class="logo-image" />' : ''}
+                ${
+                  logoBuffer
+                    ? '<img src="cid:hotel-logo" alt="La Casa Dell\'Arte" class="logo-image" />'
+                    : ""
+                }
               </div>
             </div>
           </div>
@@ -407,25 +453,25 @@ export async function POST(request: Request) {
     // Add hotel logo for CID embedding (must be base64 string with camelCase contentId)
     if (logoBuffer) {
       attachments.push({
-        filename: 'logo.png',
-        content: logoBuffer.toString('base64'),
-        contentId: 'hotel-logo',
+        filename: "logo.png",
+        content: logoBuffer.toString("base64"),
+        contentId: "hotel-logo",
       });
     }
 
     // Add PAID stamp for CID embedding (only if paid online)
-    if (paidStampBuffer && paymentOption === 'now') {
+    if (paidStampBuffer && paymentOption === "now") {
       attachments.push({
-        filename: 'paid-stamp.png',
-        content: paidStampBuffer.toString('base64'),
-        contentId: 'paid-stamp',
+        filename: "paid-stamp.png",
+        content: paidStampBuffer.toString("base64"),
+        contentId: "paid-stamp",
       });
     }
 
     // Send email to hotel with attachments
     const { data, error } = await resend.emails.send({
-      from: 'La Casa DellArte <onboarding@resend.dev>',
-      to: ['ladellaarte@gmail.com'], // Test mode
+      from: "La Casa DellArte <reservations@lacasadellarte.space>",
+      to: ["ladellaarte@gmail.com"], // Production: hotel email
       replyTo: email,
       subject: `New Booking - ${bookingReference} - ${firstName} ${lastName}`,
       html: invoiceEmailHTML,
@@ -433,30 +479,30 @@ export async function POST(request: Request) {
     });
 
     if (error) {
-      console.error('Resend error:', error);
+      console.error("Resend error:", error);
       return NextResponse.json(
-        { error: 'Failed to send email' },
+        { error: "Failed to send email" },
         { status: 500 }
       );
     }
 
     // Send confirmation email to guest with same attachments
     await resend.emails.send({
-      from: 'La Casa DellArte <onboarding@resend.dev>',
-      to: ['ladellaarte@gmail.com'], // Test mode
+      from: "La Casa DellArte <reservations@lacasadellarte.space>",
+      to: [email], // Production: guest's actual email
       subject: `Booking Confirmation - ${bookingReference}`,
       html: invoiceEmailHTML,
       attachments: attachments.length > 0 ? attachments : undefined,
     });
 
     return NextResponse.json(
-      { message: 'Emails sent successfully', data },
+      { message: "Emails sent successfully", data },
       { status: 200 }
     );
   } catch (error) {
-    console.error('Server error:', error);
+    console.error("Server error:", error);
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: "Internal server error" },
       { status: 500 }
     );
   }
