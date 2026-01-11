@@ -259,13 +259,13 @@ export default function Footer() {
 
           {/* BOTTOM BAR - Separator, Terms & Copyright */}
           <div
-            className="border-t pt-4"
+            className="border-t pt4"
             style={{ marginTop: "7px", borderTopColor: "#8B7355" }}
           >
             <div className="flex flex-col md:flex-row justify-between items-center gap-3">
               {/* Left - Terms & Privacy */}
               <div
-                className="flex items-center gap-3 text-[var(--color-text)] order-2 md:order-1"
+                className="flex items-center gap-3 text-[var(--color-text)]"
                 style={{ fontSize: "13px" }}
               >
                 <button
@@ -283,7 +283,7 @@ export default function Footer() {
                 </button>
               </div>
 
-              {/* Center - Copyright */}
+              {/* Center - Design & Developed by */}
               <div
                 className="text-[var(--color-text)] font-medium order-3 md:order-2"
                 style={{ fontSize: "13px" }}
@@ -292,9 +292,9 @@ export default function Footer() {
                 rights reserved.
               </div>
 
-              {/* Right - Design & Developed by */}
+              {/* Right - Copyright */}
               <div
-                className="text-[var(--color-text)] font-medium order-1 md:order-3"
+                className="text-[var(--color-text)] font-medium"
                 style={{ fontSize: "13px" }}
               >
                 Design & Developed by{" "}
